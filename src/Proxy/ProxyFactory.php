@@ -99,22 +99,22 @@ class $proxyClass extends $class implements EntityProxy
     private \$initialized = [];
     private \$initializers = [];
     private \$node;
-    
+
     public function __setNode(\$node)
     {
         \$this->node = \$node;
     }
-    
+
     public function __setInitializers(array \$initializers)
     {
         \$this->initializers = \$initializers;
     }
-    
+
     public function __setInitialized(\$property)
     {
         \$this->initialized[\$property] = null;
     }
-    
+
     public function __initializeProperty(\$propertyName)
     {
         if (!array_key_exists(\$propertyName, \$this->initialized)) {
@@ -122,7 +122,7 @@ class $proxyClass extends $class implements EntityProxy
             \$this->initialized[\$propertyName] = null;
         }
     }
-    
+
     $methodProxies
 }
 
@@ -192,7 +192,7 @@ METHOD;
             $initializer = new NodeCollectionInitializer($this->em, $relationship, $this->classMetadata);
         }
 
-        return $initializer;
+        return $initializer ?? null;
     }
 
     private function newProxyInstance($proxyClass)

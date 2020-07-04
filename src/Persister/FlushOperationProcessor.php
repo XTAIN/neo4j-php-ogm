@@ -44,7 +44,7 @@ class FlushOperationProcessor
         $statements = [];
         foreach ($byLabelsMap as $label => $entities) {
             foreach ($entities as $entity) {
-                $query = sprintf('UNWIND {nodes} as node
+                $query = sprintf('UNWIND $nodes as node
                 CREATE (n:`%s`) SET n += node.props', $label);
                 $metadata = $this->em->getClassMetadataFor(get_class($entity));
                 $oid = spl_object_hash($entity);

@@ -19,7 +19,7 @@ class RelationshipPersister
     public function getRelationshipQuery($entityIdA, RelationshipMetadata $relationship, $entityIdB)
     {
         if ('' === trim($relationship->getType())) {
-            throw new \RuntimeException(sprintf('Cannot create empty relationship type', $relationship->getPropertyName()));
+            throw new \RuntimeException(sprintf('Cannot create empty relationship type %s', $relationship->getPropertyName()));
         }
 
         switch ($relationship->getDirection()) {

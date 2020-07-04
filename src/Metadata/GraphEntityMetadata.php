@@ -11,7 +11,7 @@
 
 namespace GraphAware\Neo4j\OGM\Metadata;
 
-use Doctrine\Common\Persistence\Mapping\ClassMetadata;
+use Doctrine\Persistence\Mapping\ClassMetadata;
 
 abstract class GraphEntityMetadata implements ClassMetadata
 {

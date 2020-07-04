@@ -14,7 +14,7 @@ namespace GraphAware\Neo4j\OGM\Repository;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Expr\Comparison;
 use Doctrine\Common\Collections\Selectable;
-use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\Persistence\ObjectRepository;
 use GraphAware\Neo4j\OGM\EntityManager;
 use GraphAware\Neo4j\OGM\Metadata\NodeEntityMetadata;
 
@@ -74,7 +74,7 @@ class BaseRepository implements ObjectRepository, Selectable
      *
      * @return array
      */
-    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+    public function findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)
     {
         $persister = $this->entityManager->getEntityPersister($this->className);
 
@@ -118,7 +118,7 @@ class BaseRepository implements ObjectRepository, Selectable
         $whereClause = $criteria->getWhereExpression();
         if (null !== $whereClause) {
             if (Comparison::EQ !== $whereClause->getOperator()) {
-                throw new \InvalidArgumentException(sprintf('Support for Selectable is limited to the EQUALS "=" operator, 
+                throw new \InvalidArgumentException(sprintf('Support for Selectable is limited to the EQUALS "=" operator,
                  % given', $whereClause->getOperator()));
             }
 

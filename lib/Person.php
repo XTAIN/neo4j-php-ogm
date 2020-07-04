@@ -3,6 +3,7 @@
 namespace App;
 
 use GraphAware\Neo4j\OGM\Annotations as OGM;
+use GraphAware\Neo4j\OGM\Common\Collection;
 
 /**
  *
@@ -30,6 +31,18 @@ class Person
      * @OGM\Property(type="int")
      */
     protected $born;
+
+    /**
+     * @var Movie[]|Collection
+     *
+     * @OGM\Relationship(type="ACTED_IN", direction="OUTGOING", collection=true, mappedBy="actors", targetEntity="Movie")
+     */
+    protected $movies;
+
+    public function __construct()
+    {
+        $this->movies = new Collection();
+    }
 
     /**
      * @return int
@@ -69,5 +82,13 @@ class Person
     public function setBorn($born)
     {
         $this->born = $born;
+    }
+
+    /**
+     * @return Movie[]|Collection
+     */
+    public function getMovies()
+    {
+        return $this->movies;
     }
 }

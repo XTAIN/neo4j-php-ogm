@@ -1,6 +1,6 @@
 {
     "name": "oosor/neo4j-php-ogm",
-    "description": "PHP Object Graph Mapper for Neo4j",
+    "description": "PHP Object Graph Mapper for Neo4j (forked)",
     "license": "Apache-2.0",
     "keywords": [
         "neo4j",
@@ -27,19 +27,13 @@
             "email": "3oosor@gmail.com"
         }
     ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/oosor/neo4j-php-client.git"
-        }
-    ],
     "require": {
         "php": "^7.1",
         "doctrine/annotations": "^1.10",
         "doctrine/collections": "^1.6",
         "doctrine/common": "^3.0",
-        "oosor/neo4j-php-client": "dev-master",
-        "ext-simplexml": "*"
+        "ext-simplexml": "*",
+        "oosor/neo4j-php-client": "^10.0"
     },
     "autoload": {
         "psr-4": {
@@ -62,11 +56,6 @@
         "symfony/finder": "^3.0",
         "symfony/stopwatch": "^3.0",
         "phpstan/phpstan": "^0.12.32"
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.0-dev"
-        }
     },
     "scripts": {
         "phpstan": "@php ./vendor/bin/phpstan analyze --ansi"

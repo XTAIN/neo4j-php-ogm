@@ -58,7 +58,7 @@ class SharedPeriods implements \JsonSerializable
     /**
      * @return array
      */
-    public function getPeriods(): array
+    public function getPeriods()
     {
         return $this->periods;
     }
@@ -66,7 +66,7 @@ class SharedPeriods implements \JsonSerializable
     /**
      * @param array $periods
      */
-    public function setPeriods(array $periods): void
+    public function setPeriods($periods): void
     {
         $this->periods = $periods;
     }

@@ -17,6 +17,22 @@
 
 and setting the `config/hedera.php` config file.
 
+In .env file
+```dotenv
+# via url
+HEDERA_URL=http://neo4j:neo4j_password@localhost:7474
+# or same params
+HEDERA_HOST=localhost # default is localhost
+HEDERA_PORT=7474 # default is 7474
+HEDERA_USERNAME=neo4j # default is null
+HEDERA_PASSWORD=neo4j_password # default is null
+HEDERA_PROTOCOL=http # default is http
+# additional settings
+# caching data proxies and doctrine
+HEDERA_CACHE=cache/hedera # default null (if null uses tmp path of server '/tmp/*')
+
+```
+
 3. In `config/auth.php` add guard as:
 
 ```php

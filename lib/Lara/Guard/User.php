@@ -30,6 +30,14 @@ class User implements Authenticatable
     }
 
     /**
+     * @return GuardService
+     */
+    public function getGuardService(): GuardService
+    {
+        return $this->guardService;
+    }
+
+    /**
      * @return \Hedera\Models\SharedCustomers
      * */
     public function getSharedCustomers()

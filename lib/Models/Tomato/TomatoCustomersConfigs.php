@@ -81,7 +81,7 @@ class TomatoCustomersConfigs
     /**
      * @var TomatoTokensConfigs|null
      *
-     * @OGM\Relationship(type="TOMATO_TOKEN_IN", direction="OUTGOING", collection=false, mappedBy="tomatoCustomersConfigs" targetEntity="TomatoTokensConfigs")
+     * @OGM\Relationship(type="TOMATO_TOKEN_IN", direction="OUTGOING", collection=false, mappedBy="tomatoCustomersConfigs", targetEntity="TomatoTokensConfigs")
      */
     protected $tomatoTokensConfigs;
 

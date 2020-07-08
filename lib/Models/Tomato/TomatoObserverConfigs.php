@@ -55,7 +55,7 @@ class TomatoObserverConfigs
     /**
      * @var TomatoTrackingInternetDocuments|null
      *
-     * @OGM\Relationship(type="TOMATO_TRACK_ID_IN", direction="OUTGOING", collection=false, mappedBy="tomatoObserverConfigs" targetEntity="TomatoTrackingInternetDocuments")
+     * @OGM\Relationship(type="TOMATO_TRACK_ID_IN", direction="OUTGOING", collection=false, mappedBy="tomatoObserverConfigs", targetEntity="TomatoTrackingInternetDocuments")
      */
     protected $tomatoTrackingInternetDocuments;
 

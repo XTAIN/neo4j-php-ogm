@@ -147,7 +147,7 @@ class TomatoInternetDocuments
     /**
      * @var TomatoTokensConfigs|null
      *
-     * @OGM\Relationship(type="TOMATO_TOKEN_ID_IN", direction="OUTGOING", collection=false, mappedBy="tomatoInternetDocuments" targetEntity="TomatoTokensConfigs")
+     * @OGM\Relationship(type="TOMATO_TOKEN_ID_IN", direction="OUTGOING", collection=false, mappedBy="tomatoInternetDocuments", targetEntity="TomatoTokensConfigs")
      */
     protected $tomatoTokensConfigs;
 

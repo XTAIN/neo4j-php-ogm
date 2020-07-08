@@ -72,7 +72,7 @@ class TomatoFrontInternetDocuments
     /**
      * @var TomatoInternetDocuments|null
      *
-     * @OGM\Relationship(type="TOMATO_ID_FRONT_IN", direction="OUTGOING", collection=false, mappedBy="tomatoFrontInternetDocuments" targetEntity="TomatoInternetDocuments")
+     * @OGM\Relationship(type="TOMATO_ID_FRONT_IN", direction="OUTGOING", collection=false, mappedBy="tomatoFrontInternetDocuments", targetEntity="TomatoInternetDocuments")
      */
     protected $tomatoInternetDocument;
 

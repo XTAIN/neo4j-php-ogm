@@ -49,7 +49,7 @@ class TomatoTrackingInternetDocuments
     /**
      * @var TomatoInternetDocuments|null
      *
-     * @OGM\Relationship(type="TOMATO_ID_TRACK_IN", direction="OUTGOING", collection=false, mappedBy="tomatoTrackingInternetDocuments" targetEntity="TomatoInternetDocuments")
+     * @OGM\Relationship(type="TOMATO_ID_TRACK_IN", direction="OUTGOING", collection=false, mappedBy="tomatoTrackingInternetDocuments", targetEntity="TomatoInternetDocuments")
      */
     protected $tomatoInternetDocument;
 

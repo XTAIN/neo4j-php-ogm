@@ -79,6 +79,13 @@ class SharedCustomers implements \JsonSerializable
      */
     protected $sharedModules;
 
+    /**
+     * @var Collection
+     *
+     * @OGM\Relationship(type="MODULE_CONTACT_IN", direction="BOTH", collection=true, mappedBy="sharedCustomers", targetEntity="SharedContacts")
+     */
+    protected $sharedContacts;
+
     public function __construct()
     {
         $this->sharedCustomersServices = new HederaCollection();
@@ -86,6 +93,7 @@ class SharedCustomers implements \JsonSerializable
         $this->limeRules = new HederaCollection();
         $this->limeConvert = new HederaCollection();
         $this->sharedModules = new HederaCollection();
+        $this->sharedContacts = new HederaCollection();
     }
 
     /**
@@ -211,5 +219,21 @@ class SharedCustomers implements \JsonSerializable
     public function jsonSerialize()
     {
         return self::serialize();
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getSharedContacts(): Collection
+    {
+        return $this->sharedContacts;
+    }
+
+    /**
+     * @param Collection $sharedContacts
+     */
+    public function setSharedContacts(Collection $sharedContacts): void
+    {
+        $this->sharedContacts = $sharedContacts;
     }
 }

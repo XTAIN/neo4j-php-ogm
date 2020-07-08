@@ -9,7 +9,9 @@
 
 namespace Hedera\Models;
 
+use Doctrine\Common\Collections\Collection;
 use GraphAware\Neo4j\OGM\Annotations as OGM;
+use GraphAware\Neo4j\OGM\Common\Collection as HederaCollection;
 
 /**
  * @OGM\Node(label="SharedContacts", repository="Hedera\Repositories\SharedContactsRepository")
@@ -44,8 +46,16 @@ class SharedContacts
      */
     protected $email;
 
+    /**
+     * @var Collection
+     *
+     * @OGM\Relationship(type="MODULE_CONTACT_IN", direction="BOTH", collection=true, mappedBy="sharedContacts", targetEntity="SharedCustomers")
+     */
+    protected $sharedCustomers;
+
     public function __construct()
     {
+        $this->sharedCustomers = new HederaCollection();
     }
 
     /**
@@ -102,5 +112,21 @@ class SharedContacts
     public function setEmail(string $email): void
     {
         $this->email = $email;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getSharedCustomers(): Collection
+    {
+        return $this->sharedCustomers;
+    }
+
+    /**
+     * @param Collection $sharedCustomers
+     */
+    public function setSharedCustomers(Collection $sharedCustomers): void
+    {
+        $this->sharedCustomers = $sharedCustomers;
     }
 }

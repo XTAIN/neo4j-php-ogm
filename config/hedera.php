@@ -20,6 +20,7 @@ return [
             'username' => env('HEDERA_USERNAME'),
             'password' => env('HEDERA_PASSWORD'),
             'protocol' => env('HEDERA_PROTOCOL', 'http'),
+            'cache' => env('HEDERA_CACHE'),
         ],
     ],
 ];

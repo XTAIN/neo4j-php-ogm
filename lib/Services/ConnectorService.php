@@ -79,7 +79,7 @@ class ConnectorService
             $url .= $host . ':' . $port;
         }
 
-        $entityManager = EntityManager::create($url);
+        $entityManager = EntityManager::create($url, $connection['cache'] ?? null);
 
         $this->connections[$name] = $entityManager;
 

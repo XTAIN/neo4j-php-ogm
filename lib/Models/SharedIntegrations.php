@@ -118,6 +118,7 @@ class SharedIntegrations implements \JsonSerializable
      * @var mixed
      *
      * @OGM\Property(type="array")
+     * @OGM\Convert(type="nested")
      */
     protected $langs;
 
@@ -125,6 +126,7 @@ class SharedIntegrations implements \JsonSerializable
      * @var mixed
      *
      * @OGM\Property(type="array", key="_links")
+     * @OGM\Convert(type="nested")
      */
     protected $links;
 
@@ -139,6 +141,7 @@ class SharedIntegrations implements \JsonSerializable
      * @var mixed
      *
      * @OGM\Property(type="array")
+     * @OGM\Convert(type="nested")
      */
     protected $settings;
 
@@ -146,6 +149,7 @@ class SharedIntegrations implements \JsonSerializable
      * @var mixed
      *
      * @OGM\Property(type="array")
+     * @OGM\Convert(type="nested")
      */
     protected $scopes;
 

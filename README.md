@@ -1,21 +1,21 @@
-# GraphAware Neo4j PHP OGM
+# Oosor Neo4j PHP OGM
 
 ## Object Graph Mapper for Neo4j in PHP
 
 [![Build Status](https://travis-ci.org/graphaware/neo4j-php-ogm.svg?branch=master)](https://travis-ci.org/graphaware/neo4j-php-ogm)
-[![Latest Stable Version](https://poser.pugx.org/graphaware/neo4j-php-ogm/v/stable.svg)](https://packagist.org/packages/graphaware/neo4j-php-ogm)
-[![Latest Unstable Version](https://poser.pugx.org/graphaware/neo4j-php-ogm/v/unstable)](https://packagist.org/packages/graphaware/neo4j-php-ogm)
-[![Total Downloads](https://poser.pugx.org/graphaware/neo4j-php-ogm/downloads)](https://packagist.org/packages/graphaware/neo4j-php-ogm)
-[![License](https://poser.pugx.org/graphaware/neo4j-php-ogm/license)](https://packagist.org/packages/graphaware/neo4j-php-ogm)
+[![Latest Stable Version](https://poser.pugx.org/graphaware/neo4j-php-ogm/v/stable.svg)](https://packagist.org/packages/oosor/neo4j-php-ogm)
+[![Latest Unstable Version](https://poser.pugx.org/graphaware/neo4j-php-ogm/v/unstable)](https://packagist.org/packages/oosor/neo4j-php-ogm)
+[![Total Downloads](https://poser.pugx.org/graphaware/neo4j-php-ogm/downloads)](https://packagist.org/packages/oosor/neo4j-php-ogm)
+[![License](https://poser.pugx.org/graphaware/neo4j-php-ogm/license)](https://packagist.org/packages/oosor/neo4j-php-ogm)
 
-**Current Release** : `1.0.0-RC9`
+**Current Release** : `10.0.*`
 
 ## Installation
 
 Install with composer
 
 ```cli
-composer require graphaware/neo4j-php-ogm:@rc
+composer require oosor/neo4j-php-ogm
 ```
 
 ## Documentation

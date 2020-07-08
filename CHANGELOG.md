@@ -1,3 +1,8 @@
+10.0.* (2020-07-08)
+- next generation
+
+---
+
 1.0.0-RC9 (2017-12-12)
 
 - ProxyManager uses locking to prevent loading partially generate proxied files (Fixes #122) ([#174](https://github.com/graphaware/neo4j-php-ogm/pull/174))

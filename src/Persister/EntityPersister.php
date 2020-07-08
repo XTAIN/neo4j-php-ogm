@@ -118,7 +118,7 @@ class EntityPersister
         }
         $id = $this->classMetadata->getIdValue($object);
 
-        $query = 'MATCH (n) WHERE id(n) = {id} SET n += $props';
+        $query = 'MATCH (n) WHERE id(n) = $id SET n += $props';
         if (!empty($extraLabels)) {
             foreach ($extraLabels as $label) {
                 $query .= ' SET n:'.$label;

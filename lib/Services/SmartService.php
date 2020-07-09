@@ -95,6 +95,8 @@ class SmartService
     {
         $this->identifier = $identifier;
 
+        self::clearEntities();
+
         if (!$force && $this->fromCache()) {
             return;
         }
@@ -119,7 +121,9 @@ class SmartService
     {
         $this->checkDirectory();
 
-        $file = md5($this->identifier) . '.json';
+        self::clearEntities();
+
+        $file = self::getFilename();
         if (file_exists(self::getDirectory($file))) {
             unlink(self::getDirectory($file));
         }
@@ -283,7 +287,7 @@ class SmartService
      */
     protected function fromCache(): bool
     {
-        $file = md5($this->identifier) . '.json';
+        $file = self::getFilename();
         if (!file_exists(self::getDirectory($file))) {
             return false;
         }
@@ -319,7 +323,6 @@ class SmartService
     {
         $this->checkDirectory();
 
-        $file = md5($this->identifier) . '.json';
         $data = [
             'control' => time(),
             'sharedApiKey' => $this->sharedApiKey,
@@ -331,7 +334,29 @@ class SmartService
             'sharedIntegrations' => $this->sharedIntegrations,
         ];
 
-        file_put_contents(self::getDirectory($file), json_encode($data));
+        file_put_contents(self::getDirectory(self::getFilename()), json_encode($data));
+    }
+
+    /**
+     * @return void
+     * */
+    protected function clearEntities(): void
+    {
+        $this->sharedApiKey = null;
+        $this->sharedCustomers = null;
+        $this->sharedCustomersServices = null;
+        $this->sharedPeriods = null;
+        $this->sharedAmocrm = null;
+        $this->sharedOauth = null;
+        $this->sharedIntegrations = null;
+    }
+
+    /**
+     * @return string
+     * */
+    protected function getFilename(): string
+    {
+        return md5($this->identifier) . '.json';
     }
 
     /**

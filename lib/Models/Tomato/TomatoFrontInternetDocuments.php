@@ -10,6 +10,7 @@
 namespace Hedera\Models\Tomato;
 
 use GraphAware\Neo4j\OGM\Annotations as OGM;
+use Hedera\Helpers\EntityFactory;
 use Hedera\Helpers\SerializationHelper;
 
 /**
@@ -17,6 +18,7 @@ use Hedera\Helpers\SerializationHelper;
  */
 class TomatoFrontInternetDocuments implements \JsonSerializable
 {
+    use EntityFactory;
     use SerializationHelper;
 
     /**

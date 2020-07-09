@@ -12,6 +12,7 @@ namespace Hedera\Models\Tomato;
 use Doctrine\Common\Collections\Collection;
 use GraphAware\Neo4j\OGM\Annotations as OGM;
 use GraphAware\Neo4j\OGM\Common\Collection as HederaCollection;
+use Hedera\Helpers\EntityFactory;
 use Hedera\Helpers\SerializationHelper;
 use Hedera\Models\SharedCustomersServices;
 
@@ -20,6 +21,7 @@ use Hedera\Models\SharedCustomersServices;
  */
 class TomatoTokensConfigs implements \JsonSerializable
 {
+    use EntityFactory;
     use SerializationHelper;
 
     /**

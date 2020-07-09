@@ -14,6 +14,7 @@ use GraphAware\Neo4j\OGM\Annotations as OGM;
 use GraphAware\Neo4j\OGM\Common\Collection as HederaCollection;
 use Hedera\Helpers\EntityFactory;
 use Hedera\Helpers\SerializationHelper;
+use Hedera\Helpers\WithTimestamps;
 
 /**
  * @OGM\Node(label="SharedAmocrm", repository="Hedera\Repositories\SharedAmocrmRepository")
@@ -22,6 +23,7 @@ class SharedAmocrm implements \JsonSerializable
 {
     use EntityFactory;
     use SerializationHelper;
+    use WithTimestamps;
 
     /**
      * @var int

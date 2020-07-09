@@ -82,25 +82,17 @@ class GuardService
      */
     public function validatePeriod()
     {
-        $model = $this->smartService->getSharedPeriods();
+        $collect = $this->smartService->getSharedPeriods();
 
-        if (empty($model)) {
+        if (empty($collect) || $collect->isEmpty()) {
             throw new GuardingException('Model SharedPeriods not found');
-        }
-
-        $periods = $model->getPeriods();
-
-        if (empty($periods)) {
-            throw new GuardingException('Periods list is empty');
         }
 
         $currentTime = time();
 
-        foreach ($periods as $period) {
-            if (isset($period->date_end)) {
-                if ($currentTime < strtotime($period->date_end)) {
-                    return $this;
-                }
+        foreach ($collect as $model) {
+            if ($currentTime < strtotime($model->getDateEnd())) {
+                return $this;
             }
         }
 

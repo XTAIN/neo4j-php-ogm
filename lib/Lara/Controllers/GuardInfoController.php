@@ -10,6 +10,7 @@
 
 namespace Hedera\Lara\Controllers;
 
+use Hedera\Models\SharedPeriods;
 use Hedera\Services\GuardService;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Str;
@@ -46,20 +47,19 @@ class GuardInfoController
             return self::resolve('error', 'customers_service_code_invalid');
         }
 
-        $period = $guardService->getSmartService()->getSharedPeriods();
+        $periods = $guardService->getSmartService()->getSharedPeriods();
 
-        if (empty($period)) {
+        if (empty($periods) || $periods->isEmpty()) {
             return self::resolve('error', 'periods_not_exist');
         }
 
-        if (empty($period->getPeriods())) {
-            return self::resolve('error', 'periods_list_empty');
-        }
-
-        $last = collect($period->getPeriods())
+        /**
+         * @var SharedPeriods $last
+         * */
+        $last = collect($periods)
             ->reduce(
-                function ($result, $item) {
-                    return (empty($result) || strtotime($result->date_end) < strtotime($item->date_end))
+                function (?SharedPeriods $result, SharedPeriods $item) {
+                    return (empty($result) || strtotime($result->getDateEnd()) < strtotime($item->getDateEnd()))
                         ? $item
                         : $result;
                 },
@@ -67,23 +67,23 @@ class GuardInfoController
             );
         $currentTime = time();
 
-        if (strtotime($last->date_end) < $currentTime) {
-            return self::resolve('error', 'periods_refused', ['period_end' => $last->date_end]);
+        if (strtotime($last->getDateEnd()) < $currentTime) {
+            return self::resolve('error', 'periods_refused', ['period_end' => $last->getDateEnd()]);
         }
 
-        $start = strtotime($last->date_start);
-        $end = strtotime($last->date_end);
+        $start = strtotime($last->getDateStart());
+        $end = strtotime($last->getDateEnd());
         $deltaPeriod = $end - $start;
         $deltaNow = $currentTime - $start;
 
         if ($deltaNow / $deltaPeriod > static::$percent) {
-            return self::resolve('warning', 'periods_before_refused', ['period_end' => $last->date_end]);
+            return self::resolve('warning', 'periods_before_refused', ['period_end' => $last->getDateEnd()]);
         }
 
         return self::resolve(
             'success',
             'ok',
-            ['period_start' => $last->date_start, 'period_end' => $last->date_end]
+            ['period_start' => $last->getDateStart(), 'period_end' => $last->getDateEnd()]
         );
     }
 

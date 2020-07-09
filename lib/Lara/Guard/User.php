@@ -62,7 +62,7 @@ class User implements Authenticatable
     }
 
     /**
-     * @return \Hedera\Models\SharedPeriods
+     * @return \Doctrine\Common\Collections\Collection
      * */
     public function getSharedPeriods()
     {

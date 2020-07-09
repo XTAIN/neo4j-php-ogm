@@ -9,7 +9,9 @@
 
 namespace Hedera\Services;
 
+use Doctrine\Common\Collections\Collection;
 use GraphAware\Neo4j\OGM\EntityManager;
+use GraphAware\Neo4j\OGM\Common\Collection as HederaCollection;
 use Hedera\Models\SharedAmocrm;
 use Hedera\Models\SharedApikeys;
 use Hedera\Models\SharedCustomers;
@@ -46,7 +48,7 @@ class SmartService
     protected $sharedCustomersServices;
 
     /**
-     * @var SharedPeriods|null $sharedPeriods
+     * @var Collection $sharedPeriods
      * */
     protected $sharedPeriods;
 
@@ -164,9 +166,9 @@ class SmartService
     }
 
     /**
-     * @return SharedPeriods|null
+     * @return Collection
      */
-    public function getSharedPeriods(): ?SharedPeriods
+    public function getSharedPeriods(): Collection
     {
         return $this->sharedPeriods;
     }
@@ -295,7 +297,14 @@ class SmartService
         $this->sharedApiKey = SharedApikeys::factory($data['sharedApiKey']);
         $this->sharedCustomersServices = SharedCustomersServices::factory($data['sharedCustomersServices']);
         $this->sharedCustomers = SharedCustomers::factory($data['sharedCustomers']);
-        $this->sharedPeriods = SharedPeriods::factory($data['sharedPeriods']);
+        $this->sharedPeriods = new HederaCollection(
+            array_map(
+                function ($item) {
+                    return SharedPeriods::factory($item);
+                },
+                $data['sharedPeriods'] ?? []
+            )
+        );
         $this->sharedAmocrm = SharedAmocrm::factory($data['sharedAmocrm']);
         $this->sharedOauth = SharedOauth::factory($data['sharedOauth']);
         $this->sharedIntegrations = SharedIntegrations::factory($data['sharedIntegrations']);

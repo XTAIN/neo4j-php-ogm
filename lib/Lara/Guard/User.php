@@ -38,6 +38,14 @@ class User implements Authenticatable
     }
 
     /**
+     * @return \GraphAware\Neo4j\OGM\EntityManager|null
+     */
+    public function getEntityManager()
+    {
+        return $this->guardService->getConnectorService()->getConnection();
+    }
+
+    /**
      * @return \Hedera\Models\SharedCustomers
      * */
     public function getSharedCustomers()

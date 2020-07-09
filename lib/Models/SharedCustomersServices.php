@@ -52,9 +52,9 @@ class SharedCustomersServices implements \JsonSerializable
     protected $sharedApikey;
 
     /**
-     * @var SharedPeriods|null
+     * @var Collection
      *
-     * @OGM\Relationship(type="PERIOD_IN", direction="OUTGOING", collection=false, mappedBy="sharedCustomersServices", targetEntity="SharedPeriods")
+     * @OGM\Relationship(type="PERIOD_IN", direction="INCOMING", collection=true, mappedBy="sharedCustomersServices", targetEntity="SharedPeriods")
      */
     protected $sharedPeriods;
 
@@ -89,6 +89,7 @@ class SharedCustomersServices implements \JsonSerializable
     public function __construct()
     {
         $this->sharedConfigs = new HederaCollection();
+        $this->sharedPeriods = new HederaCollection();
     }
 
     /**
@@ -148,17 +149,17 @@ class SharedCustomersServices implements \JsonSerializable
     }
 
     /**
-     * @return SharedPeriods|null
+     * @return Collection
      */
-    public function getSharedPeriods(): ?SharedPeriods
+    public function getSharedPeriods(): Collection
     {
         return $this->sharedPeriods;
     }
 
     /**
-     * @param SharedPeriods|null $sharedPeriods
+     * @param Collection $sharedPeriods
      */
-    public function setSharedPeriods(?SharedPeriods $sharedPeriods): void
+    public function setSharedPeriods(Collection $sharedPeriods): void
     {
         $this->sharedPeriods = $sharedPeriods;
     }

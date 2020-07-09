@@ -59,7 +59,7 @@ class SharedPeriods implements \JsonSerializable
     /**
      * @var SharedCustomersServices|null
      *
-     * @OGM\Relationship(type="PERIOD_IN", direction="INCOMING", collection=false, mappedBy="sharedPeriods", targetEntity="SharedCustomersServices")
+     * @OGM\Relationship(type="PERIOD_IN", direction="OUTGOING", collection=false, mappedBy="sharedPeriods", targetEntity="SharedCustomersServices")
      */
     protected $sharedCustomersServices;
 

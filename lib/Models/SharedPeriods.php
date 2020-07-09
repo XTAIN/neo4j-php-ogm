@@ -124,6 +124,22 @@ class SharedPeriods implements \JsonSerializable
     }
 
     /**
+     * @return DirectoryPeriods|null
+     */
+    public function getDirectoryPeriods(): ?DirectoryPeriods
+    {
+        return $this->directoryPeriods;
+    }
+
+    /**
+     * @param DirectoryPeriods|null $directoryPeriods
+     */
+    public function setDirectoryPeriods(?DirectoryPeriods $directoryPeriods): void
+    {
+        $this->directoryPeriods = $directoryPeriods;
+    }
+
+    /**
      * @return SharedCustomersServices|null
      */
     public function getSharedCustomersServices(): ?SharedCustomersServices

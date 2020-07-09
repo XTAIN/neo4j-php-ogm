@@ -113,4 +113,20 @@ class DirectoryPeriods
     {
         $this->trial = $trial;
     }
+
+    /**
+     * @return Collection
+     */
+    public function getSharedPeriods(): Collection
+    {
+        return $this->sharedPeriods;
+    }
+
+    /**
+     * @param Collection $sharedPeriods
+     */
+    public function setSharedPeriods(Collection $sharedPeriods): void
+    {
+        $this->sharedPeriods = $sharedPeriods;
+    }
 }

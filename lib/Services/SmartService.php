@@ -255,7 +255,7 @@ class SmartService
             )
             ->first();
 
-        return isset($this->sharedOauth);
+        return !empty($this->sharedOauth);
     }
 
     /**

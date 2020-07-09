@@ -9,7 +9,9 @@
 
 namespace Hedera\Models;
 
+use Doctrine\Common\Collections\Collection;
 use GraphAware\Neo4j\OGM\Annotations as OGM;
+use GraphAware\Neo4j\OGM\Common\Collection as HederaCollection;
 
 /**
  * @OGM\Node(label="DirectoryPeriods", repository="Hedera\Repositories\DirectoryPeriodsRepository")
@@ -44,8 +46,16 @@ class DirectoryPeriods
      */
     protected $trial;
 
+    /**
+     * @var Collection
+     *
+     * @OGM\Relationship(type="PERIOD_DIR_IN", direction="INCOMING", collection=true, mappedBy="directoryPeriods", targetEntity="SharedPeriods")
+     */
+    protected $sharedPeriods;
+
     public function __construct()
     {
+        $this->sharedPeriods = new HederaCollection();
     }
 
     /**

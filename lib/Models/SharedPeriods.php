@@ -29,12 +29,32 @@ class SharedPeriods implements \JsonSerializable
     protected $id;
 
     /**
-     * @var array
+     * @var string
      *
-     * @OGM\Property(type="array")
-     * @OGM\Convert(type="nested")
+     * @OGM\Property(type="string", key="date_start")
      */
-    protected $periods;
+    protected $dateStart;
+
+    /**
+     * @var string
+     *
+     * @OGM\Property(type="string", key="date_end")
+     */
+    protected $dateEnd;
+
+    /**
+     * @var string
+     *
+     * @OGM\Property(type="string")
+     */
+    protected $period;
+
+    /**
+     * @var DirectoryPeriods|null
+     *
+     * @OGM\Relationship(type="PERIOD_DIR_IN", direction="OUTGOING", collection=false, mappedBy="sharedPeriods", targetEntity="DirectoryPeriods")
+     */
+    protected $directoryPeriods;
 
     /**
      * @var SharedCustomersServices|null
@@ -56,19 +76,51 @@ class SharedPeriods implements \JsonSerializable
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public function getPeriods()
+    public function getDateStart(): string
     {
-        return $this->periods;
+        return $this->dateStart;
     }
 
     /**
-     * @param array $periods
+     * @param string $dateStart
      */
-    public function setPeriods($periods): void
+    public function setDateStart(string $dateStart): void
     {
-        $this->periods = $periods;
+        $this->dateStart = $dateStart;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDateEnd(): string
+    {
+        return $this->dateEnd;
+    }
+
+    /**
+     * @param string $dateEnd
+     */
+    public function setDateEnd(string $dateEnd): void
+    {
+        $this->dateEnd = $dateEnd;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPeriod(): string
+    {
+        return $this->period;
+    }
+
+    /**
+     * @param string $period
+     */
+    public function setPeriod(string $period): void
+    {
+        $this->period = $period;
     }
 
     /**

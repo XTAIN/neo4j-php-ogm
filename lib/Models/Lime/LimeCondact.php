@@ -7,12 +7,12 @@
  * @link      https://fabrika-klientov.ua
  * */
 
-namespace Hedera\Models;
+namespace Hedera\Models\Lime;
 
 use GraphAware\Neo4j\OGM\Annotations as OGM;
 
 /**
- * @OGM\Node(label="LimeCondact", repository="Hedera\Repositories\LimeCondactRepository")
+ * @OGM\Node(label="LimeCondact", repository="Hedera\Repositories\Lime\LimeCondactRepository")
  */
 class LimeCondact
 {

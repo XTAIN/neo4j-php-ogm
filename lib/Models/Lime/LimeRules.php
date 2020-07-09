@@ -7,14 +7,15 @@
  * @link      https://fabrika-klientov.ua
  * */
 
-namespace Hedera\Models;
+namespace Hedera\Models\Lime;
 
 use Doctrine\Common\Collections\Collection;
 use GraphAware\Neo4j\OGM\Annotations as OGM;
 use GraphAware\Neo4j\OGM\Common\Collection as HederaCollection;
+use Hedera\Models\SharedCustomers;
 
 /**
- * @OGM\Node(label="LimeRules", repository="Hedera\Repositories\LimeRulesRepository")
+ * @OGM\Node(label="LimeRules", repository="Hedera\Repositories\Lime\LimeRulesRepository")
  */
 class LimeRules
 {
@@ -78,7 +79,7 @@ class LimeRules
     /**
      * @var SharedCustomers|null
      *
-     * @OGM\Relationship(type="LIME_RULES_CU_IN", direction="OUTGOING", collection=false, mappedBy="limeRules", targetEntity="SharedCustomers")
+     * @OGM\Relationship(type="LIME_RULES_CU_IN", direction="OUTGOING", collection=false, mappedBy="limeRules", targetEntity="Hedera\Models\SharedCustomers")
      */
     protected $sharedCustomers;
 

@@ -7,12 +7,13 @@
  * @link      https://fabrika-klientov.ua
  * */
 
-namespace Hedera\Models;
+namespace Hedera\Models\Lime;
 
 use GraphAware\Neo4j\OGM\Annotations as OGM;
+use Hedera\Models\SharedCustomers;
 
 /**
- * @OGM\Node(label="LimeConvert", repository="Hedera\Repositories\LimeConvertRepository")
+ * @OGM\Node(label="LimeConvert", repository="Hedera\Repositories\Lime\LimeConvertRepository")
  */
 class LimeConvert
 {
@@ -62,7 +63,7 @@ class LimeConvert
     /**
      * @var SharedCustomers|null
      *
-     * @OGM\Relationship(type="LIME_CONVERT_CU_IN", direction="OUTGOING", collection=false, mappedBy="limeConvert", targetEntity="SharedCustomers")
+     * @OGM\Relationship(type="LIME_CONVERT_CU_IN", direction="OUTGOING", collection=false, mappedBy="limeConvert", targetEntity="Hedera\Models\SharedCustomers")
      */
     protected $sharedCustomers;
 

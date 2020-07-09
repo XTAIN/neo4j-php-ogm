@@ -61,14 +61,14 @@ class SharedCustomers implements \JsonSerializable
     /**
      * @var Collection
      *
-     * @OGM\Relationship(type="LIME_RULES_CU_IN", direction="INCOMING", collection=true, mappedBy="sharedCustomers", targetEntity="LimeRules")
+     * @OGM\Relationship(type="LIME_RULES_CU_IN", direction="INCOMING", collection=true, mappedBy="sharedCustomers", targetEntity="Hedera\Models\Lime\LimeRules")
      */
     protected $limeRules;
 
     /**
      * @var Collection
      *
-     * @OGM\Relationship(type="LIME_CONVERT_CU_IN", direction="INCOMING", collection=true, mappedBy="sharedCustomers", targetEntity="LimeConvert")
+     * @OGM\Relationship(type="LIME_CONVERT_CU_IN", direction="INCOMING", collection=true, mappedBy="sharedCustomers", targetEntity="Hedera\Models\Lime\LimeConvert")
      */
     protected $limeConvert;
 

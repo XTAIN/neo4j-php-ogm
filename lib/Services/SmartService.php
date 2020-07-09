@@ -323,6 +323,7 @@ class SmartService
     {
         $this->checkDirectory();
 
+        $file = self::getFilename();
         $data = [
             'control' => time(),
             'sharedApiKey' => $this->sharedApiKey,
@@ -334,7 +335,8 @@ class SmartService
             'sharedIntegrations' => $this->sharedIntegrations,
         ];
 
-        file_put_contents(self::getDirectory(self::getFilename()), json_encode($data));
+        file_put_contents(self::getDirectory($file), json_encode($data));
+        chmod(self::getDirectory($file), 0664);
     }
 
     /**

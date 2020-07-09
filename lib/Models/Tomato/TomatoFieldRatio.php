@@ -10,13 +10,16 @@
 namespace Hedera\Models\Tomato;
 
 use GraphAware\Neo4j\OGM\Annotations as OGM;
+use Hedera\Helpers\SerializationHelper;
 use Hedera\Models\SharedCustomersServices;
 
 /**
  * @OGM\Node(label="TomatoFieldRatio", repository="Hedera\Repositories\Tomato\TomatoFieldRatioRepository")
  */
-class TomatoFieldRatio
+class TomatoFieldRatio implements \JsonSerializable
 {
+    use SerializationHelper;
+
     /**
      * @var int
      *
@@ -267,5 +270,10 @@ class TomatoFieldRatio
     public function setSharedCustomersServices(?SharedCustomersServices $sharedCustomersServices): void
     {
         $this->sharedCustomersServices = $sharedCustomersServices;
+    }
+
+    public function jsonSerialize()
+    {
+        return self::serialize();
     }
 }

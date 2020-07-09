@@ -12,12 +12,15 @@ namespace Hedera\Models\Tomato;
 use Doctrine\Common\Collections\Collection;
 use GraphAware\Neo4j\OGM\Annotations as OGM;
 use GraphAware\Neo4j\OGM\Common\Collection as HederaCollection;
+use Hedera\Helpers\SerializationHelper;
 
 /**
  * @OGM\Node(label="TomatoTrackingInternetDocuments", repository="Hedera\Repositories\Tomato\TomatoTrackingInternetDocumentsRepository")
  */
-class TomatoTrackingInternetDocuments
+class TomatoTrackingInternetDocuments implements \JsonSerializable
 {
+    use SerializationHelper;
+
     /**
      * @var int
      *
@@ -151,5 +154,10 @@ class TomatoTrackingInternetDocuments
     public function setTomatoObserverConfigs(Collection $tomatoObserverConfigs): void
     {
         $this->tomatoObserverConfigs = $tomatoObserverConfigs;
+    }
+
+    public function jsonSerialize()
+    {
+        return self::serialize();
     }
 }

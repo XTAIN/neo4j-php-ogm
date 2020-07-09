@@ -10,12 +10,15 @@
 namespace Hedera\Models\Tomato;
 
 use GraphAware\Neo4j\OGM\Annotations as OGM;
+use Hedera\Helpers\SerializationHelper;
 
 /**
  * @OGM\Node(label="TomatoFrontInternetDocuments", repository="Hedera\Repositories\Tomato\TomatoFrontInternetDocumentsRepository")
  */
-class TomatoFrontInternetDocuments
+class TomatoFrontInternetDocuments implements \JsonSerializable
 {
+    use SerializationHelper;
+
     /**
      * @var int
      *
@@ -194,5 +197,10 @@ class TomatoFrontInternetDocuments
     public function setTomatoInternetDocument(?TomatoInternetDocuments $tomatoInternetDocument): void
     {
         $this->tomatoInternetDocument = $tomatoInternetDocument;
+    }
+
+    public function jsonSerialize()
+    {
+        return self::serialize();
     }
 }

@@ -10,13 +10,16 @@
 namespace Hedera\Models\Tomato;
 
 use GraphAware\Neo4j\OGM\Annotations as OGM;
+use Hedera\Helpers\SerializationHelper;
 use Hedera\Models\SharedCustomersServices;
 
 /**
  * @OGM\Node(label="TomatoCustomersConfigs", repository="Hedera\Repositories\Tomato\TomatoCustomersConfigsRepository")
  */
-class TomatoCustomersConfigs
+class TomatoCustomersConfigs implements \JsonSerializable
 {
+    use SerializationHelper;
+
     /**
      * @var int
      *
@@ -219,5 +222,10 @@ class TomatoCustomersConfigs
     public function setTomatoTokensConfigs(?TomatoTokensConfigs $tomatoTokensConfigs): void
     {
         $this->tomatoTokensConfigs = $tomatoTokensConfigs;
+    }
+
+    public function jsonSerialize()
+    {
+        return self::serialize();
     }
 }

@@ -12,13 +12,16 @@ namespace Hedera\Models\Tomato;
 use Doctrine\Common\Collections\Collection;
 use GraphAware\Neo4j\OGM\Annotations as OGM;
 use GraphAware\Neo4j\OGM\Common\Collection as HederaCollection;
+use Hedera\Helpers\SerializationHelper;
 use Hedera\Models\SharedCustomersServices;
 
 /**
  * @OGM\Node(label="TomatoTokensConfigs", repository="Hedera\Repositories\Tomato\TomatoTokensConfigsRepository")
  */
-class TomatoTokensConfigs
+class TomatoTokensConfigs implements \JsonSerializable
 {
+    use SerializationHelper;
+
     /**
      * @var int
      *
@@ -253,5 +256,10 @@ class TomatoTokensConfigs
     public function setTomatoInternetDocuments(Collection $tomatoInternetDocuments): void
     {
         $this->tomatoInternetDocuments = $tomatoInternetDocuments;
+    }
+
+    public function jsonSerialize()
+    {
+        return self::serialize();
     }
 }

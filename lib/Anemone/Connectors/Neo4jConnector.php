@@ -91,6 +91,8 @@ class Neo4jConnector implements BeAuthConnector
 
             $em->flush();
 
+            $this->oauthService->event($oauth);
+
             return true;
         }
 

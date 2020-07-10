@@ -24,6 +24,10 @@ class AnemoneOAuth2Service
      * @var \Illuminate\Support\Collection $collect
      * */
     protected static $collect;
+    /**
+     * @var \Illuminate\Support\Collection $listeners
+     * */
+    protected $listeners;
 
     /**
      * @return void
@@ -32,6 +36,7 @@ class AnemoneOAuth2Service
     {
         static::$context = $this;
         static::$collect = collect();
+        $this->listeners = collect();
     }
 
     /**
@@ -73,6 +78,29 @@ class AnemoneOAuth2Service
         return static::$collect->filter(
             $amoDomain instanceof Closure ? $amoDomain : function ($item) use ($amoDomain) {
                 return $item['amocrm']->getDomain() == $amoDomain;
+            }
+        );
+    }
+
+    /**
+     * in closure set new SharedOauth instance
+     * @param Closure $closure
+     * @return void
+     */
+    public function addListener(Closure $closure): void
+    {
+        $this->listeners->add($closure);
+    }
+
+    /**
+     * @param SharedOauth $oauth
+     * @return void
+     */
+    public function event(SharedOauth $oauth): void
+    {
+        $this->listeners->each(
+            function (Closure $closure) use ($oauth) {
+                $closure($oauth);
             }
         );
     }

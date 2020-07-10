@@ -11,6 +11,7 @@ namespace Hedera\Services;
 
 use Anemone\Client as AnemoneClient;
 use Hedera\Exceptions\GuardingException;
+use Hedera\Models\SharedOauth;
 
 class GuardService
 {
@@ -80,6 +81,11 @@ class GuardService
 
         $token_type = $oauth->getTokenType();
         $links = $integration->getLinks();
+
+        // add listener for refresh token event
+        $service->addListener(function (SharedOauth $oauth) {
+            $this->smartService->clear();
+        });
 
         return new AnemoneClient(
             [

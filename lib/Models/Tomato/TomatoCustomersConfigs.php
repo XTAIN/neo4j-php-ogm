@@ -30,6 +30,13 @@ class TomatoCustomersConfigs implements \JsonSerializable
     protected $id;
 
     /**
+     * @var bool
+     *
+     * @OGM\Property(type="boolean")
+     */
+    protected $isGlobal;
+
+    /**
      * @var string|null
      *
      * @OGM\Property(type="string", nullable=true)
@@ -96,6 +103,22 @@ class TomatoCustomersConfigs implements \JsonSerializable
     public function getId(): int
     {
         return $this->id;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isGlobal(): bool
+    {
+        return $this->isGlobal;
+    }
+
+    /**
+     * @param bool $isGlobal
+     */
+    public function setIsGlobal(bool $isGlobal): void
+    {
+        $this->isGlobal = $isGlobal;
     }
 
     /**

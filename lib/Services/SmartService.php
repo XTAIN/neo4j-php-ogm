@@ -329,7 +329,7 @@ class SmartService
             'sharedApiKey' => $this->sharedApiKey,
             'sharedCustomersServices' => $this->sharedCustomersServices,
             'sharedCustomers' => $this->sharedCustomers,
-            'sharedPeriods' => $this->sharedPeriods,
+            'sharedPeriods' => $this->sharedPeriods->getValues(),
             'sharedAmocrm' => $this->sharedAmocrm,
             'sharedOauth' => $this->sharedOauth,
             'sharedIntegrations' => $this->sharedIntegrations,

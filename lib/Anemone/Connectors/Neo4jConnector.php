@@ -37,7 +37,14 @@ class Neo4jConnector implements BeAuthConnector
          * @var \Hedera\Models\SharedOauth|null $oauth
          * */
         $oauth = $model['oauth'];
-        return isset($oauth) ? $oauth->jsonSerialize() : [];
+
+        return isset($oauth)
+            ? [
+                'access_token' => $oauth->getAccessToken(),
+                'refresh_token' => $oauth->getRefreshToken(),
+                'token_type' => $oauth->getTokenType(),
+            ]
+            : [];
     }
 
     public function write(array $authData, array $refreshAuthData): bool

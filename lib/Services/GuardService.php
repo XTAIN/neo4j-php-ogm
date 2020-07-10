@@ -9,6 +9,7 @@
 
 namespace Hedera\Services;
 
+use Anemone\Client as AnemoneClient;
 use Hedera\Exceptions\GuardingException;
 
 class GuardService
@@ -51,15 +52,59 @@ class GuardService
     }
 
     /**
+     * @param string|null $domain
+     * @return AnemoneClient|null
+     * @throws \Anemone\Exceptions\InvalidDataException
+     */
+    public function getAnemoneClient(string $domain = null): ?AnemoneClient
+    {
+        $service = AnemoneOAuth2Service::context();
+        $authData = $service->find($domain ?? $this->smartService->getSharedAmocrm()->getDomain())->first();
+
+        if (empty($authData)) {
+            return null;
+        }
+
+        /**
+         * @var \Hedera\Models\SharedAmocrm $amocrm
+         * */
+        $amocrm = $authData['amocrm'];
+        /**
+         * @var \Hedera\Models\SharedOauth $oauth
+         * */
+        $oauth = $authData['oauth'];
+        /**
+         * @var \Hedera\Models\SharedIntegrations $integration
+         * */
+        $integration = $authData['integration'];
+
+        $token_type = $oauth->getTokenType();
+        $links = $integration->getLinks();
+
+        return new AnemoneClient(
+            [
+                "domain" => $amocrm->getDomain(),
+                "token_type" => $token_type ?? 'Bearer',
+                "access_token" => $oauth->getAccessToken(),
+                "refresh_token" => $oauth->getRefreshToken(),
+                "client_secret" => $integration->getSecret(),
+                "client_id" => $integration->getIntegrationUuid(),
+                'redirect_uri' => $links->redirect_uri->href ?? '',
+            ]
+        );
+    }
+
+    /**
      * @return bool
      * */
     public function isReady(): bool
     {
         return $this->smartService->isReady();
     }
+
     /**
-     * @throws GuardingException
      * @return self
+     * @throws GuardingException
      */
     public function validateApiKey()
     {
@@ -77,8 +122,8 @@ class GuardService
     }
 
     /**
-     * @throws GuardingException
      * @return self
+     * @throws GuardingException
      */
     public function validatePeriod()
     {
@@ -100,8 +145,8 @@ class GuardService
     }
 
     /**
-     * @throws GuardingException
      * @return self
+     * @throws GuardingException
      */
     public function validateAmocrm()
     {

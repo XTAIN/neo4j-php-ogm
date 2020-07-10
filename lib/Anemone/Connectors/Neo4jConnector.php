@@ -74,19 +74,24 @@ class Neo4jConnector implements BeAuthConnector
                 return false;
             }
 
-            if (empty($refreshAuthData['expires_in'])) {
+            if (!empty($refreshAuthData['expires_in'])) {
                 $next->setExpiresIn($refreshAuthData['expires_in']);
                 $oauth->setExpiresIn($refreshAuthData['expires_in']);
             }
 
-            if (empty($refreshAuthData['access_token'])) {
+            if (!empty($refreshAuthData['access_token'])) {
                 $next->setAccessToken($refreshAuthData['access_token']);
                 $oauth->setAccessToken($refreshAuthData['access_token']);
             }
 
-            if (empty($refreshAuthData['refresh_token'])) {
+            if (!empty($refreshAuthData['refresh_token'])) {
                 $next->setRefreshToken($refreshAuthData['refresh_token']);
                 $oauth->setRefreshToken($refreshAuthData['refresh_token']);
+            }
+
+            if (!empty($refreshAuthData['token_type'])) {
+                $next->setTokenType($refreshAuthData['token_type']);
+                $oauth->setTokenType($refreshAuthData['token_type']);
             }
 
             $em->flush();

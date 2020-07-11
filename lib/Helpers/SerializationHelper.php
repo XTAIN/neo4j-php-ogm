@@ -14,7 +14,7 @@ trait SerializationHelper
     protected $__excludeSerialize = [];
 //    protected $__deepSerialize = false;
 
-    protected function serialize(): array
+    protected function serializing(): array
     {
         return array_filter(
             get_object_vars($this),

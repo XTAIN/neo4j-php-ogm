@@ -506,6 +506,6 @@ class TomatoInternetDocuments implements \JsonSerializable
 
     public function jsonSerialize()
     {
-        return self::serialize();
+        return self::serializing();
     }
 }

@@ -250,7 +250,7 @@ class SmartService
      */
     protected function loadSharedOauth(): bool
     {
-        $this->sharedOauth = $this->sharedAmocrm
+        $sharedOauth = $this->sharedAmocrm
             ->getSharedOauth()
             ->filter(
                 function (SharedOauth $oauth) {
@@ -259,7 +259,9 @@ class SmartService
             )
             ->first();
 
-        return !empty($this->sharedOauth);
+        $this->sharedOauth = empty($sharedOauth) ? null : $sharedOauth;
+
+        return isset($this->sharedOauth);
     }
 
     /**

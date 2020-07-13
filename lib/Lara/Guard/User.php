@@ -5,7 +5,7 @@
  * @package   Hedera
  * @author    Andrew <3oosor@gmail.com>
  * @copyright 2020 Fabrika-Klientov
- * @version   GIT: 20.07.07
+ * @version   GIT: 20.07.13
  * @link      https://fabrika-klientov.ua
  */
 
@@ -38,11 +38,12 @@ class User implements Authenticatable
     }
 
     /**
+     * @param string|null $name
      * @return \GraphAware\Neo4j\OGM\EntityManager|null
      */
-    public function getEntityManager()
+    public function getEntityManager(string $name = null)
     {
-        return $this->guardService->getConnectorService()->getConnection();
+        return $this->guardService->getConnectorService()->getConnection($name);
     }
 
     /**

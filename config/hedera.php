@@ -21,6 +21,7 @@ return [
             'password' => env('HEDERA_PASSWORD'),
             'protocol' => env('HEDERA_PROTOCOL', 'http'),
             'cache' => env('HEDERA_CACHE') ? storage_path(env('HEDERA_CACHE')) : null,
+            'listeners' => env('HEDERA_LISTENERS', true),
         ],
     ],
 ];

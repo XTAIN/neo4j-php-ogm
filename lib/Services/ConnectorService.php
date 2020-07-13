@@ -9,7 +9,11 @@
 
 namespace Hedera\Services;
 
+use GraphAware\Neo4j\Client\Neo4jClientEvents;
 use GraphAware\Neo4j\OGM\EntityManager;
+use GraphAware\Neo4j\OGM\Events;
+use GraphAware\Neo4j\OGM\Listeners\HederaFlushListener;
+use GraphAware\Neo4j\OGM\Listeners\HederaListener;
 use Hedera\Exceptions\GuardingException;
 
 class ConnectorService
@@ -80,6 +84,7 @@ class ConnectorService
         }
 
         $entityManager = EntityManager::create($url, $connection['cache'] ?? null);
+        ($connection['listeners'] ?? false) && self::injectHederaEventListeners($entityManager);
 
         $this->connections[$name] = $entityManager;
 
@@ -99,5 +104,34 @@ class ConnectorService
         }
 
         return $this->defaultConnection;
+    }
+
+    /**
+     * @param EntityManager $entityManager
+     */
+    protected function injectHederaEventListeners(EntityManager $entityManager)
+    {
+        $eventDispatcher = $entityManager->getDatabaseDriver()->getEventDispatcher();
+
+        $hederaListener = new HederaListener();
+
+        $eventDispatcher
+            ->addListener(Neo4jClientEvents::NEO4J_PRE_RUN, [$hederaListener, 'onPreRun']);
+        $eventDispatcher
+            ->addListener(Neo4jClientEvents::NEO4J_POST_RUN, [$hederaListener, 'onPostRun']);
+        $eventDispatcher
+            ->addListener(Neo4jClientEvents::NEO4J_ON_FAILURE, [$hederaListener, 'onFailure']);
+
+        $hederaFlushListener = new HederaFlushListener();
+
+        $entityManager
+            ->getEventManager()
+            ->addEventListener(Events::PRE_FLUSH, $hederaFlushListener);
+        $entityManager
+            ->getEventManager()
+            ->addEventListener(Events::ON_FLUSH, $hederaFlushListener);
+        $entityManager
+            ->getEventManager()
+            ->addEventListener(Events::POST_FLUSH, $hederaFlushListener);
     }
 }

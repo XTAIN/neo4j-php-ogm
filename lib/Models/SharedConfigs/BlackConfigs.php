@@ -45,12 +45,12 @@ class BlackConfigs extends SharedConfigs
      *
      * @OGM\Relationship(type="BLACK_CONFIG_IN", direction="INCOMING", collection=true, mappedBy="blackConfigs", targetEntity="Hedera\Models\BlackRelationFields")
      */
-    protected $blackRelationConfigs;
+    protected $blackRelationFields;
 
     public function __construct()
     {
         parent::__construct();
-        $this->blackRelationConfigs = new HederaCollection();
+        $this->blackRelationFields = new HederaCollection();
     }
 
     /**
@@ -104,16 +104,16 @@ class BlackConfigs extends SharedConfigs
     /**
      * @return Collection
      */
-    public function getBlackRelationConfigs(): Collection
+    public function getBlackRelationFields(): Collection
     {
-        return $this->blackRelationConfigs;
+        return $this->blackRelationFields;
     }
 
     /**
-     * @param Collection $blackRelationConfigs
+     * @param Collection $blackRelationFields
      */
-    public function setBlackRelationConfigs(Collection $blackRelationConfigs): void
+    public function setBlackRelationFields(Collection $blackRelationFields): void
     {
-        $this->blackRelationConfigs = $blackRelationConfigs;
+        $this->blackRelationFields = $blackRelationFields;
     }
 }

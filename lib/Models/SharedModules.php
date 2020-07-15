@@ -12,12 +12,17 @@ namespace Hedera\Models;
 use Doctrine\Common\Collections\Collection;
 use GraphAware\Neo4j\OGM\Annotations as OGM;
 use GraphAware\Neo4j\OGM\Common\Collection as HederaCollection;
+use Hedera\Helpers\EntityFactory;
+use Hedera\Helpers\SerializationHelper;
 
 /**
  * @OGM\Node(label="SharedModules", repository="Hedera\Repositories\SharedModulesRepository")
  */
-class SharedModules
+class SharedModules implements \JsonSerializable
 {
+    use EntityFactory;
+    use SerializationHelper;
+
     /**
      * @var int
      *
@@ -31,6 +36,13 @@ class SharedModules
      * @OGM\Property(type="boolean")
      */
     protected $power;
+
+    /**
+     * @var string
+     *
+     * @OGM\Property(type="string")
+     */
+    protected $key;
 
     /**
      * @var SharedCustomers|null
@@ -76,6 +88,22 @@ class SharedModules
     }
 
     /**
+     * @return string
+     */
+    public function getKey(): string
+    {
+        return $this->key;
+    }
+
+    /**
+     * @param string $key
+     */
+    public function setKey(string $key): void
+    {
+        $this->key = $key;
+    }
+
+    /**
      * @return SharedCustomers|null
      */
     public function getSharedCustomers(): ?SharedCustomers
@@ -105,5 +133,10 @@ class SharedModules
     public function setSharedConfigs(Collection $sharedConfigs): void
     {
         $this->sharedConfigs = $sharedConfigs;
+    }
+
+    public function jsonSerialize()
+    {
+        return self::serializing();
     }
 }

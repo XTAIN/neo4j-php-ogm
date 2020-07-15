@@ -5,14 +5,14 @@
  * @package   Hedera
  * @author    Andrew <3oosor@gmail.com>
  * @copyright 2020 Fabrika-Klientov
- * @version   GIT: 20.07.07
+ * @version   GIT: 20.07.15
  * @link      https://fabrika-klientov.ua
  */
 
-namespace Hedera\Lara\Guard;
+namespace Hedera\Lara\Guard\Module;
 
-use Hedera\Services\AnemoneOAuth2Service;
-use Hedera\Services\GuardService;
+use Hedera\Lara\Guard\URepository;
+use Hedera\Services\ModuleService;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 class UserRepository implements URepository
@@ -30,17 +30,9 @@ class UserRepository implements URepository
      */
     public function getUser(string $token): ?Authenticatable
     {
-        $guardService = new GuardService($token);
-        if ($guardService->isReady()) {
-            $user = new User($guardService);
-
-            /**
-             * @var AnemoneOAuth2Service $oauthService
-             * */
-            $oauthService = app(AnemoneOAuth2Service::class);
-            $oauthService->add($user->getSharedAmocrm(), $user->getSharedOauth(), $user->getSharedIntegrations());
-
-            return $user;
+        $userService = new ModuleService($token);
+        if ($userService->isReady()) {
+            return new User($userService);
         }
 
         return null;

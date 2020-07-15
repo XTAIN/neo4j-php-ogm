@@ -30,6 +30,7 @@ HEDERA_PROTOCOL=http # default is http
 # additional settings
 # caching data proxies and doctrine
 HEDERA_CACHE=cache/hedera # default null (if null uses tmp path of server '/tmp/*')
+HEDERA_LISTENERS=true # default true (if true - run system hedera listeners)
 
 ```
 

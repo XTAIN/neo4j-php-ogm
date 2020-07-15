@@ -5,7 +5,7 @@
  * @package   Hedera
  * @author    Andrew <3oosor@gmail.com>
  * @copyright 2020 Fabrika-Klientov
- * @version   GIT: 20.07.07
+ * @version   GIT: 20.07.15
  * @link      https://fabrika-klientov.ua
  */
 
@@ -38,6 +38,19 @@ class AuthServiceProvider extends ServiceProvider
                 $userProvider = app(TokenToUserProvider::class);
                 $request = app('request');
                 $config['hedera'] = config('hedera', null);
+
+                return new AccessTokenGuard($userProvider, $request, $config);
+            }
+        );
+
+        Auth::extend(
+            'hedera_module',
+            function ($app, $name, array $config) {
+                // automatically build the DI, put it as reference
+                $userProvider = app(TokenToUserProvider::class);
+                $request = app('request');
+                $config['hedera'] = config('hedera', null);
+                $config['hedera_module'] = true;
 
                 return new AccessTokenGuard($userProvider, $request, $config);
             }

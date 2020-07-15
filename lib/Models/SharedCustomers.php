@@ -216,11 +216,6 @@ class SharedCustomers implements \JsonSerializable
         $this->sharedModules = $sharedModules;
     }
 
-    public function jsonSerialize()
-    {
-        return self::serializing();
-    }
-
     /**
      * @return Collection
      */
@@ -235,5 +230,10 @@ class SharedCustomers implements \JsonSerializable
     public function setSharedContacts(Collection $sharedContacts): void
     {
         $this->sharedContacts = $sharedContacts;
+    }
+
+    public function jsonSerialize()
+    {
+        return self::serializing();
     }
 }

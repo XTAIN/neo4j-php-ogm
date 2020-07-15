@@ -19,9 +19,12 @@ use Hedera\Models\SharedCustomersServices;
 use Hedera\Models\SharedIntegrations;
 use Hedera\Models\SharedOauth;
 use Hedera\Models\SharedPeriods;
+use Hedera\Services\Helpers\Cached;
 
-class SmartService
+class SmartService implements BeSmartService
 {
+    use Cached;
+
     /**
      * @var string $identifier
      * */
@@ -70,28 +73,21 @@ class SmartService
     /**
      * @var string $directory
      * */
-    protected static $directory = __DIR__ . '/../../storage/hedera';
-
-    /**
-     * @var int $expires
-     * */
-    protected static $expires = 3600;
+    protected static $directory;
 
     /**
      * @param EntityManager $connection
      */
     public function __construct(EntityManager $connection)
     {
-        static::$directory = function_exists('storage_path') ? storage_path('hedera') : static::$directory;
+        static::$directory = function_exists('storage_path') ? storage_path('hedera') : static::DIRECTORY;
         $this->entityManager = $connection;
     }
 
     /**
-     * @param string $identifier
-     * @param bool $force
-     * @return void
+     * @inheritDoc
      */
-    public function init(string $identifier, bool $force = false)
+    public function init(string $identifier, bool $force = false): void
     {
         $this->identifier = $identifier;
 
@@ -115,22 +111,17 @@ class SmartService
     }
 
     /**
-     * @return void
+     * @inheritDoc
      */
-    public function clear()
+    public function clear(): void
     {
-        $this->checkDirectory();
-
         self::clearEntities();
 
-        $file = self::getFilename();
-        if (file_exists(self::getDirectory($file))) {
-            unlink(self::getDirectory($file));
-        }
+        self::clearData();
     }
 
     /**
-     * @return bool
+     * @inheritDoc
      * */
     public function isReady(): bool
     {
@@ -289,14 +280,12 @@ class SmartService
      */
     protected function fromCache(): bool
     {
-        $file = self::getFilename();
-        if (!file_exists(self::getDirectory($file))) {
+        $data = self::readData();
+        if (empty($data)) {
             return false;
         }
 
-        $data = json_decode(file_get_contents(self::getDirectory($file)), true);
-
-        if (empty($data['control']) || $data['control'] + static::$expires < time()) {
+        if (empty($data['control']) || $data['control'] + static::EXPIRES < time()) {
             return false;
         }
 
@@ -323,9 +312,6 @@ class SmartService
      */
     protected function toCache()
     {
-        $this->checkDirectory();
-
-        $file = self::getFilename();
         $data = [
             'control' => time(),
             'sharedApiKey' => $this->sharedApiKey,
@@ -337,8 +323,7 @@ class SmartService
             'sharedIntegrations' => $this->sharedIntegrations,
         ];
 
-        file_put_contents(self::getDirectory($file), json_encode($data));
-        chmod(self::getDirectory($file), 0664);
+        self::writeData($data);
     }
 
     /**
@@ -353,32 +338,5 @@ class SmartService
         $this->sharedAmocrm = null;
         $this->sharedOauth = null;
         $this->sharedIntegrations = null;
-    }
-
-    /**
-     * @return string
-     * */
-    protected function getFilename(): string
-    {
-        return md5($this->identifier) . '.json';
-    }
-
-    /**
-     * @param string|null $file
-     * @return string
-     */
-    protected function getDirectory(string $file = null): string
-    {
-        return static::$directory . (isset($file) ? ('/' . $file) : '');
-    }
-
-    /**
-     * @return void
-     */
-    protected function checkDirectory()
-    {
-        if (!is_dir(self::getDirectory())) {
-            @mkdir(self::getDirectory(), 0775, true);
-        }
     }
 }

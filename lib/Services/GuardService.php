@@ -13,15 +13,15 @@ use Anemone\Client as AnemoneClient;
 use Hedera\Exceptions\GuardingException;
 use Hedera\Models\SharedOauth;
 
-class GuardService
+class GuardService implements UserService
 {
     /**
-     * @var  ConnectorService $connectorService
+     * @var ConnectorService $connectorService
      */
     private $connectorService;
 
     /**
-     * @var  SmartService $smartService
+     * @var SmartService $smartService
      */
     private $smartService;
 

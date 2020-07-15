@@ -5,12 +5,13 @@
  * @package   Hedera
  * @author    Andrew <3oosor@gmail.com>
  * @copyright 2020 Fabrika-Klientov
- * @version   GIT: 20.07.07
+ * @version   GIT: 20.07.15
  * @link      https://fabrika-klientov.ua
  */
 
 namespace Hedera\Lara\Guard;
 
+use Hedera\Lara\Guard\Module\UserRepository as ModuleUserRepository;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\UserProvider;
@@ -20,7 +21,13 @@ class AccessTokenGuard implements Guard
     private $provider;
     private $request;
     private $config;
+    /**
+     * @var Authenticatable $user
+     * */
     private $user;
+    /**
+     * @var URepository $repository
+     * */
     protected $repository;
 
     /**
@@ -34,10 +41,12 @@ class AccessTokenGuard implements Guard
         $this->request = $request;
         $this->config = $config['hedera'] ?? null;
 
+        $isModule = $config['hedera_module'] ?? false;
+
         if (empty($this->config)) {
             \Log::error('Before using hedera guard - you should setting hedera config in config');
         } else {
-            $this->repository = new UserRepository($this->config);
+            $this->repository = $isModule ? new ModuleUserRepository($this->config) : new UserRepository($this->config);
             $this->initUser();
         }
     }

@@ -57,7 +57,7 @@ class User implements Authenticatable
     /**
      * @return \Hedera\Models\SharedModules
      * */
-    public function getSharedCustomersServices()
+    public function getSharedModules()
     {
         return $this->userService->getSmartService()->getSharedModules();
     }

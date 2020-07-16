@@ -22,6 +22,11 @@ abstract class CustomerAuth
     protected $em;
 
     /**
+     * @var string $customerClass
+     * */
+    protected static $customerClass = SharedCustomers::class;
+
+    /**
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -38,6 +43,10 @@ abstract class CustomerAuth
         return $next($request);
     }
 
+    /**
+     * @param \Illuminate\Http\Request  $request
+     * @return bool
+     */
     protected function load($request): bool
     {
         $token = $request->segment(3);
@@ -53,7 +62,7 @@ abstract class CustomerAuth
                 throw new \Exception('Not init default EntityManager');
             }
 
-            $repository = $em->getRepository(SharedCustomers::class);
+            $repository = $em->getRepository(static::$customerClass);
             /**
              * @var SharedCustomers|null $model
              * */
@@ -70,5 +79,10 @@ abstract class CustomerAuth
         return false;
     }
 
-    abstract protected function isAuth($request, SharedCustomers $sharedCustomers): bool;
+    /**
+     * @param \Illuminate\Http\Request  $request
+     * @param SharedCustomers $sharedCustomers
+     * @return bool
+     */
+    abstract protected function isAuth($request, $sharedCustomers): bool;
 }

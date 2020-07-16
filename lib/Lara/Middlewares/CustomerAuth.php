@@ -58,11 +58,11 @@ abstract class CustomerAuth
         try {
             $service = new ConnectorService();
             $this->em = $service->getConnection();
-            if (empty($em)) {
+            if (empty($this->em)) {
                 throw new \Exception('Not init default EntityManager');
             }
 
-            $repository = $em->getRepository(static::$customerClass);
+            $repository = $this->em->getRepository(static::$customerClass);
             /**
              * @var SharedCustomers|null $model
              * */

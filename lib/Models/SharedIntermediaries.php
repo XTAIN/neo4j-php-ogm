@@ -45,11 +45,11 @@ class SharedIntermediaries
     protected $isSystem;
 
     /**
-     * @var SharedModules|null
+     * @var SharedCustomers|null
      *
-     * @OGM\Relationship(type="INTERMEDIA_IN", direction="OUTGOING", collection=false, mappedBy="sharedIntermediaries" targetEntity="SharedModules")
+     * @OGM\Relationship(type="INTERMEDIA_IN", direction="OUTGOING", collection=false, mappedBy="sharedIntermediaries" targetEntity="SharedCustomers")
      */
-    protected $sharedModules;
+    protected $sharedCustomers;
 
     public function __construct()
     {
@@ -112,18 +112,18 @@ class SharedIntermediaries
     }
 
     /**
-     * @return SharedModules|null
+     * @return SharedCustomers|null
      */
-    public function getSharedModules(): ?SharedModules
+    public function getSharedCustomers(): ?SharedCustomers
     {
-        return $this->sharedModules;
+        return $this->sharedCustomers;
     }
 
     /**
-     * @param SharedModules|null $sharedModules
+     * @param SharedCustomers|null $sharedCustomers
      */
-    public function setSharedModules(?SharedModules $sharedModules): void
+    public function setSharedCustomers(?SharedCustomers $sharedCustomers): void
     {
-        $this->sharedModules = $sharedModules;
+        $this->sharedCustomers = $sharedCustomers;
     }
 }

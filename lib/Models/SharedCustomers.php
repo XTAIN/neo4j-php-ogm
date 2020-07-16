@@ -93,6 +93,13 @@ class SharedCustomers implements \JsonSerializable
      */
     protected $sharedContacts;
 
+    /**
+     * @var Collection
+     *
+     * @OGM\Relationship(type="INTERMEDIA_IN", direction="INCOMING", collection=true, mappedBy="sharedCustomers", targetEntity="SharedIntermediaries")
+     */
+    protected $sharedIntermediaries;
+
     public function __construct()
     {
         $this->sharedCustomersServices = new HederaCollection();
@@ -101,6 +108,7 @@ class SharedCustomers implements \JsonSerializable
         $this->limeConvert = new HederaCollection();
         $this->sharedModules = new HederaCollection();
         $this->sharedContacts = new HederaCollection();
+        $this->sharedIntermediaries = new HederaCollection();
     }
 
     /**
@@ -253,6 +261,22 @@ class SharedCustomers implements \JsonSerializable
     public function setSharedContacts(Collection $sharedContacts): void
     {
         $this->sharedContacts = $sharedContacts;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getSharedIntermediaries(): Collection
+    {
+        return $this->sharedIntermediaries;
+    }
+
+    /**
+     * @param Collection $sharedIntermediaries
+     */
+    public function setSharedIntermediaries(Collection $sharedIntermediaries): void
+    {
+        $this->sharedIntermediaries = $sharedIntermediaries;
     }
 
     public function jsonSerialize()

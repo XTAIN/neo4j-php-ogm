@@ -49,7 +49,7 @@ abstract class CustomerAuth
      */
     protected function load($request): bool
     {
-        $token = $request->segment(3);
+        $token = last(explode(' ', $request->header('Authorization') ?? ''));
 
         if (empty($token)) {
             return false;

@@ -27,12 +27,19 @@ class SharedModulesRepository extends BaseRepository
             return new HederaCollection();
         }
 
-        $ids = $collection->map(function ($item) {
-            return $item->getId();
-        });
+        $ids = $collection
+            ->map(
+                function ($item) {
+                    return $item->getId();
+                }
+            )
+            ->getValues();
 
         $query = $this->entityManager
-            ->createQuery('MATCH (n:' . $this->getClassName() . ') WHERE ID(n) IN $id MATCH (n)<-[:MODULE_CONFIG_IN]-(conf) RETURN n, conf');
+            ->createQuery(
+                'MATCH (n:' . $this->getClassName()
+                . ') WHERE ID(n) IN $id MATCH (n)<-[:MODULE_CONFIG_IN]-(conf) RETURN n, conf'
+            );
         $query->setParameter('id', $ids);
         $query
             ->addEntityMapping('n', $this->getClassName())

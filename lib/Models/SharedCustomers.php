@@ -45,6 +45,13 @@ class SharedCustomers implements \JsonSerializable
     protected $description;
 
     /**
+     * @var string|null
+     *
+     * @OGM\Property(type="string")
+     */
+    protected $key;
+
+    /**
      * @var Collection
      *
      * @OGM\Relationship(type="CUSTOMER_SERVICE_IN", direction="INCOMING", collection=true, mappedBy="sharedCustomers", targetEntity="SharedCustomersServices")
@@ -134,6 +141,22 @@ class SharedCustomers implements \JsonSerializable
     public function setDescription(?string $description): void
     {
         $this->description = $description;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getKey(): ?string
+    {
+        return $this->key;
+    }
+
+    /**
+     * @param string|null $key
+     */
+    public function setKey(?string $key): void
+    {
+        $this->key = $key;
     }
 
     /**

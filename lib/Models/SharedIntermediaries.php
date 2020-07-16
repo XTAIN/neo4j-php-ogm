@@ -10,12 +10,17 @@
 namespace Hedera\Models;
 
 use GraphAware\Neo4j\OGM\Annotations as OGM;
+use Hedera\Helpers\EntityFactory;
+use Hedera\Helpers\SerializationHelper;
 
 /**
  * @OGM\Node(label="SharedIntermediaries", repository="Hedera\Repositories\SharedIntermediariesRepository")
  */
-class SharedIntermediaries
+class SharedIntermediaries implements \JsonSerializable
 {
+    use EntityFactory;
+    use SerializationHelper;
+
     /**
      * @var int
      *
@@ -125,5 +130,10 @@ class SharedIntermediaries
     public function setSharedCustomers(?SharedCustomers $sharedCustomers): void
     {
         $this->sharedCustomers = $sharedCustomers;
+    }
+
+    public function jsonSerialize()
+    {
+        return self::serializing();
     }
 }

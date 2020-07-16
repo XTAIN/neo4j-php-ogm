@@ -15,7 +15,6 @@ use GraphAware\Neo4j\OGM\Common\Collection as HederaCollection;
 use Hedera\Helpers\EntityFactory;
 use Hedera\Helpers\SerializationHelper;
 use Hedera\Models\SharedCustomers;
-use Hedera\Models\SharedModules;
 
 /**
  * @OGM\Node(label="BlackScheme", repository="Hedera\Repositories\Black\BlackSchemeRepository")

@@ -14,6 +14,7 @@ use GraphAware\Neo4j\OGM\Annotations as OGM;
 use GraphAware\Neo4j\OGM\Common\Collection as HederaCollection;
 use Hedera\Helpers\EntityFactory;
 use Hedera\Helpers\SerializationHelper;
+use Hedera\Models\SharedCustomers;
 use Hedera\Models\SharedModules;
 
 /**
@@ -46,11 +47,11 @@ class BlackScheme implements \JsonSerializable
     protected $system;
 
     /**
-     * @var SharedModules|null
+     * @var SharedCustomers|null
      *
-     * @OGM\Relationship(type="MODULE_CONFIG_IN", direction="OUTGOING", collection=false, targetEntity="Hedera\Models\SharedModules")
+     * @OGM\Relationship(type="CU_BLACK_SCHEME_IN", direction="OUTGOING", collection=false, targetEntity="Hedera\Models\SharedCustomers")
      */
-    protected $sharedModules;
+    protected $sharedCustomers;
 
     /**
      * @var Collection
@@ -113,19 +114,19 @@ class BlackScheme implements \JsonSerializable
     }
 
     /**
-     * @return SharedModules|null
+     * @return SharedCustomers|null
      */
-    public function getSharedModules(): ?SharedModules
+    public function getSharedCustomers(): ?SharedCustomers
     {
-        return $this->sharedModules;
+        return $this->sharedCustomers;
     }
 
     /**
-     * @param SharedModules|null $sharedModules
+     * @param SharedCustomers|null $sharedCustomers
      */
-    public function setSharedModules(?SharedModules $sharedModules): void
+    public function setSharedCustomers(?SharedCustomers $sharedCustomers): void
     {
-        $this->sharedModules = $sharedModules;
+        $this->sharedCustomers = $sharedCustomers;
     }
 
     /**

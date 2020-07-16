@@ -52,9 +52,9 @@ class SharedModules implements \JsonSerializable
     protected $sharedCustomers;
 
     /**
-     * @var Collection
+     * @var SharedConfigs|null
      *
-     * @OGM\Relationship(type="MODULE_CONFIG_IN", direction="INCOMING", collection=true, mappedBy="sharedModules", targetEntity="SharedConfigs")
+     * @OGM\Relationship(type="MODULE_CONFIG_IN", direction="INCOMING", collection=false, mappedBy="sharedModules", targetEntity="SharedConfigs")
      */
     protected $sharedConfigs;
 
@@ -67,7 +67,6 @@ class SharedModules implements \JsonSerializable
 
     public function __construct()
     {
-        $this->sharedConfigs = new HederaCollection();
         $this->sharedIntermediaries = new HederaCollection();
     }
 
@@ -128,17 +127,17 @@ class SharedModules implements \JsonSerializable
     }
 
     /**
-     * @return Collection
+     * @return SharedConfigs|null
      */
-    public function getSharedConfigs(): Collection
+    public function getSharedConfigs(): ?SharedConfigs
     {
         return $this->sharedConfigs;
     }
 
     /**
-     * @param Collection $sharedConfigs
+     * @param SharedConfigs|null $sharedConfigs
      */
-    public function setSharedConfigs(Collection $sharedConfigs): void
+    public function setSharedConfigs(?SharedConfigs $sharedConfigs): void
     {
         $this->sharedConfigs = $sharedConfigs;
     }

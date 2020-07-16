@@ -52,7 +52,7 @@ class SharedIntermediaries implements \JsonSerializable
     /**
      * @var SharedCustomers|null
      *
-     * @OGM\Relationship(type="INTERMEDIA_IN", direction="OUTGOING", collection=false, mappedBy="sharedIntermediaries" targetEntity="SharedCustomers")
+     * @OGM\Relationship(type="INTERMEDIA_IN", direction="OUTGOING", collection=false, mappedBy="sharedIntermediaries", targetEntity="SharedCustomers")
      */
     protected $sharedCustomers;
 

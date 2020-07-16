@@ -47,42 +47,42 @@ class SharedCustomersServices implements \JsonSerializable
     /**
      * @var SharedApikeys|null
      *
-     * @OGM\Relationship(type="APIKEY_IN", direction="OUTGOING", collection=false, mappedBy="sharedCustomersServices", targetEntity="SharedApikeys")
+     * @OGM\Relationship(type="APIKEY_IN", direction="OUTGOING", collection=false, mappedBy="sharedCustomersServices", targetEntity="Hedera\Models\SharedApikeys")
      */
     protected $sharedApikey;
 
     /**
      * @var Collection
      *
-     * @OGM\Relationship(type="PERIOD_IN", direction="INCOMING", collection=true, mappedBy="sharedCustomersServices", targetEntity="SharedPeriods")
+     * @OGM\Relationship(type="PERIOD_IN", direction="INCOMING", collection=true, mappedBy="sharedCustomersServices", targetEntity="Hedera\Models\SharedPeriods")
      */
     protected $sharedPeriods;
 
     /**
      * @var SharedAmocrm|null
      *
-     * @OGM\Relationship(type="AMOCRM_IN", direction="OUTGOING", collection=false, mappedBy="sharedCustomersServices", targetEntity="SharedAmocrm")
+     * @OGM\Relationship(type="AMOCRM_IN", direction="OUTGOING", collection=false, mappedBy="sharedCustomersServices", targetEntity="Hedera\Models\SharedAmocrm")
      */
     protected $sharedAmocrm;
 
     /**
      * @var SharedCustomers|null
      *
-     * @OGM\Relationship(type="CUSTOMER_SERVICE_IN", direction="OUTGOING", collection=false, mappedBy="sharedCustomersServices", targetEntity="SharedCustomers")
+     * @OGM\Relationship(type="CUSTOMER_SERVICE_IN", direction="OUTGOING", collection=false, mappedBy="sharedCustomersServices", targetEntity="Hedera\Models\SharedCustomers")
      */
     protected $sharedCustomers;
 
     /**
      * @var SharedWidgets|null
      *
-     * @OGM\Relationship(type="CUSTOMER_SERVICE_WIDGET_IN", direction="OUTGOING", collection=false, mappedBy="sharedCustomersServices", targetEntity="SharedWidgets")
+     * @OGM\Relationship(type="CUSTOMER_SERVICE_WIDGET_IN", direction="OUTGOING", collection=false, mappedBy="sharedCustomersServices", targetEntity="Hedera\Models\SharedWidgets")
      */
     protected $sharedWidgets;
 
     /**
      * @var Collection
      *
-     * @OGM\Relationship(type="CU_SERVICE_CONFIG_IN", direction="INCOMING", collection=true, mappedBy="sharedCustomersServices", targetEntity="SharedConfigs")
+     * @OGM\Relationship(type="CU_SERVICE_CONFIG_IN", direction="INCOMING", collection=true, mappedBy="sharedCustomersServices", targetEntity="Hedera\Models\SharedConfigs")
      */
     protected $sharedConfigs;
 

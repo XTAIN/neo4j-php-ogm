@@ -54,14 +54,14 @@ class SharedCustomers implements \JsonSerializable
     /**
      * @var Collection
      *
-     * @OGM\Relationship(type="CUSTOMER_SERVICE_IN", direction="INCOMING", collection=true, mappedBy="sharedCustomers", targetEntity="SharedCustomersServices")
+     * @OGM\Relationship(type="CUSTOMER_SERVICE_IN", direction="INCOMING", collection=true, mappedBy="sharedCustomers", targetEntity="Hedera\Models\SharedCustomersServices")
      */
     protected $sharedCustomersServices;
 
     /**
      * @var Collection
      *
-     * @OGM\Relationship(type="AMOCRM_CU_IN", direction="INCOMING", collection=true, mappedBy="sharedCustomers", targetEntity="SharedAmocrm")
+     * @OGM\Relationship(type="AMOCRM_CU_IN", direction="INCOMING", collection=true, mappedBy="sharedCustomers", targetEntity="Hedera\Models\SharedAmocrm")
      */
     protected $sharedAmocrm;
 
@@ -82,21 +82,21 @@ class SharedCustomers implements \JsonSerializable
     /**
      * @var Collection
      *
-     * @OGM\Relationship(type="MODULE_CU_IN", direction="INCOMING", collection=true, mappedBy="sharedCustomers", targetEntity="SharedModules")
+     * @OGM\Relationship(type="MODULE_CU_IN", direction="INCOMING", collection=true, mappedBy="sharedCustomers", targetEntity="Hedera\Models\SharedModules")
      */
     protected $sharedModules;
 
     /**
      * @var Collection
      *
-     * @OGM\Relationship(type="MODULE_CONTACT_IN", direction="BOTH", collection=true, mappedBy="sharedCustomers", targetEntity="SharedContacts")
+     * @OGM\Relationship(type="MODULE_CONTACT_IN", direction="BOTH", collection=true, mappedBy="sharedCustomers", targetEntity="Hedera\Models\SharedContacts")
      */
     protected $sharedContacts;
 
     /**
      * @var Collection
      *
-     * @OGM\Relationship(type="INTERMEDIA_IN", direction="INCOMING", collection=true, mappedBy="sharedCustomers", targetEntity="SharedIntermediaries")
+     * @OGM\Relationship(type="INTERMEDIA_IN", direction="INCOMING", collection=true, mappedBy="sharedCustomers", targetEntity="Hedera\Models\SharedIntermediaries")
      */
     protected $sharedIntermediaries;
 

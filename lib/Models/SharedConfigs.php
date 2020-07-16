@@ -10,12 +10,17 @@
 namespace Hedera\Models;
 
 use GraphAware\Neo4j\OGM\Annotations as OGM;
+use Hedera\Helpers\EntityFactory;
+use Hedera\Helpers\SerializationHelper;
 
 /**
  * @OGM\Node(label="SharedConfigs", repository="Hedera\Repositories\SharedConfigsRepository")
  */
-class SharedConfigs
+class SharedConfigs implements \JsonSerializable
 {
+    use EntityFactory;
+    use SerializationHelper;
+
     /**
      * @var int
      *
@@ -102,5 +107,10 @@ class SharedConfigs
     public function setSharedModules(?SharedModules $sharedModules): void
     {
         $this->sharedModules = $sharedModules;
+    }
+
+    public function jsonSerialize()
+    {
+        return self::serializing();
     }
 }

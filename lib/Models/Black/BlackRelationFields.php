@@ -10,13 +10,18 @@
 namespace Hedera\Models\Black;
 
 use GraphAware\Neo4j\OGM\Annotations as OGM;
+use Hedera\Helpers\EntityFactory;
+use Hedera\Helpers\SerializationHelper;
 use Hedera\Models\SharedIntermediaries;
 
 /**
  * @OGM\Node(label="BlackRelationFields", repository="Hedera\Repositories\Black\BlackRelationFieldsRepository")
  */
-class BlackRelationFields
+class BlackRelationFields implements \JsonSerializable
 {
+    use EntityFactory;
+    use SerializationHelper;
+
     /**
      * @var int
      *
@@ -128,5 +133,10 @@ class BlackRelationFields
     public function setSharedIntermediaries(?SharedIntermediaries $sharedIntermediaries): void
     {
         $this->sharedIntermediaries = $sharedIntermediaries;
+    }
+
+    public function jsonSerialize()
+    {
+        return self::serializing();
     }
 }

@@ -12,13 +12,18 @@ namespace Hedera\Models\Black;
 use Doctrine\Common\Collections\Collection;
 use GraphAware\Neo4j\OGM\Annotations as OGM;
 use GraphAware\Neo4j\OGM\Common\Collection as HederaCollection;
+use Hedera\Helpers\EntityFactory;
+use Hedera\Helpers\SerializationHelper;
 use Hedera\Models\SharedModules;
 
 /**
  * @OGM\Node(label="BlackScheme", repository="Hedera\Repositories\Black\BlackSchemeRepository")
  */
-class BlackScheme
+class BlackScheme implements \JsonSerializable
 {
+    use EntityFactory;
+    use SerializationHelper;
+
     /**
      * @var int
      *
@@ -153,5 +158,10 @@ class BlackScheme
     public function setBlackRelationFields(Collection $blackRelationFields): void
     {
         $this->blackRelationFields = $blackRelationFields;
+    }
+
+    public function jsonSerialize()
+    {
+        return self::serializing();
     }
 }

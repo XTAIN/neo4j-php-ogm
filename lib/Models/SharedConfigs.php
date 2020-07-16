@@ -38,14 +38,14 @@ class SharedConfigs implements \JsonSerializable
     /**
      * @var SharedCustomersServices|null
      *
-     * @OGM\Relationship(type="CU_SERVICE_CONFIG_IN", direction="OUTGOING", collection=false, mappedBy="sharedConfigs", targetEntity="SharedCustomersServices")
+     * @OGM\Relationship(type="CU_SERVICE_CONFIG_IN", direction="OUTGOING", collection=false, mappedBy="sharedConfigs", targetEntity="Hedera\Models\SharedCustomersServices")
      */
     protected $sharedCustomersServices;
 
     /**
      * @var SharedModules|null
      *
-     * @OGM\Relationship(type="MODULE_CONFIG_IN", direction="OUTGOING", collection=false, mappedBy="sharedConfigs", targetEntity="SharedModules")
+     * @OGM\Relationship(type="MODULE_CONFIG_IN", direction="OUTGOING", collection=false, mappedBy="sharedConfigs", targetEntity="Hedera\Models\SharedModules")
      */
     protected $sharedModules;
 

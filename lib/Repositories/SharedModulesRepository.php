@@ -35,10 +35,11 @@ class SharedModulesRepository extends BaseRepository
             )
             ->getValues();
 
+        $graph = last(explode('\\', $this->getClassName()));
+
         $query = $this->entityManager
             ->createQuery(
-                'MATCH (n:' . $this->getClassName()
-                . ') WHERE ID(n) IN $id MATCH (n)<-[:MODULE_CONFIG_IN]-(conf) RETURN n, conf'
+                'MATCH (n:' . $graph . ') WHERE ID(n) IN $id MATCH (n)<-[:MODULE_CONFIG_IN]-(conf) RETURN n, conf'
             );
         $query->setParameter('id', $ids);
         $query

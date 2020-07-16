@@ -7,7 +7,7 @@
  * @link      https://fabrika-klientov.ua
  * */
 
-namespace Hedera\Repositories;
+namespace Hedera\Repositories\Black;
 
 use GraphAware\Neo4j\OGM\Repository\BaseRepository;
 

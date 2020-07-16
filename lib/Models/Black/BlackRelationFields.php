@@ -7,13 +7,13 @@
  * @link      https://fabrika-klientov.ua
  * */
 
-namespace Hedera\Models;
+namespace Hedera\Models\Black;
 
 use GraphAware\Neo4j\OGM\Annotations as OGM;
-use Hedera\Models\SharedConfigs\BlackConfigs;
+use Hedera\Models\SharedIntermediaries;
 
 /**
- * @OGM\Node(label="BlackRelationFields", repository="Hedera\Repositories\BlackRelationFieldsRepository")
+ * @OGM\Node(label="BlackRelationFields", repository="Hedera\Repositories\Black\BlackRelationFieldsRepository")
  */
 class BlackRelationFields
 {
@@ -41,11 +41,18 @@ class BlackRelationFields
     protected $intermediaryItem;
 
     /**
-     * @var BlackConfigs|null
+     * @var BlackScheme|null
      *
-     * @OGM\Relationship(type="BLACK_CONFIG_IN", direction="OUTGOING", collection=false, mappedBy="blackRelationConfigs", targetEntity="Hedera\Models\SharedConfigs\BlackConfigs")
+     * @OGM\Relationship(type="BLACK_RELATION_IN", direction="OUTGOING", collection=false, mappedBy="blackRelationFields", targetEntity="BlackScheme")
      */
-    protected $blackConfigs;
+    protected $blackScheme;
+
+    /**
+     * @var SharedIntermediaries|null
+     *
+     * @OGM\Relationship(type="INTERMEDIA_FIELD_IN", direction="OUTGOING", collection=false, targetEntity="Hedera\Models\SharedIntermediaries")
+     */
+    protected $sharedIntermediaries;
 
     public function __construct()
     {
@@ -92,18 +99,34 @@ class BlackRelationFields
     }
 
     /**
-     * @return BlackConfigs|null
+     * @return BlackScheme|null
      */
-    public function getBlackConfigs(): ?BlackConfigs
+    public function getBlackScheme(): ?BlackScheme
     {
-        return $this->blackConfigs;
+        return $this->blackScheme;
     }
 
     /**
-     * @param BlackConfigs|null $blackConfigs
+     * @param BlackScheme|null $blackScheme
      */
-    public function setBlackConfigs(?BlackConfigs $blackConfigs): void
+    public function setBlackScheme(?BlackScheme $blackScheme): void
     {
-        $this->blackConfigs = $blackConfigs;
+        $this->blackScheme = $blackScheme;
+    }
+
+    /**
+     * @return SharedIntermediaries|null
+     */
+    public function getSharedIntermediaries(): ?SharedIntermediaries
+    {
+        return $this->sharedIntermediaries;
+    }
+
+    /**
+     * @param SharedIntermediaries|null $sharedIntermediaries
+     */
+    public function setSharedIntermediaries(?SharedIntermediaries $sharedIntermediaries): void
+    {
+        $this->sharedIntermediaries = $sharedIntermediaries;
     }
 }

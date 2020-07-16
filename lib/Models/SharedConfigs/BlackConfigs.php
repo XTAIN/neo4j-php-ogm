@@ -9,9 +9,8 @@
 
 namespace Hedera\Models\SharedConfigs;
 
-use Doctrine\Common\Collections\Collection;
 use GraphAware\Neo4j\OGM\Annotations as OGM;
-use GraphAware\Neo4j\OGM\Common\Collection as HederaCollection;
+use Hedera\Models\Black\BlackScheme;
 use Hedera\Models\SharedConfigs;
 
 /**
@@ -41,17 +40,11 @@ class BlackConfigs extends SharedConfigs
     protected $entry;
 
     /**
-     * @var Collection
+     * @var BlackScheme|null
      *
-     * @OGM\Relationship(type="BLACK_CONFIG_IN", direction="INCOMING", collection=true, mappedBy="blackConfigs", targetEntity="Hedera\Models\BlackRelationFields")
+     * @OGM\Relationship(type="BLACK_CONFIG_IN", direction="OUTGOING", collection=false, mappedBy="blackConfigs", targetEntity="Hedera\Models\Black\BlackScheme")
      */
-    protected $blackRelationFields;
-
-    public function __construct()
-    {
-        parent::__construct();
-        $this->blackRelationFields = new HederaCollection();
-    }
+    protected $blackScheme;
 
     /**
      * @return string
@@ -102,18 +95,18 @@ class BlackConfigs extends SharedConfigs
     }
 
     /**
-     * @return Collection
+     * @return BlackScheme|null
      */
-    public function getBlackRelationFields(): Collection
+    public function getBlackScheme(): ?BlackScheme
     {
-        return $this->blackRelationFields;
+        return $this->blackScheme;
     }
 
     /**
-     * @param Collection $blackRelationFields
+     * @param BlackScheme|null $blackScheme
      */
-    public function setBlackRelationFields(Collection $blackRelationFields): void
+    public function setBlackScheme(?BlackScheme $blackScheme): void
     {
-        $this->blackRelationFields = $blackRelationFields;
+        $this->blackScheme = $blackScheme;
     }
 }

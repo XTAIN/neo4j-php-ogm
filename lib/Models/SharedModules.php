@@ -42,6 +42,13 @@ class SharedModules implements \JsonSerializable
      *
      * @OGM\Property(type="string")
      */
+    protected $code;
+
+    /**
+     * @var string
+     *
+     * @OGM\Property(type="string")
+     */
     protected $key;
 
     /**
@@ -92,6 +99,22 @@ class SharedModules implements \JsonSerializable
     public function setPower(bool $power): void
     {
         $this->power = $power;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCode(): string
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param string $code
+     */
+    public function setCode(string $code): void
+    {
+        $this->code = $code;
     }
 
     /**

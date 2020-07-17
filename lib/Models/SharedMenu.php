@@ -24,9 +24,9 @@ class SharedMenu
     protected $id;
 
     /**
-     * @var string
+     * @var int|null
      *
-     * @OGM\Property(type="string", key="parent_uuid")
+     * @OGM\Property(type="int", key="parent_uuid")
      */
     protected $parentUuid;
 
@@ -100,17 +100,17 @@ class SharedMenu
     }
 
     /**
-     * @return string
+     * @return int|null
      */
-    public function getParentUuid(): string
+    public function getParentUuid(): ?int
     {
         return $this->parentUuid;
     }
 
     /**
-     * @param string $parentUuid
+     * @param int|null $parentUuid
      */
-    public function setParentUuid(string $parentUuid): void
+    public function setParentUuid(?int $parentUuid): void
     {
         $this->parentUuid = $parentUuid;
     }

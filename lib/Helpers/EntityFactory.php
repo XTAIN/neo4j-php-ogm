@@ -21,6 +21,18 @@ trait EntityFactory
         $instance = $instance ?? new static();
 
         foreach ($data as $key => $value) {
+            $key = lcfirst(
+                join(
+                    '',
+                    array_map(
+                        function ($item) {
+                            return ucfirst($item);
+                        },
+                        preg_split('/[\-_]/', $key)
+                    )
+                )
+            );
+
             if (property_exists($instance, $key)) {
                 $instance->{$key} = $value;
             }

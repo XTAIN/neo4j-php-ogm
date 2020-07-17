@@ -10,12 +10,17 @@
 namespace Hedera\Models;
 
 use GraphAware\Neo4j\OGM\Annotations as OGM;
+use Hedera\Helpers\EntityFactory;
+use Hedera\Helpers\SerializationHelper;
 
 /**
  * @OGM\Node(label="SharedMenu", repository="Hedera\Repositories\SharedMenuRepository")
  */
-class SharedMenu
+class SharedMenu implements \JsonSerializable
 {
+    use EntityFactory;
+    use SerializationHelper;
+
     /**
      * @var int
      *
@@ -241,5 +246,10 @@ class SharedMenu
     public function setRoles(array $roles): void
     {
         $this->roles = $roles;
+    }
+
+    public function jsonSerialize()
+    {
+        return self::serializing();
     }
 }

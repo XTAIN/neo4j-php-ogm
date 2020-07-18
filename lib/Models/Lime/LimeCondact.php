@@ -10,12 +10,17 @@
 namespace Hedera\Models\Lime;
 
 use GraphAware\Neo4j\OGM\Annotations as OGM;
+use Hedera\Helpers\EntityFactory;
+use Hedera\Helpers\SerializationHelper;
 
 /**
  * @OGM\Node(label="LimeCondact", repository="Hedera\Repositories\Lime\LimeCondactRepository")
  */
-class LimeCondact
+class LimeCondact implements \JsonSerializable
 {
+    use EntityFactory;
+    use SerializationHelper;
+
     /**
      * @var int
      *
@@ -195,5 +200,10 @@ class LimeCondact
     public function setLimeRules(?LimeRules $limeRules): void
     {
         $this->limeRules = $limeRules;
+    }
+
+    public function jsonSerialize()
+    {
+        return self::serializing();
     }
 }

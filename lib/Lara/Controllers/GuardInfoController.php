@@ -1,7 +1,7 @@
 <?php
 /**
  *
- * @package   Lantana
+ * @package   Hedera
  * @author    Andrew <3oosor@gmail.com>
  * @copyright 2020 Fabrika-Klientov
  * @version   GIT: 20.07.08

@@ -10,13 +10,18 @@
 namespace Hedera\Models\Lime;
 
 use GraphAware\Neo4j\OGM\Annotations as OGM;
+use Hedera\Helpers\EntityFactory;
+use Hedera\Helpers\SerializationHelper;
 use Hedera\Models\SharedCustomers;
 
 /**
  * @OGM\Node(label="LimeConvert", repository="Hedera\Repositories\Lime\LimeConvertRepository")
  */
-class LimeConvert
+class LimeConvert implements \JsonSerializable
 {
+    use EntityFactory;
+    use SerializationHelper;
+
     /**
      * @var int
      *
@@ -173,5 +178,10 @@ class LimeConvert
     public function setSharedCustomers(?SharedCustomers $sharedCustomers): void
     {
         $this->sharedCustomers = $sharedCustomers;
+    }
+
+    public function jsonSerialize()
+    {
+        return self::serializing();
     }
 }

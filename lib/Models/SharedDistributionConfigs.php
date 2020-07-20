@@ -10,6 +10,7 @@
 namespace Hedera\Models;
 
 use GraphAware\Neo4j\OGM\Annotations as OGM;
+use Hedera\Models\Lime\LimeConvert;
 
 /**
  * @OGM\Node(label="SharedDistributionConfigs", repository="Hedera\Repositories\SharedDistributionConfigsRepository")
@@ -61,11 +62,19 @@ class SharedDistributionConfigs
     protected $data;
 
     /**
+     * @deprecated
      * @var SharedCustomersServices|null
      *
      * @OGM\Relationship(type="DISTRIB_IN", direction="OUTGOING", collection=false, targetEntity="SharedCustomersServices")
      */
     protected $sharedCustomersServices;
+
+    /**
+     * @var LimeConvert|null
+     *
+     * @OGM\Relationship(type="LIME_DISTRIB_IN", direction="OUTGOING", collection=false, mappedBy="sharedDistributionConfigs", targetEntity="Hedera\Models\Lime\LimeConvert")
+     */
+    protected $limeConvert;
 
     public function __construct()
     {
@@ -160,6 +169,7 @@ class SharedDistributionConfigs
     }
 
     /**
+     * @deprecated
      * @return SharedCustomersServices|null
      */
     public function getSharedCustomersServices(): ?SharedCustomersServices
@@ -168,10 +178,27 @@ class SharedDistributionConfigs
     }
 
     /**
+     * @deprecated
      * @param SharedCustomersServices|null $sharedCustomersServices
      */
     public function setSharedCustomersServices(?SharedCustomersServices $sharedCustomersServices): void
     {
         $this->sharedCustomersServices = $sharedCustomersServices;
+    }
+
+    /**
+     * @return LimeConvert|null
+     */
+    public function getLimeConvert(): ?LimeConvert
+    {
+        return $this->limeConvert;
+    }
+
+    /**
+     * @param LimeConvert|null $limeConvert
+     */
+    public function setLimeConvert(?LimeConvert $limeConvert): void
+    {
+        $this->limeConvert = $limeConvert;
     }
 }

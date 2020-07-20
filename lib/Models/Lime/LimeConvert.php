@@ -13,6 +13,7 @@ use GraphAware\Neo4j\OGM\Annotations as OGM;
 use Hedera\Helpers\EntityFactory;
 use Hedera\Helpers\SerializationHelper;
 use Hedera\Models\SharedCustomers;
+use Hedera\Models\SharedDistributionConfigs;
 
 /**
  * @OGM\Node(label="LimeConvert", repository="Hedera\Repositories\Lime\LimeConvertRepository")
@@ -71,6 +72,13 @@ class LimeConvert implements \JsonSerializable
      * @OGM\Relationship(type="LIME_CONVERT_CU_IN", direction="OUTGOING", collection=false, mappedBy="limeConvert", targetEntity="Hedera\Models\SharedCustomers")
      */
     protected $sharedCustomers;
+
+    /**
+     * @var SharedDistributionConfigs|null
+     *
+     * @OGM\Relationship(type="LIME_DISTRIB_IN", direction="INCOMING", collection=false, mappedBy="limeConvert", targetEntity="Hedera\Models\SharedDistributionConfigs")
+     */
+    protected $sharedDistributionConfigs;
 
     public function __construct()
     {
@@ -178,6 +186,22 @@ class LimeConvert implements \JsonSerializable
     public function setSharedCustomers(?SharedCustomers $sharedCustomers): void
     {
         $this->sharedCustomers = $sharedCustomers;
+    }
+
+    /**
+     * @return SharedDistributionConfigs|null
+     */
+    public function getSharedDistributionConfigs(): ?SharedDistributionConfigs
+    {
+        return $this->sharedDistributionConfigs;
+    }
+
+    /**
+     * @param SharedDistributionConfigs|null $sharedDistributionConfigs
+     */
+    public function setSharedDistributionConfigs(?SharedDistributionConfigs $sharedDistributionConfigs): void
+    {
+        $this->sharedDistributionConfigs = $sharedDistributionConfigs;
     }
 
     public function jsonSerialize()

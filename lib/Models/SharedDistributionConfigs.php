@@ -10,13 +10,18 @@
 namespace Hedera\Models;
 
 use GraphAware\Neo4j\OGM\Annotations as OGM;
+use Hedera\Helpers\EntityFactory;
+use Hedera\Helpers\SerializationHelper;
 use Hedera\Models\Lime\LimeConvert;
 
 /**
  * @OGM\Node(label="SharedDistributionConfigs", repository="Hedera\Repositories\SharedDistributionConfigsRepository")
  */
-class SharedDistributionConfigs
+class SharedDistributionConfigs implements \JsonSerializable
 {
+    use EntityFactory;
+    use SerializationHelper;
+
     /**
      * @var int
      *
@@ -200,5 +205,10 @@ class SharedDistributionConfigs
     public function setLimeConvert(?LimeConvert $limeConvert): void
     {
         $this->limeConvert = $limeConvert;
+    }
+
+    public function jsonSerialize()
+    {
+        return self::serializing();
     }
 }

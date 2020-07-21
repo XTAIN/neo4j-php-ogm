@@ -46,6 +46,7 @@ class LimeConvert implements \JsonSerializable
     protected $module;
 
     /**
+     * @deprecated
      * @var string
      *
      * @OGM\Property(type="string", key="module_uuid")

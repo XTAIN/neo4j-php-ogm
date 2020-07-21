@@ -9,7 +9,9 @@
 
 namespace Hedera\Models;
 
+use Doctrine\Common\Collections\Collection;
 use GraphAware\Neo4j\OGM\Annotations as OGM;
+use GraphAware\Neo4j\OGM\Common\Collection as HederaCollection;
 use Hedera\Helpers\EntityFactory;
 use Hedera\Helpers\SerializationHelper;
 
@@ -71,14 +73,15 @@ class SharedModules implements \JsonSerializable
     protected $sharedAmocrm;
 
     /**
-     * @var SharedDistributionConfigs|null
+     * @var Collection
      *
-     * @OGM\Relationship(type="MODULE_DISTRIB_IN", direction="INCOMING", collection=false, mappedBy="sharedModules", targetEntity="SharedDistributionConfigs")
+     * @OGM\Relationship(type="LIME_MOD_CONVERT_IN", direction="INCOMING", collection=true, mappedBy="sharedModules", targetEntity="Hedera\Models\Lime\LimeConvert")
      */
-    protected $sharedDistributionConfigs;
+    protected $limeConvert;
 
     public function __construct()
     {
+        $this->limeConvert = new HederaCollection();
     }
 
     /**
@@ -186,19 +189,19 @@ class SharedModules implements \JsonSerializable
     }
 
     /**
-     * @return SharedDistributionConfigs|null
+     * @return Collection
      */
-    public function getSharedDistributionConfigs(): ?SharedDistributionConfigs
+    public function getLimeConvert(): Collection
     {
-        return $this->sharedDistributionConfigs;
+        return $this->limeConvert;
     }
 
     /**
-     * @param SharedDistributionConfigs|null $sharedDistributionConfigs
+     * @param Collection $limeConvert
      */
-    public function setSharedDistributionConfigs(?SharedDistributionConfigs $sharedDistributionConfigs): void
+    public function setLimeConvert(Collection $limeConvert): void
     {
-        $this->sharedDistributionConfigs = $sharedDistributionConfigs;
+        $this->limeConvert = $limeConvert;
     }
 
     public function jsonSerialize()

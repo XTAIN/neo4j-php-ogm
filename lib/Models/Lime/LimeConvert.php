@@ -14,6 +14,7 @@ use Hedera\Helpers\EntityFactory;
 use Hedera\Helpers\SerializationHelper;
 use Hedera\Models\SharedCustomers;
 use Hedera\Models\SharedDistributionConfigs;
+use Hedera\Models\SharedModules;
 
 /**
  * @OGM\Node(label="LimeConvert", repository="Hedera\Repositories\Lime\LimeConvertRepository")
@@ -72,6 +73,13 @@ class LimeConvert implements \JsonSerializable
      * @OGM\Relationship(type="LIME_CONVERT_CU_IN", direction="OUTGOING", collection=false, mappedBy="limeConvert", targetEntity="Hedera\Models\SharedCustomers")
      */
     protected $sharedCustomers;
+
+    /**
+     * @var SharedModules|null
+     *
+     * @OGM\Relationship(type="LIME_MOD_CONVERT_IN", direction="OUTGOING", collection=false, mappedBy="limeConvert", targetEntity="Hedera\Models\SharedModules")
+     */
+    protected $sharedModules;
 
     /**
      * @var SharedDistributionConfigs|null
@@ -186,6 +194,22 @@ class LimeConvert implements \JsonSerializable
     public function setSharedCustomers(?SharedCustomers $sharedCustomers): void
     {
         $this->sharedCustomers = $sharedCustomers;
+    }
+
+    /**
+     * @return SharedModules|null
+     */
+    public function getSharedModules(): ?SharedModules
+    {
+        return $this->sharedModules;
+    }
+
+    /**
+     * @param SharedModules|null $sharedModules
+     */
+    public function setSharedModules(?SharedModules $sharedModules): void
+    {
+        $this->sharedModules = $sharedModules;
     }
 
     /**

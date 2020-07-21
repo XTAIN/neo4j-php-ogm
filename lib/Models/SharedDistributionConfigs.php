@@ -81,13 +81,6 @@ class SharedDistributionConfigs implements \JsonSerializable
      */
     protected $limeConvert;
 
-    /**
-     * @var SharedModules|null
-     *
-     * @OGM\Relationship(type="MODULE_DISTRIB_IN", direction="OUTGOING", collection=false, mappedBy="sharedDistributionConfigs", targetEntity="SharedModules")
-     */
-    protected $sharedModules;
-
     public function __construct()
     {
     }
@@ -212,22 +205,6 @@ class SharedDistributionConfigs implements \JsonSerializable
     public function setLimeConvert(?LimeConvert $limeConvert): void
     {
         $this->limeConvert = $limeConvert;
-    }
-
-    /**
-     * @return SharedModules|null
-     */
-    public function getSharedModules(): ?SharedModules
-    {
-        return $this->sharedModules;
-    }
-
-    /**
-     * @param SharedModules|null $sharedModules
-     */
-    public function setSharedModules(?SharedModules $sharedModules): void
-    {
-        $this->sharedModules = $sharedModules;
     }
 
     public function jsonSerialize()

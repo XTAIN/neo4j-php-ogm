@@ -119,7 +119,7 @@ class SharedAmocrm implements \JsonSerializable
     /**
      * @var SharedModules|null
      *
-     * @OGM\Relationship(type="AMOCRM_MODULE_IN", direction="OUTGOING", collection=false, targetEntity="SharedModules")
+     * @OGM\Relationship(type="AMOCRM_MODULE_IN", direction="OUTGOING", collection=false, mappedBy="sharedAmocrm", targetEntity="SharedModules")
      */
     protected $sharedModules;
 

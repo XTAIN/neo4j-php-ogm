@@ -63,6 +63,13 @@ class SharedModules implements \JsonSerializable
      */
     protected $sharedConfigs;
 
+    /**
+     * @var SharedAmocrm|null
+     *
+     * @OGM\Relationship(type="AMOCRM_MODULE_IN", direction="INCOMING", collection=false, mappedBy="sharedModules", targetEntity="SharedAmocrm")
+     */
+    protected $sharedAmocrm;
+
     public function __construct()
     {
     }
@@ -153,6 +160,22 @@ class SharedModules implements \JsonSerializable
     public function setSharedConfigs(?SharedConfigs $sharedConfigs): void
     {
         $this->sharedConfigs = $sharedConfigs;
+    }
+
+    /**
+     * @return SharedAmocrm|null
+     */
+    public function getSharedAmocrm(): ?SharedAmocrm
+    {
+        return $this->sharedAmocrm;
+    }
+
+    /**
+     * @param SharedAmocrm|null $sharedAmocrm
+     */
+    public function setSharedAmocrm(?SharedAmocrm $sharedAmocrm): void
+    {
+        $this->sharedAmocrm = $sharedAmocrm;
     }
 
     public function jsonSerialize()

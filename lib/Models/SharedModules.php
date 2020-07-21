@@ -70,6 +70,13 @@ class SharedModules implements \JsonSerializable
      */
     protected $sharedAmocrm;
 
+    /**
+     * @var SharedDistributionConfigs|null
+     *
+     * @OGM\Relationship(type="MODULE_DISTRIB_IN", direction="INCOMING", collection=false, mappedBy="sharedModules", targetEntity="SharedDistributionConfigs")
+     */
+    protected $sharedDistributionConfigs;
+
     public function __construct()
     {
     }
@@ -176,6 +183,22 @@ class SharedModules implements \JsonSerializable
     public function setSharedAmocrm(?SharedAmocrm $sharedAmocrm): void
     {
         $this->sharedAmocrm = $sharedAmocrm;
+    }
+
+    /**
+     * @return SharedDistributionConfigs|null
+     */
+    public function getSharedDistributionConfigs(): ?SharedDistributionConfigs
+    {
+        return $this->sharedDistributionConfigs;
+    }
+
+    /**
+     * @param SharedDistributionConfigs|null $sharedDistributionConfigs
+     */
+    public function setSharedDistributionConfigs(?SharedDistributionConfigs $sharedDistributionConfigs): void
+    {
+        $this->sharedDistributionConfigs = $sharedDistributionConfigs;
     }
 
     public function jsonSerialize()

@@ -62,6 +62,20 @@ class AnemoneOAuth2Service
     }
 
     /**
+     * @param Closure|string $amoDomain
+     * @return void
+     * */
+    public function remove($amoDomain): void
+    {
+        static::$collect = static::$collect
+            ->filter(
+                $amoDomain instanceof Closure ? $amoDomain : function ($item) use ($amoDomain) {
+                    return $item['amocrm']->getDomain() != $amoDomain;
+                }
+            );
+    }
+
+    /**
      * @return \Illuminate\Support\Collection
      * */
     public function items()

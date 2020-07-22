@@ -182,6 +182,13 @@ class SharedIntegrations implements \JsonSerializable
     protected $sharedWidgets;
 
     /**
+     * @var SharedCustomersServices|null
+     *
+     * @OGM\Relationship(type="CU_SERV_INTEGR_IN", direction="INCOMING", collection=false, mappedBy="sharedIntegrations", targetEntity="SharedCustomersServices")
+     */
+    protected $sharedCustomersServices;
+
+    /**
      * @var Collection
      *
      * @OGM\Relationship(type="INTEGR_OAUTH_IN", direction="INCOMING", collection=true, mappedBy="sharedIntegrations", targetEntity="SharedOauth")
@@ -535,6 +542,22 @@ class SharedIntegrations implements \JsonSerializable
     public function setSharedWidgets(?SharedWidgets $sharedWidgets): void
     {
         $this->sharedWidgets = $sharedWidgets;
+    }
+
+    /**
+     * @return SharedCustomersServices|null
+     */
+    public function getSharedCustomersServices(): ?SharedCustomersServices
+    {
+        return $this->sharedCustomersServices;
+    }
+
+    /**
+     * @param SharedCustomersServices|null $sharedCustomersServices
+     */
+    public function setSharedCustomersServices(?SharedCustomersServices $sharedCustomersServices): void
+    {
+        $this->sharedCustomersServices = $sharedCustomersServices;
     }
 
     /**

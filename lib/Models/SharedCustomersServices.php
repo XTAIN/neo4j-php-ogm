@@ -86,6 +86,13 @@ class SharedCustomersServices implements \JsonSerializable
      */
     protected $sharedConfigs;
 
+    /**
+     * @var SharedIntegrations|null
+     *
+     * @OGM\Relationship(type="CU_SERV_INTEGR_IN", direction="OUTGOING", collection=false, mappedBy="sharedCustomersServices", targetEntity="SharedIntegrations")
+     */
+    protected $sharedIntegrations;
+
     public function __construct()
     {
         $this->sharedConfigs = new HederaCollection();
@@ -226,6 +233,22 @@ class SharedCustomersServices implements \JsonSerializable
     public function setSharedConfigs(Collection $sharedConfigs): void
     {
         $this->sharedConfigs = $sharedConfigs;
+    }
+
+    /**
+     * @return SharedIntegrations|null
+     */
+    public function getSharedIntegrations(): ?SharedIntegrations
+    {
+        return $this->sharedIntegrations;
+    }
+
+    /**
+     * @param SharedIntegrations|null $sharedIntegrations
+     */
+    public function setSharedIntegrations(?SharedIntegrations $sharedIntegrations): void
+    {
+        $this->sharedIntegrations = $sharedIntegrations;
     }
 
     public function jsonSerialize()

@@ -39,6 +39,13 @@ class BlackScheme implements \JsonSerializable
     protected $name;
 
     /**
+     * @var string|null
+     *
+     * @OGM\Property(type="string")
+     */
+    protected $type;
+
+    /**
      * @var bool
      *
      * @OGM\Property(type="boolean")
@@ -94,6 +101,22 @@ class BlackScheme implements \JsonSerializable
     public function setName(string $name): void
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string|null $type
+     */
+    public function setType(?string $type): void
+    {
+        $this->type = $type;
     }
 
     /**

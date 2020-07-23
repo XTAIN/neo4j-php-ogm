@@ -12,7 +12,6 @@ namespace Hedera\Helpers;
 trait SerializationHelper
 {
     protected $__excludeSerialize = [];
-//    protected $__deepSerialize = false;
 
     protected function serializing(): array
     {
@@ -29,29 +28,18 @@ trait SerializationHelper
         );
     }
 
-//    protected function serialize(): array
-//    {
-//        $this->__deepSerialize = true;
-//
-//        return array_filter(
-//            get_object_vars($this),
-//            function ($value, $key) {
-//                if (
-//                    is_object($value) &&
-//                    method_exists($value, 'get__DeepSerialize') &&
-//                    $value->get__DeepSerialize()
-//                ) {
-//                    return false;
-//                }
-//
-//                return !(stripos($key, '__') === 0) && !in_array($key, $this->__excludeSerialize);
-//            },
-//            ARRAY_FILTER_USE_BOTH
-//        );
-//    }
-//
-//    public function get__DeepSerialize()
-//    {
-//        return $this->__deepSerialize;
-//    }
+    public function __serialize(): array
+    {
+        return self::serializing();
+    }
+
+    public function __unserialize(array $data): void
+    {
+        self::__construct();
+        foreach ($data as $key => $value) {
+            if (property_exists($this, $key)) {
+                $this->{$key} = $value;
+            }
+        }
+    }
 }

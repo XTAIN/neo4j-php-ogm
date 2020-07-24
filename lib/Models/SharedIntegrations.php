@@ -61,13 +61,6 @@ class SharedIntegrations implements \JsonSerializable
     /**
      * @var int
      *
-     * @OGM\Property(type="int", key="updated_at")
-     */
-    protected $updatedAt;
-
-    /**
-     * @var int
-     *
      * @OGM\Property(type="int", key="version_time")
      */
     protected $versionTime;
@@ -270,22 +263,6 @@ class SharedIntegrations implements \JsonSerializable
     public function setState(int $state): void
     {
         $this->state = $state;
-    }
-
-    /**
-     * @return int
-     */
-    public function getUpdatedAt(): int
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * @param int $updatedAt
-     */
-    public function setUpdatedAt(int $updatedAt): void
-    {
-        $this->updatedAt = $updatedAt;
     }
 
     /**

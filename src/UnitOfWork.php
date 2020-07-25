@@ -902,7 +902,7 @@ class UnitOfWork
      *
      * @param object $entity
      * @param array  $visited
-     * @param bool   $noCascade if true, don't cascade detach operation
+     * @param bool   $noCascade if true, don't cascade merge operation
      */
     private function doMerge($entity, array &$visited, $noCascade = false)
     {
@@ -916,13 +916,15 @@ class UnitOfWork
 
         switch ($this->getEntityState($entity, self::STATE_MANAGED)) {
             case self::STATE_MANAGED:
-            case self::STATE_NEW:
-                return;
+                break;
             case self::STATE_DETACHED:
+            case self::STATE_NEW:
                 if (!$this->isManaged($entity)) {
                     $this->addManaged($entity);
                 }
                 break;
+            default:
+                return;
         }
 
         $this->entityStates[$oid] = self::STATE_MANAGED;
@@ -940,25 +942,46 @@ class UnitOfWork
      */
     private function cascadeMerge($entity, array &$visited)
     {
-        $class = $this->entityManager->getClassMetadata(get_class($entity));
+        $classMetadata = $this->entityManager->getClassMetadataFor(get_class($entity));
+        $associations = $classMetadata->getSimpleRelationships();
 
-        foreach ($class->getRelationships() as $relationship) {
-            $value = $relationship->getValue($entity);
-
-            switch (true) {
-                case $value instanceof Collection:
-                case is_array($value):
-                    foreach ($value as $relatedEntity) {
-                        $this->doMerge($relatedEntity, $visited);
-                    }
-                    break;
-                case $value !== null:
-                    $this->doMerge($value, $visited);
-                    break;
-                default:
-                    // Do nothing
+        foreach ($associations as $association) {
+            $value = $association->getValue($entity);
+            if ($value instanceof LazyCollection) {
+                $value = $value->getAddWithoutFetch();
+            }
+            if (is_array($value) || $value instanceof ArrayCollection || $value instanceof Collection) {
+                foreach ($value as $assoc) {
+                    $this->mergeRelationship($entity, $assoc, $association, $visited);
+                }
+            } else {
+                $entityB = $association->getValue($entity);
+                if (is_object($entityB)) {
+                    $this->mergeRelationship($entity, $entityB, $association, $visited);
+                }
             }
         }
+    }
+
+    public function mergeRelationship($entityA, $entityB, RelationshipMetadata $relationship, array &$visited)
+    {
+        if ($entityB instanceof Collection || $entityB instanceof ArrayCollection) {
+            foreach ($entityB as $e) {
+                $aMeta = $this->entityManager->getClassMetadataFor(get_class($entityA));
+                $bMeta = $this->entityManager->getClassMetadataFor(get_class($entityB));
+                $type = $relationship->isRelationshipEntity() ? $this->entityManager->getRelationshipEntityMetadata($relationship->getRelationshipEntityClass())->getType() : $relationship->getType();
+                $hashStr = $aMeta->getIdValue($entityA).$bMeta->getIdValue($entityB).$type.$relationship->getDirection();
+                $hash = md5($hashStr);
+                if (!array_key_exists($hash, $this->relationshipsScheduledForCreated)) {
+                    $this->relationshipsScheduledForCreated[] = [$entityA, $relationship, $e, $relationship->getPropertyName()];
+                }
+                $this->doMerge($e, $visited);
+            }
+
+            return;
+        }
+        $this->doMerge($entityB, $visited);
+        $this->relationshipsScheduledForCreated[] = [$entityA, $relationship, $entityB, $relationship->getPropertyName()];
     }
 
     /**

@@ -656,8 +656,9 @@ class UnitOfWork
      */
     public function merge($entity)
     {
-        // TODO write me
-        trigger_error('Function not implemented.', E_USER_ERROR);
+        $visited = [];
+
+        $this->doMerge($entity, $visited);
     }
 
     /**
@@ -894,6 +895,70 @@ class UnitOfWork
             throw new \LogicException('Entity marked as not managed but could not find identity');
         }
         unset($this->entitiesById[$id]);
+    }
+
+    /**
+     * Executes a merge operation on the given entity.
+     *
+     * @param object $entity
+     * @param array  $visited
+     * @param bool   $noCascade if true, don't cascade detach operation
+     */
+    private function doMerge($entity, array &$visited, $noCascade = false)
+    {
+        $oid = spl_object_hash($entity);
+
+        if (isset($visited[$oid])) {
+            return; // Prevent infinite recursion
+        }
+
+        $visited[$oid] = $entity; // mark visited
+
+        switch ($this->getEntityState($entity, self::STATE_MANAGED)) {
+            case self::STATE_MANAGED:
+            case self::STATE_NEW:
+                return;
+            case self::STATE_DETACHED:
+                if (!$this->isManaged($entity)) {
+                    $this->addManaged($entity);
+                }
+                break;
+        }
+
+        $this->entityStates[$oid] = self::STATE_MANAGED;
+
+        if (!$noCascade) {
+            $this->cascadeMerge($entity, $visited);
+        }
+    }
+
+    /**
+     * Cascades a merge operation to associated entities.
+     *
+     * @param object $entity
+     * @param array  $visited
+     */
+    private function cascadeMerge($entity, array &$visited)
+    {
+        $class = $this->entityManager->getClassMetadata(get_class($entity));
+
+        foreach ($class->getRelationships() as $relationship) {
+            $value = $relationship->getValue($entity);
+
+            switch (true) {
+                case $value instanceof Collection:
+                case is_array($value):
+                    foreach ($value as $relatedEntity) {
+                        $this->doMerge($relatedEntity, $visited);
+                    }
+                    break;
+                case $value !== null:
+                    $this->doMerge($value, $visited);
+                    break;
+                default:
+                    // Do nothing
+            }
+        }
     }
 
     /**

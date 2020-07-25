@@ -916,7 +916,6 @@ class UnitOfWork
 
         switch ($this->getEntityState($entity, self::STATE_MANAGED)) {
             case self::STATE_MANAGED:
-                break;
             case self::STATE_DETACHED:
             case self::STATE_NEW:
                 if (!$this->isManaged($entity)) {

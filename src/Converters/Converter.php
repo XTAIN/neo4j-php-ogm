@@ -21,6 +21,7 @@ abstract class Converter
     private static $converterMap = [
         'datetime' => DateTimeConverter::class,
         'nested' => NestedConverter::class,
+        'array' => ArrayConverter::class,
         'created_at' => CreatedAtConverter::class,
         'updated_at' => UpdatedAtConverter::class,
     ];

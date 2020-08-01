@@ -9,7 +9,9 @@
 
 namespace Hedera\Models;
 
+use Doctrine\Common\Collections\Collection;
 use GraphAware\Neo4j\OGM\Annotations as OGM;
+use GraphAware\Neo4j\OGM\Common\Collection as HederaCollection;
 use Hedera\Helpers\EntityFactory;
 use Hedera\Helpers\SerializationHelper;
 
@@ -88,12 +90,20 @@ class SharedMenu implements \JsonSerializable
      * @var array
      *
      * @OGM\Property(type="array")
-     * @OGM\Convert(type="nested")
+     * @OGM\Convert(type="array")
      */
     protected $roles;
 
+    /**
+     * @var Collection
+     *
+     * @OGM\Relationship(type="SUB_MENU", direction="INCOMING", collection=true, mappedBy="sharedMenu", targetEntity="Hedera\Models\SharedMenu")
+     */
+    protected $sharedMenu;
+
     public function __construct()
     {
+        $this->sharedMenu = new HederaCollection();
     }
 
     /**
@@ -246,6 +256,22 @@ class SharedMenu implements \JsonSerializable
     public function setRoles(array $roles): void
     {
         $this->roles = $roles;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getSharedMenu(): Collection
+    {
+        return $this->sharedMenu;
+    }
+
+    /**
+     * @param Collection $sharedMenu
+     */
+    public function setSharedMenu(Collection $sharedMenu): void
+    {
+        $this->sharedMenu = $sharedMenu;
     }
 
     public function jsonSerialize()

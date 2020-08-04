@@ -31,13 +31,6 @@ class SharedMenu implements \JsonSerializable
     protected $id;
 
     /**
-     * @var int|null
-     *
-     * @OGM\Property(type="int", key="parent_uuid")
-     */
-    protected $parentUuid;
-
-    /**
      * @var string|null
      *
      * @OGM\Property(type="string")
@@ -112,22 +105,6 @@ class SharedMenu implements \JsonSerializable
     public function getId(): int
     {
         return $this->id;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getParentUuid(): ?int
-    {
-        return $this->parentUuid;
-    }
-
-    /**
-     * @param int|null $parentUuid
-     */
-    public function setParentUuid(?int $parentUuid): void
-    {
-        $this->parentUuid = $parentUuid;
     }
 
     /**

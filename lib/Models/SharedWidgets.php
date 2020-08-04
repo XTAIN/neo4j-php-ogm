@@ -61,7 +61,7 @@ class SharedWidgets
     protected $path;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @OGM\Property(type="string", key="front_uri")
      */
@@ -84,7 +84,7 @@ class SharedWidgets
     protected $manifestJSON;
 
     /**
-     * @var mixed
+     * @var string|null
      *
      * @OGM\Property(type="string", key="logo_main")
      */
@@ -207,17 +207,17 @@ class SharedWidgets
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getFrontUri(): string
+    public function getFrontUri(): ?string
     {
         return $this->frontUri;
     }
 
     /**
-     * @param string $frontUri
+     * @param string|null $frontUri
      */
-    public function setFrontUri(string $frontUri): void
+    public function setFrontUri(?string $frontUri): void
     {
         $this->frontUri = $frontUri;
     }
@@ -255,17 +255,17 @@ class SharedWidgets
     }
 
     /**
-     * @return mixed
+     * @return string|null
      */
-    public function getLogoMain()
+    public function getLogoMain(): ?string
     {
         return $this->logoMain;
     }
 
     /**
-     * @param mixed $logoMain
+     * @param string|null $logoMain
      */
-    public function setLogoMain($logoMain): void
+    public function setLogoMain(?string $logoMain): void
     {
         $this->logoMain = $logoMain;
     }

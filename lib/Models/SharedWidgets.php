@@ -61,6 +61,36 @@ class SharedWidgets
     protected $path;
 
     /**
+     * @var string
+     *
+     * @OGM\Property(type="string", key="front_uri")
+     */
+    protected $frontUri;
+
+    /**
+     * @var mixed
+     *
+     * @OGM\Property(type="array")
+     * @OGM\Convert(type="nested")
+     */
+    protected $widgetsJSON;
+
+    /**
+     * @var mixed
+     *
+     * @OGM\Property(type="array")
+     * @OGM\Convert(type="nested")
+     */
+    protected $manifestJSON;
+
+    /**
+     * @var mixed
+     *
+     * @OGM\Property(type="string", key="logo_main")
+     */
+    protected $logoMain;
+
+    /**
      * @var Collection
      *
      * @OGM\Relationship(type="WIDGET_INTEGR_IN", direction="INCOMING", collection=true, mappedBy="sharedWidgets", targetEntity="SharedIntegrations")
@@ -174,6 +204,70 @@ class SharedWidgets
     public function setPath(string $path): void
     {
         $this->path = $path;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFrontUri(): string
+    {
+        return $this->frontUri;
+    }
+
+    /**
+     * @param string $frontUri
+     */
+    public function setFrontUri(string $frontUri): void
+    {
+        $this->frontUri = $frontUri;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWidgetsJSON()
+    {
+        return $this->widgetsJSON;
+    }
+
+    /**
+     * @param mixed $widgetsJSON
+     */
+    public function setWidgetsJSON($widgetsJSON): void
+    {
+        $this->widgetsJSON = $widgetsJSON;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getManifestJSON()
+    {
+        return $this->manifestJSON;
+    }
+
+    /**
+     * @param mixed $manifestJSON
+     */
+    public function setManifestJSON($manifestJSON): void
+    {
+        $this->manifestJSON = $manifestJSON;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLogoMain()
+    {
+        return $this->logoMain;
+    }
+
+    /**
+     * @param mixed $logoMain
+     */
+    public function setLogoMain($logoMain): void
+    {
+        $this->logoMain = $logoMain;
     }
 
     /**

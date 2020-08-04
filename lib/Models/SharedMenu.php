@@ -90,7 +90,7 @@ class SharedMenu implements \JsonSerializable
     /**
      * @var Collection
      *
-     * @OGM\Relationship(type="SUB_MENU", direction="INCOMING", collection=true, mappedBy="sharedMenu", targetEntity="Hedera\Models\SharedMenu")
+     * @OGM\Relationship(relationshipEntity="Hedera\Relations\SubMenu", type="SUB_MENU", direction="INCOMING", collection=true, mappedBy="sharedMenu")
      */
     protected $sharedMenu;
 

@@ -81,6 +81,7 @@ class GuardService implements UserService
 
         $token_type = $oauth->getTokenType();
         $links = $integration->getLinks();
+        $link = is_array($links) ? ($links['redirect_uri']['href'] ?? '') : ($links->redirect_uri->href ?? '');
 
         // add listener for refresh token event
         $service->addListener(function (SharedOauth $oauth) {
@@ -95,7 +96,7 @@ class GuardService implements UserService
                 "refresh_token" => $oauth->getRefreshToken(),
                 "client_secret" => $integration->getSecret(),
                 "client_id" => $integration->getIntegrationUuid(),
-                'redirect_uri' => $links->redirect_uri->href ?? '',
+                'redirect_uri' => $link,
             ]
         );
     }

@@ -38,6 +38,13 @@ class SharedCustomersServices implements \JsonSerializable
     protected $code;
 
     /**
+     * @var string|null
+     *
+     * @OGM\Property(type="string")
+     */
+    protected $type;
+
+    /**
      * @var boolean
      *
      * @OGM\Property(type="boolean")
@@ -121,6 +128,22 @@ class SharedCustomersServices implements \JsonSerializable
     public function setCode(string $code): void
     {
         $this->code = $code;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string|null $type
+     */
+    public function setType(?string $type): void
+    {
+        $this->type = $type;
     }
 
     /**

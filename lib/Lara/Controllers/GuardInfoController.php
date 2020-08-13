@@ -43,9 +43,9 @@ class GuardInfoController
             return self::resolve('error', 'customers_service_not_exist');
         }
 
-        if (Str::upper($sharedCS->getCode()) != Str::upper(env('APP_NAME', ''))) {
-            return self::resolve('error', 'customers_service_code_invalid');
-        }
+//        if (Str::upper($sharedCS->getCode()) != Str::upper(env('APP_NAME', ''))) {
+//            return self::resolve('error', 'customers_service_code_invalid');
+//        }
 
         $periods = $guardService->getSmartService()->getSharedPeriods();
 

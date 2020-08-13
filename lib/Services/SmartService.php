@@ -76,12 +76,21 @@ class SmartService implements BeSmartService
     protected static $directory;
 
     /**
+     * @var string $classOfCustomersService
+     * */
+    protected static $classOfCustomersService = SharedCustomersServices::class;
+
+    /**
      * @param EntityManager $connection
      */
     public function __construct(EntityManager $connection)
     {
         static::$directory = function_exists('storage_path') ? storage_path('hedera') : static::DIRECTORY;
         $this->entityManager = $connection;
+        $tmp = getenv('SHARED_CUSTOMERS_SERVICE');
+        if (!empty($tmp)) {
+            static::$classOfCustomersService = $tmp;
+        }
     }
 
     /**
@@ -212,6 +221,12 @@ class SmartService implements BeSmartService
     protected function loadSharedCustomersService(): bool
     {
         $this->sharedCustomersServices = $this->sharedApiKey->getSharedCustomersServices();
+        if (get_class($this->sharedCustomersServices) != static::$classOfCustomersService) {
+            $this->entityManager->clear();
+
+            $repository = $this->entityManager->getRepository(static::$classOfCustomersService);
+            $this->sharedCustomersServices = $repository->find($this->sharedCustomersServices->getId());
+        }
 
         return isset($this->sharedCustomersServices);
     }
@@ -290,7 +305,8 @@ class SmartService implements BeSmartService
         }
 
         $this->sharedApiKey = SharedApikeys::factory($data['sharedApiKey']);
-        $this->sharedCustomersServices = SharedCustomersServices::factory($data['sharedCustomersServices']);
+        $scs = static::$classOfCustomersService;
+        $this->sharedCustomersServices = $scs::factory($data['sharedCustomersServices']);
         $this->sharedCustomers = SharedCustomers::factory($data['sharedCustomers']);
         $this->sharedPeriods = new HederaCollection(
             array_map(

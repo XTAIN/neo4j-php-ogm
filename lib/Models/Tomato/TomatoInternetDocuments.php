@@ -35,119 +35,119 @@ class TomatoInternetDocuments implements \JsonSerializable
      *
      * @OGM\Property(type="string")
      */
-    protected $IntDocNumber;
+    protected $intDocNumber;
 
     /**
      * @var string
      *
      * @OGM\Property(type="string")
      */
-    protected $DateTime;
+    protected $dateTime;
 
     /**
      * @var string
      *
      * @OGM\Property(type="string")
      */
-    protected $Ref;
+    protected $ref;
 
     /**
      * @var string
      *
      * @OGM\Property(type="string")
      */
-    protected $Description;
+    protected $description;
 
     /**
      * @var string
      *
      * @OGM\Property(type="string")
      */
-    protected $ServiceType;
+    protected $serviceType;
 
     /**
      * @var string
      *
      * @OGM\Property(type="string")
      */
-    protected $Cost;
+    protected $cost;
 
     /**
      * @var string
      *
      * @OGM\Property(type="string")
      */
-    protected $CostOnSite;
+    protected $costOnSite;
 
     /**
      * @var string|null
      *
      * @OGM\Property(type="string", nullable=true)
      */
-    protected $SendersPhone;
+    protected $sendersPhone;
 
     /**
      * @var string|null
      *
      * @OGM\Property(type="string", nullable=true)
      */
-    protected $RecipientsPhone;
+    protected $recipientsPhone;
 
     /**
      * @var string|null
      *
      * @OGM\Property(type="string", nullable=true)
      */
-    protected $StateName;
+    protected $stateName;
 
     /**
      * @var string|null
      *
      * @OGM\Property(type="string", nullable=true)
      */
-    protected $SenderDescription;
+    protected $senderDescription;
 
     /**
      * @var string|null
      *
      * @OGM\Property(type="string", nullable=true)
      */
-    protected $RecipientDescription;
+    protected $recipientDescription;
 
     /**
      * @var string|null
      *
      * @OGM\Property(type="string", nullable=true)
      */
-    protected $SenderAddressDescription;
+    protected $senderAddressDescription;
 
     /**
      * @var string|null
      *
      * @OGM\Property(type="string", nullable=true)
      */
-    protected $RecipientAddressDescription;
+    protected $recipientAddressDescription;
 
     /**
      * @var string|null
      *
      * @OGM\Property(type="string", nullable=true)
      */
-    protected $EstimatedDeliveryDate;
+    protected $estimatedDeliveryDate;
 
     /**
      * @var string|null
      *
      * @OGM\Property(type="string", nullable=true)
      */
-    protected $DateLastUpdatedStatus;
+    protected $dateLastUpdatedStatus;
 
     /**
      * @var string|null
      *
      * @OGM\Property(type="string", nullable=true)
      */
-    protected $CreateTime;
+    protected $createTime;
 
     /**
      * @var TomatoTokensConfigs|null
@@ -189,15 +189,15 @@ class TomatoInternetDocuments implements \JsonSerializable
      */
     public function getIntDocNumber(): ?string
     {
-        return $this->IntDocNumber;
+        return $this->intDocNumber;
     }
 
     /**
-     * @param string|null $IntDocNumber
+     * @param string|null $intDocNumber
      */
-    public function setIntDocNumber(?string $IntDocNumber): void
+    public function setIntDocNumber(?string $intDocNumber): void
     {
-        $this->IntDocNumber = $IntDocNumber;
+        $this->intDocNumber = $intDocNumber;
     }
 
     /**
@@ -205,15 +205,15 @@ class TomatoInternetDocuments implements \JsonSerializable
      */
     public function getDateTime(): string
     {
-        return $this->DateTime;
+        return $this->dateTime;
     }
 
     /**
-     * @param string $DateTime
+     * @param string $dateTime
      */
-    public function setDateTime(string $DateTime): void
+    public function setDateTime(string $dateTime): void
     {
-        $this->DateTime = $DateTime;
+        $this->dateTime = $dateTime;
     }
 
     /**
@@ -221,15 +221,15 @@ class TomatoInternetDocuments implements \JsonSerializable
      */
     public function getRef(): string
     {
-        return $this->Ref;
+        return $this->ref;
     }
 
     /**
-     * @param string $Ref
+     * @param string $ref
      */
-    public function setRef(string $Ref): void
+    public function setRef(string $ref): void
     {
-        $this->Ref = $Ref;
+        $this->ref = $ref;
     }
 
     /**
@@ -237,15 +237,15 @@ class TomatoInternetDocuments implements \JsonSerializable
      */
     public function getDescription(): string
     {
-        return $this->Description;
+        return $this->description;
     }
 
     /**
-     * @param string $Description
+     * @param string $description
      */
-    public function setDescription(string $Description): void
+    public function setDescription(string $description): void
     {
-        $this->Description = $Description;
+        $this->description = $description;
     }
 
     /**
@@ -253,15 +253,15 @@ class TomatoInternetDocuments implements \JsonSerializable
      */
     public function getServiceType(): string
     {
-        return $this->ServiceType;
+        return $this->serviceType;
     }
 
     /**
-     * @param string $ServiceType
+     * @param string $serviceType
      */
-    public function setServiceType(string $ServiceType): void
+    public function setServiceType(string $serviceType): void
     {
-        $this->ServiceType = $ServiceType;
+        $this->serviceType = $serviceType;
     }
 
     /**
@@ -269,15 +269,15 @@ class TomatoInternetDocuments implements \JsonSerializable
      */
     public function getCost(): string
     {
-        return $this->Cost;
+        return $this->cost;
     }
 
     /**
-     * @param string $Cost
+     * @param string $cost
      */
-    public function setCost(string $Cost): void
+    public function setCost(string $cost): void
     {
-        $this->Cost = $Cost;
+        $this->cost = $cost;
     }
 
     /**
@@ -285,15 +285,15 @@ class TomatoInternetDocuments implements \JsonSerializable
      */
     public function getCostOnSite(): string
     {
-        return $this->CostOnSite;
+        return $this->costOnSite;
     }
 
     /**
-     * @param string $CostOnSite
+     * @param string $costOnSite
      */
-    public function setCostOnSite(string $CostOnSite): void
+    public function setCostOnSite(string $costOnSite): void
     {
-        $this->CostOnSite = $CostOnSite;
+        $this->costOnSite = $costOnSite;
     }
 
     /**
@@ -301,15 +301,15 @@ class TomatoInternetDocuments implements \JsonSerializable
      */
     public function getSendersPhone(): ?string
     {
-        return $this->SendersPhone;
+        return $this->sendersPhone;
     }
 
     /**
-     * @param string|null $SendersPhone
+     * @param string|null $sendersPhone
      */
-    public function setSendersPhone(?string $SendersPhone): void
+    public function setSendersPhone(?string $sendersPhone): void
     {
-        $this->SendersPhone = $SendersPhone;
+        $this->sendersPhone = $sendersPhone;
     }
 
     /**
@@ -317,15 +317,15 @@ class TomatoInternetDocuments implements \JsonSerializable
      */
     public function getRecipientsPhone(): ?string
     {
-        return $this->RecipientsPhone;
+        return $this->recipientsPhone;
     }
 
     /**
-     * @param string|null $RecipientsPhone
+     * @param string|null $recipientsPhone
      */
-    public function setRecipientsPhone(?string $RecipientsPhone): void
+    public function setRecipientsPhone(?string $recipientsPhone): void
     {
-        $this->RecipientsPhone = $RecipientsPhone;
+        $this->recipientsPhone = $recipientsPhone;
     }
 
     /**
@@ -333,15 +333,15 @@ class TomatoInternetDocuments implements \JsonSerializable
      */
     public function getStateName(): ?string
     {
-        return $this->StateName;
+        return $this->stateName;
     }
 
     /**
-     * @param string|null $StateName
+     * @param string|null $stateName
      */
-    public function setStateName(?string $StateName): void
+    public function setStateName(?string $stateName): void
     {
-        $this->StateName = $StateName;
+        $this->stateName = $stateName;
     }
 
     /**
@@ -349,15 +349,15 @@ class TomatoInternetDocuments implements \JsonSerializable
      */
     public function getSenderDescription(): ?string
     {
-        return $this->SenderDescription;
+        return $this->senderDescription;
     }
 
     /**
-     * @param string|null $SenderDescription
+     * @param string|null $senderDescription
      */
-    public function setSenderDescription(?string $SenderDescription): void
+    public function setSenderDescription(?string $senderDescription): void
     {
-        $this->SenderDescription = $SenderDescription;
+        $this->senderDescription = $senderDescription;
     }
 
     /**
@@ -365,15 +365,15 @@ class TomatoInternetDocuments implements \JsonSerializable
      */
     public function getRecipientDescription(): ?string
     {
-        return $this->RecipientDescription;
+        return $this->recipientDescription;
     }
 
     /**
-     * @param string|null $RecipientDescription
+     * @param string|null $recipientDescription
      */
-    public function setRecipientDescription(?string $RecipientDescription): void
+    public function setRecipientDescription(?string $recipientDescription): void
     {
-        $this->RecipientDescription = $RecipientDescription;
+        $this->recipientDescription = $recipientDescription;
     }
 
     /**
@@ -381,15 +381,15 @@ class TomatoInternetDocuments implements \JsonSerializable
      */
     public function getSenderAddressDescription(): ?string
     {
-        return $this->SenderAddressDescription;
+        return $this->senderAddressDescription;
     }
 
     /**
-     * @param string|null $SenderAddressDescription
+     * @param string|null $senderAddressDescription
      */
-    public function setSenderAddressDescription(?string $SenderAddressDescription): void
+    public function setSenderAddressDescription(?string $senderAddressDescription): void
     {
-        $this->SenderAddressDescription = $SenderAddressDescription;
+        $this->senderAddressDescription = $senderAddressDescription;
     }
 
     /**
@@ -397,15 +397,15 @@ class TomatoInternetDocuments implements \JsonSerializable
      */
     public function getRecipientAddressDescription(): ?string
     {
-        return $this->RecipientAddressDescription;
+        return $this->recipientAddressDescription;
     }
 
     /**
-     * @param string|null $RecipientAddressDescription
+     * @param string|null $recipientAddressDescription
      */
-    public function setRecipientAddressDescription(?string $RecipientAddressDescription): void
+    public function setRecipientAddressDescription(?string $recipientAddressDescription): void
     {
-        $this->RecipientAddressDescription = $RecipientAddressDescription;
+        $this->recipientAddressDescription = $recipientAddressDescription;
     }
 
     /**
@@ -413,15 +413,15 @@ class TomatoInternetDocuments implements \JsonSerializable
      */
     public function getEstimatedDeliveryDate(): ?string
     {
-        return $this->EstimatedDeliveryDate;
+        return $this->estimatedDeliveryDate;
     }
 
     /**
-     * @param string|null $EstimatedDeliveryDate
+     * @param string|null $estimatedDeliveryDate
      */
-    public function setEstimatedDeliveryDate(?string $EstimatedDeliveryDate): void
+    public function setEstimatedDeliveryDate(?string $estimatedDeliveryDate): void
     {
-        $this->EstimatedDeliveryDate = $EstimatedDeliveryDate;
+        $this->estimatedDeliveryDate = $estimatedDeliveryDate;
     }
 
     /**
@@ -429,15 +429,15 @@ class TomatoInternetDocuments implements \JsonSerializable
      */
     public function getDateLastUpdatedStatus(): ?string
     {
-        return $this->DateLastUpdatedStatus;
+        return $this->dateLastUpdatedStatus;
     }
 
     /**
-     * @param string|null $DateLastUpdatedStatus
+     * @param string|null $dateLastUpdatedStatus
      */
-    public function setDateLastUpdatedStatus(?string $DateLastUpdatedStatus): void
+    public function setDateLastUpdatedStatus(?string $dateLastUpdatedStatus): void
     {
-        $this->DateLastUpdatedStatus = $DateLastUpdatedStatus;
+        $this->dateLastUpdatedStatus = $dateLastUpdatedStatus;
     }
 
     /**
@@ -445,15 +445,15 @@ class TomatoInternetDocuments implements \JsonSerializable
      */
     public function getCreateTime(): ?string
     {
-        return $this->CreateTime;
+        return $this->createTime;
     }
 
     /**
-     * @param string|null $CreateTime
+     * @param string|null $createTime
      */
-    public function setCreateTime(?string $CreateTime): void
+    public function setCreateTime(?string $createTime): void
     {
-        $this->CreateTime = $CreateTime;
+        $this->createTime = $createTime;
     }
 
     /**

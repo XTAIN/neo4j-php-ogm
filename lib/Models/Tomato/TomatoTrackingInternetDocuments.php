@@ -35,21 +35,21 @@ class TomatoTrackingInternetDocuments implements \JsonSerializable
      *
      * @OGM\Property(type="string")
      */
-    protected $Number;
+    protected $number;
 
     /**
      * @var string
      *
      * @OGM\Property(type="string")
      */
-    protected $Status;
+    protected $status;
 
     /**
      * @var string
      *
      * @OGM\Property(type="string")
      */
-    protected $StatusCode;
+    protected $statusCode;
 
     /**
      * @var TomatoInternetDocuments|null
@@ -83,15 +83,15 @@ class TomatoTrackingInternetDocuments implements \JsonSerializable
      */
     public function getNumber(): ?string
     {
-        return $this->Number;
+        return $this->number;
     }
 
     /**
-     * @param string|null $Number
+     * @param string|null $number
      */
-    public function setNumber(?string $Number): void
+    public function setNumber(?string $number): void
     {
-        $this->Number = $Number;
+        $this->number = $number;
     }
 
     /**
@@ -99,15 +99,15 @@ class TomatoTrackingInternetDocuments implements \JsonSerializable
      */
     public function getStatus(): string
     {
-        return $this->Status;
+        return $this->status;
     }
 
     /**
-     * @param string $Status
+     * @param string $status
      */
-    public function setStatus(string $Status): void
+    public function setStatus(string $status): void
     {
-        $this->Status = $Status;
+        $this->status = $status;
     }
 
     /**
@@ -115,15 +115,15 @@ class TomatoTrackingInternetDocuments implements \JsonSerializable
      */
     public function getStatusCode(): string
     {
-        return $this->StatusCode;
+        return $this->statusCode;
     }
 
     /**
-     * @param string $StatusCode
+     * @param string $statusCode
      */
-    public function setStatusCode(string $StatusCode): void
+    public function setStatusCode(string $statusCode): void
     {
-        $this->StatusCode = $StatusCode;
+        $this->statusCode = $statusCode;
     }
 
     /**

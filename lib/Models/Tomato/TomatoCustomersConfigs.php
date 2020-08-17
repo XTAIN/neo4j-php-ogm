@@ -97,6 +97,10 @@ class TomatoCustomersConfigs implements \JsonSerializable
      */
     protected $tomatoTokensConfigs;
 
+    public function __construct()
+    {
+    }
+
     /**
      * @return int
      */

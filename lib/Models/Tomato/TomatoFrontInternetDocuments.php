@@ -81,6 +81,10 @@ class TomatoFrontInternetDocuments implements \JsonSerializable
      */
     protected $tomatoInternetDocument;
 
+    public function __construct()
+    {
+    }
+
     /**
      * @return int
      */

@@ -33,7 +33,7 @@ class CrocusConfigs extends SharedConfigs
     protected $auth;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @OGM\Property(type="string", key="last_fixed_date")
      */
@@ -72,17 +72,17 @@ class CrocusConfigs extends SharedConfigs
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getLastFixedDate(): string
+    public function getLastFixedDate(): ?string
     {
         return $this->lastFixedDate;
     }
 
     /**
-     * @param string $lastFixedDate
+     * @param string|null $lastFixedDate
      */
-    public function setLastFixedDate(string $lastFixedDate): void
+    public function setLastFixedDate(?string $lastFixedDate): void
     {
         $this->lastFixedDate = $lastFixedDate;
     }

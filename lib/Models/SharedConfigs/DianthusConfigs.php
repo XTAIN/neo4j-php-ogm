@@ -9,7 +9,9 @@
 
 namespace Hedera\Models\SharedConfigs;
 
+use Doctrine\Common\Collections\Collection;
 use GraphAware\Neo4j\OGM\Annotations as OGM;
+use GraphAware\Neo4j\OGM\Common\Collection as HederaCollection;
 use Hedera\Models\SharedConfigs;
 
 /**
@@ -44,6 +46,19 @@ class DianthusConfigs extends SharedConfigs
      * @OGM\Property(type="string")
      */
     protected $companyId;
+
+    /**
+     * @var Collection
+     *
+     * @OGM\Relationship(type="DIANTHUS_BLACKCONFIG", direction="INCOMING", collection=true, mappedBy="dianthusConfigs", targetEntity="Hedera\Models\SharedConfigs\BlackConfigs")
+     */
+    protected $blackConfigs;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->blackConfigs = new HederaCollection();
+    }
 
     /**
      * @return string
@@ -107,5 +122,21 @@ class DianthusConfigs extends SharedConfigs
     public function setCompanyId(?string $companyId): void
     {
         $this->companyId = $companyId;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getBlackConfigs(): Collection
+    {
+        return $this->blackConfigs;
+    }
+
+    /**
+     * @param Collection $blackConfigs
+     */
+    public function setBlackConfigs(Collection $blackConfigs): void
+    {
+        $this->blackConfigs = $blackConfigs;
     }
 }

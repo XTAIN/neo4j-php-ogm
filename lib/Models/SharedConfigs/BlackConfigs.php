@@ -47,6 +47,20 @@ class BlackConfigs extends SharedConfigs
     protected $blackScheme;
 
     /**
+     * @var DianthusConfigs|null
+     *
+     * @OGM\Relationship(type="DIANTHUS_BLACKCONFIG", direction="OUTGOING", collection=false, mappedBy="blackConfigs", targetEntity="Hedera\Models\SharedConfigs\DianthusConfigs")
+     */
+    protected $dianthusConfigs;
+
+    /**
+     * @var BrunneraConfigs|null
+     *
+     * @OGM\Relationship(type="BRUNNERA_BLACKCONFIG", direction="OUTGOING", collection=false, mappedBy="blackConfigs", targetEntity="Hedera\Models\SharedConfigs\BrunneraConfigs")
+     */
+    protected $brunneraConfigs;
+
+    /**
      * @return string
      */
     public function getName(): string
@@ -108,5 +122,39 @@ class BlackConfigs extends SharedConfigs
     public function setBlackScheme(?BlackScheme $blackScheme): void
     {
         $this->blackScheme = $blackScheme;
+    }
+
+    // linked hook for another services (binotel, phonet)
+
+    /**
+     * @return DianthusConfigs|null
+     */
+    public function getDianthusConfigs(): ?DianthusConfigs
+    {
+        return $this->dianthusConfigs;
+    }
+
+    /**
+     * @param DianthusConfigs|null $dianthusConfigs
+     */
+    public function setDianthusConfigs(?DianthusConfigs $dianthusConfigs): void
+    {
+        $this->dianthusConfigs = $dianthusConfigs;
+    }
+
+    /**
+     * @return BrunneraConfigs|null
+     */
+    public function getBrunneraConfigs(): ?BrunneraConfigs
+    {
+        return $this->brunneraConfigs;
+    }
+
+    /**
+     * @param BrunneraConfigs|null $brunneraConfigs
+     */
+    public function setBrunneraConfigs(?BrunneraConfigs $brunneraConfigs): void
+    {
+        $this->brunneraConfigs = $brunneraConfigs;
     }
 }

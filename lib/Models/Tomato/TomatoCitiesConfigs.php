@@ -62,6 +62,13 @@ class TomatoCitiesConfigs implements \JsonSerializable
     protected $company;
 
     /**
+     * @var string|null
+     *
+     * @OGM\Property(type="string", nullable=true)
+     */
+    protected $locale;
+
+    /**
      * @var SharedCustomersServices|null
      *
      * @OGM\Relationship(type="TOMATO_CITY_SERVICE_IN", direction="OUTGOING", collection=false, targetEntity="Hedera\Models\SharedCustomersServices")
@@ -142,6 +149,22 @@ class TomatoCitiesConfigs implements \JsonSerializable
     public function setCompany($company): void
     {
         $this->company = $company;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getLocale(): ?string
+    {
+        return $this->locale;
+    }
+
+    /**
+     * @param string|null $locale
+     */
+    public function setLocale(?string $locale): void
+    {
+        $this->locale = $locale;
     }
 
     /**

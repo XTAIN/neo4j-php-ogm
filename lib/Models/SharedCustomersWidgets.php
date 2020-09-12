@@ -36,9 +36,9 @@ class SharedCustomersWidgets implements \JsonSerializable
     protected $updatedAtAmo;
 
     /**
-     * @var int
+     * @var int|string
      *
-     * @OGM\Property(type="int", key="id_widget")
+     * @OGM\Property(type="string", key="id_widget")
      */
     protected $idWidget; // need convert from id to id_widget
 
@@ -170,17 +170,17 @@ class SharedCustomersWidgets implements \JsonSerializable
     }
 
     /**
-     * @return int
+     * @return int|string
      */
-    public function getIdWidget(): int
+    public function getIdWidget()
     {
         return $this->idWidget;
     }
 
     /**
-     * @param int $idWidget
+     * @param int|string $idWidget
      */
-    public function setIdWidget(int $idWidget): void
+    public function setIdWidget($idWidget): void
     {
         $this->idWidget = $idWidget;
     }

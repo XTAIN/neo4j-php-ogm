@@ -128,6 +128,13 @@ class SharedCustomersWidgets implements \JsonSerializable
     protected $settings;
 
     /**
+     * @var string|null
+     *
+     * @OGM\Property(type="string")
+     */
+    protected $oauthClientUuid;
+
+    /**
      * @var SharedAmocrm|null
      *
      * @OGM\Relationship(type="AMOCRM_CU_WIDGET_IN", direction="OUTGOING", collection=false, mappedBy="sharedCustomersWidgets", targetEntity="SharedAmocrm")
@@ -375,6 +382,22 @@ class SharedCustomersWidgets implements \JsonSerializable
     public function setSettings($settings): void
     {
         $this->settings = $settings;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getOauthClientUuid(): ?string
+    {
+        return $this->oauthClientUuid;
+    }
+
+    /**
+     * @param string|null $oauthClientUuid
+     */
+    public function setOauthClientUuid(?string $oauthClientUuid): void
+    {
+        $this->oauthClientUuid = $oauthClientUuid;
     }
 
     /**

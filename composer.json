@@ -1,5 +1,5 @@
 {
-    "name": "oosor/neo4j-php-ogm",
+    "name": "fbkl/hedera",
     "description": "PHP Object Graph Mapper for Neo4j (forked)",
     "license": "Apache-2.0",
     "keywords": [

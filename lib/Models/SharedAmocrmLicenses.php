@@ -63,14 +63,14 @@ class SharedAmocrmLicenses
     /**
      * @var SharedAmocrmLicensesCost|null
      *
-     * @OGM\Relationship(type="LICENSE_COST_IN", direction="OUTGOING", collection=false, mappedBy="sharedAmocrmLicenses", targetEntity="SharedAmocrmLicensesCost")
+     * @OGM\Relationship(type="SHARED_AMOCRM_LICENSES_TO_SHARED_AMOCRM_LICENSES_COST", direction="OUTGOING", collection=false, mappedBy="sharedAmocrmLicenses", targetEntity="SharedAmocrmLicensesCost")
      */
     protected $sharedAmocrmLicensesCost;
 
     /**
      * @var SharedAmocrm|null
      *
-     * @OGM\Relationship(type="AMOCRM_LICENSE_IN", direction="INCOMING", collection=false, mappedBy="sharedAmocrmLicenses", targetEntity="SharedAmocrm")
+     * @OGM\Relationship(type="SHARED_AMOCRM_TO_SHARED_AMOCRM_LICENSES", direction="INCOMING", collection=false, mappedBy="sharedAmocrmLicenses", targetEntity="SharedAmocrm")
      */
     protected $sharedAmocrm;
 

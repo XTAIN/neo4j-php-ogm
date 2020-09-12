@@ -84,14 +84,14 @@ class SharedAmocrm implements \JsonSerializable
     /**
      * @var Collection
      *
-     * @OGM\Relationship(type="AMOCRM_CU_USER_IN", direction="INCOMING", collection=true, mappedBy="sharedAmocrm", targetEntity="SharedCustomersUsers")
+     * @OGM\Relationship(type="SHARED_CUSTOMERS_USERS_TO_SHARED_AMOCRM", direction="INCOMING", collection=true, mappedBy="sharedAmocrm", targetEntity="SharedCustomersUsers")
      */
     protected $sharedCustomersUsers;
 
     /**
      * @var Collection
      *
-     * @OGM\Relationship(type="AMOCRM_CU_WIDGET_IN", direction="INCOMING", collection=true, mappedBy="sharedAmocrm", targetEntity="SharedCustomersWidgets")
+     * @OGM\Relationship(type="SHARED_CUSTOMERS_WIDGETS_TO_SHARED_AMOCRM", direction="INCOMING", collection=true, mappedBy="sharedAmocrm", targetEntity="SharedCustomersWidgets")
      */
     protected $sharedCustomersWidgets;
 
@@ -112,7 +112,7 @@ class SharedAmocrm implements \JsonSerializable
     /**
      * @var SharedAmocrmLicenses|null
      *
-     * @OGM\Relationship(type="AMOCRM_LICENSE_IN", direction="OUTGOING", collection=false, mappedBy="sharedAmocrm", targetEntity="SharedAmocrmLicenses")
+     * @OGM\Relationship(type="SHARED_AMOCRM_TO_SHARED_AMOCRM_LICENSES", direction="OUTGOING", collection=false, mappedBy="sharedAmocrm", targetEntity="SharedAmocrmLicenses")
      */
     protected $sharedAmocrmLicenses;
 

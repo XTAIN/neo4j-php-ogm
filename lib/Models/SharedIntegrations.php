@@ -188,9 +188,17 @@ class SharedIntegrations implements \JsonSerializable
      */
     protected $sharedOauth;
 
+    /**
+     * @var Collection
+     *
+     * @OGM\Relationship(type="SHARED_CUSTOMERS_WIDGETS_TO_SHARED_INTEGRATION", direction="INCOMING", collection=true, mappedBy="sharedIntegrations", targetEntity="SharedCustomersWidgets")
+     */
+    protected $sharedCustomersWidgets;
+
     public function __construct()
     {
         $this->sharedOauth = new HederaCollection();
+        $this->sharedCustomersWidgets = new HederaCollection();
     }
 
     /**
@@ -551,6 +559,22 @@ class SharedIntegrations implements \JsonSerializable
     public function setSharedOauth(Collection $sharedOauth): void
     {
         $this->sharedOauth = $sharedOauth;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getSharedCustomersWidgets(): Collection
+    {
+        return $this->sharedCustomersWidgets;
+    }
+
+    /**
+     * @param Collection $sharedCustomersWidgets
+     */
+    public function setSharedCustomersWidgets(Collection $sharedCustomersWidgets): void
+    {
+        $this->sharedCustomersWidgets = $sharedCustomersWidgets;
     }
 
     public function jsonSerialize()

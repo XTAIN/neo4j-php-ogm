@@ -137,16 +137,23 @@ class SharedCustomersWidgets implements \JsonSerializable
     /**
      * @var SharedAmocrm|null
      *
-     * @OGM\Relationship(type="AMOCRM_CU_WIDGET_IN", direction="OUTGOING", collection=false, mappedBy="sharedCustomersWidgets", targetEntity="SharedAmocrm")
+     * @OGM\Relationship(type="SHARED_CUSTOMERS_WIDGETS_TO_SHARED_AMOCRM", direction="OUTGOING", collection=false, mappedBy="sharedCustomersWidgets", targetEntity="SharedAmocrm")
      */
     protected $sharedAmocrm;
 
     /**
      * @var SharedWidgets|null
      *
-     * @OGM\Relationship(type="CU_WIDGET_IN", direction="OUTGOING", collection=false, mappedBy="sharedCustomersWidgets", targetEntity="SharedWidgets")
+     * @OGM\Relationship(type="SHARED_CUSTOMERS_WIDGETS_TO_SHARED_WIDGETS", direction="OUTGOING", collection=false, mappedBy="sharedCustomersWidgets", targetEntity="SharedWidgets")
      */
     protected $sharedWidgets;
+
+    /**
+     * @var SharedIntegrations|null
+     *
+     * @OGM\Relationship(type="SHARED_CUSTOMERS_WIDGETS_TO_SHARED_INTEGRATION", direction="OUTGOING", collection=false, mappedBy="sharedCustomersWidgets", targetEntity="SharedIntegrations")
+     */
+    protected $sharedIntegrations;
 
     public function __construct()
     {
@@ -430,6 +437,22 @@ class SharedCustomersWidgets implements \JsonSerializable
     public function setSharedWidgets(?SharedWidgets $sharedWidgets): void
     {
         $this->sharedWidgets = $sharedWidgets;
+    }
+
+    /**
+     * @return SharedIntegrations|null
+     */
+    public function getSharedIntegrations(): ?SharedIntegrations
+    {
+        return $this->sharedIntegrations;
+    }
+
+    /**
+     * @param SharedIntegrations|null $sharedIntegrations
+     */
+    public function setSharedIntegrations(?SharedIntegrations $sharedIntegrations): void
+    {
+        $this->sharedIntegrations = $sharedIntegrations;
     }
 
     public function jsonSerialize()

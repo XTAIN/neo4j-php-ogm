@@ -51,7 +51,7 @@ class SharedAmocrmLicensesCost
     /**
      * @var Collection
      *
-     * @OGM\Relationship(type="LICENSE_COST_IN", direction="INCOMING", collection=true, mappedBy="sharedAmocrmLicensesCost", targetEntity="SharedAmocrmLicenses")
+     * @OGM\Relationship(type="SHARED_AMOCRM_LICENSES_TO_SHARED_AMOCRM_LICENSES_COST", direction="INCOMING", collection=true, mappedBy="sharedAmocrmLicensesCost", targetEntity="SharedAmocrmLicenses")
      */
     protected $sharedAmocrmLicenses;
 

@@ -83,7 +83,7 @@ class SharedCustomersUsers implements \JsonSerializable
     /**
      * @var SharedAmocrm|null
      *
-     * @OGM\Relationship(type="AMOCRM_CU_USER_IN", direction="OUTGOING", collection=false, mappedBy="sharedCustomersUsers", targetEntity="SharedAmocrm")
+     * @OGM\Relationship(type="SHARED_CUSTOMERS_USERS_TO_SHARED_AMOCRM", direction="OUTGOING", collection=false, mappedBy="sharedCustomersUsers", targetEntity="SharedAmocrm")
      */
     protected $sharedAmocrm;
 

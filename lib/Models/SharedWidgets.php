@@ -107,7 +107,7 @@ class SharedWidgets
     /**
      * @var Collection
      *
-     * @OGM\Relationship(type="CU_WIDGET_IN", direction="INCOMING", collection=true, mappedBy="sharedWidgets", targetEntity="SharedCustomersWidgets")
+     * @OGM\Relationship(type="SHARED_CUSTOMERS_WIDGETS_TO_SHARED_WIDGETS", direction="INCOMING", collection=true, mappedBy="sharedWidgets", targetEntity="SharedCustomersWidgets")
      */
     protected $sharedCustomersWidgets;
 

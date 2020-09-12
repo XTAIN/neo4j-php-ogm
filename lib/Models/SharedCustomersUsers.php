@@ -3,7 +3,7 @@
  * @package   Hedera
  * @author    Andrew <3oosor@gmail.com>
  * @copyright 2020 Fabrika-Klientov
- * @version   GIT: 20.07.06
+ * @version   GIT: 20.09.12
  * @link      https://fabrika-klientov.ua
  * */
 
@@ -38,18 +38,42 @@ class SharedCustomersUsers
     protected $email;
 
     /**
-     * @var bool
+     * @var int
      *
-     * @OGM\Property(type="boolean", key="is_admin")
+     * @OGM\Property(type="int")
      */
-    protected $isAdmin;
+    protected $userId;
 
     /**
-     * @var bool
+     * @var string
      *
-     * @OGM\Property(type="boolean")
+     * @OGM\Property(type="string")
      */
-    protected $active;
+    protected $lang;
+
+    /**
+     * @var mixed
+     *
+     * @OGM\Property(type="array")
+     * @OGM\Convert(type="nested")
+     */
+    protected $rights;
+
+    /**
+     * @var mixed
+     *
+     * @OGM\Property(type="array")
+     * @OGM\Convert(type="nested")
+     */
+    protected $roles;
+
+    /**
+     * @var mixed
+     *
+     * @OGM\Property(type="array")
+     * @OGM\Convert(type="nested")
+     */
+    protected $groups;
 
     /**
      * @var SharedAmocrm|null
@@ -103,35 +127,83 @@ class SharedCustomersUsers
     }
 
     /**
-     * @return bool
+     * @return int
      */
-    public function isAdmin(): bool
+    public function getUserId(): int
     {
-        return $this->isAdmin;
+        return $this->userId;
     }
 
     /**
-     * @param bool $isAdmin
+     * @param int $userId
      */
-    public function setIsAdmin(bool $isAdmin): void
+    public function setUserId(int $userId): void
     {
-        $this->isAdmin = $isAdmin;
+        $this->userId = $userId;
     }
 
     /**
-     * @return bool
+     * @return string
      */
-    public function isActive(): bool
+    public function getLang(): string
     {
-        return $this->active;
+        return $this->lang;
     }
 
     /**
-     * @param bool $active
+     * @param string $lang
      */
-    public function setActive(bool $active): void
+    public function setLang(string $lang): void
     {
-        $this->active = $active;
+        $this->lang = $lang;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRights()
+    {
+        return $this->rights;
+    }
+
+    /**
+     * @param mixed $rights
+     */
+    public function setRights($rights): void
+    {
+        $this->rights = $rights;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    /**
+     * @param mixed $roles
+     */
+    public function setRoles($roles): void
+    {
+        $this->roles = $roles;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGroups()
+    {
+        return $this->groups;
+    }
+
+    /**
+     * @param mixed $groups
+     */
+    public function setGroups($groups): void
+    {
+        $this->groups = $groups;
     }
 
     /**

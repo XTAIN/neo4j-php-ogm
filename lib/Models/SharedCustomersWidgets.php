@@ -43,7 +43,7 @@ class SharedCustomersWidgets implements \JsonSerializable
     protected $idWidget; // need convert from id to id_widget
 
     /**
-     * @var string
+     * @var string|null
      *
      * @OGM\Property(type="string")
      */
@@ -71,49 +71,49 @@ class SharedCustomersWidgets implements \JsonSerializable
     protected $installs;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @OGM\Property(type="string")
      */
     protected $type;
 
     /**
-     * @var bool
+     * @var bool|null
      *
      * @OGM\Property(type="boolean")
      */
     protected $active;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @OGM\Property(type="string")
      */
     protected $name;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @OGM\Property(type="string")
      */
     protected $description;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @OGM\Property(type="string")
      */
     protected $categories;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @OGM\Property(type="string")
      */
     protected $state;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @OGM\Property(type="string")
      */
@@ -188,15 +188,15 @@ class SharedCustomersWidgets implements \JsonSerializable
     /**
      * @return string
      */
-    public function getCode(): string
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
     /**
-     * @param string $code
+     * @param string|null $code
      */
-    public function setCode(string $code): void
+    public function setCode(?string $code): void
     {
         $this->code = $code;
     }
@@ -250,113 +250,113 @@ class SharedCustomersWidgets implements \JsonSerializable
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
     /**
-     * @param string $type
+     * @param string|null $type
      */
-    public function setType(string $type): void
+    public function setType(?string $type): void
     {
         $this->type = $type;
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
-    public function isActive(): bool
+    public function isActive(): ?bool
     {
         return $this->active;
     }
 
     /**
-     * @param bool $active
+     * @param bool|null $active
      */
-    public function setActive(bool $active): void
+    public function setActive(?bool $active): void
     {
         $this->active = $active;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
+     * @param string|null $name
      */
-    public function setName(string $name): void
+    public function setName(?string $name): void
     {
         $this->name = $name;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
     /**
-     * @param string $description
+     * @param string|null $description
      */
-    public function setDescription(string $description): void
+    public function setDescription(?string $description): void
     {
         $this->description = $description;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCategories(): string
+    public function getCategories(): ?string
     {
         return $this->categories;
     }
 
     /**
-     * @param string $categories
+     * @param string|null $categories
      */
-    public function setCategories(string $categories): void
+    public function setCategories(?string $categories): void
     {
         $this->categories = $categories;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getState(): string
+    public function getState(): ?string
     {
         return $this->state;
     }
 
     /**
-     * @param string $state
+     * @param string|null $state
      */
-    public function setState(string $state): void
+    public function setState(?string $state): void
     {
         $this->state = $state;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getLogo(): string
+    public function getLogo(): ?string
     {
         return $this->logo;
     }
 
     /**
-     * @param string $logo
+     * @param string|null $logo
      */
-    public function setLogo(string $logo): void
+    public function setLogo(?string $logo): void
     {
         $this->logo = $logo;
     }

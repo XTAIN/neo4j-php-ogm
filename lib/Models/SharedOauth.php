@@ -66,6 +66,13 @@ class SharedOauth implements \JsonSerializable
     protected $code;
 
     /**
+     * @var bool|null
+     *
+     * @OGM\Property(type="boolean")
+     */
+    protected $revoked;
+
+    /**
      * @var SharedAmocrm|null
      *
      * @OGM\Relationship(type="AMOCRM_OAUTH_IN", direction="OUTGOING", collection=false, mappedBy="sharedOauth", targetEntity="SharedAmocrm")
@@ -169,6 +176,22 @@ class SharedOauth implements \JsonSerializable
     public function setCode(?string $code): void
     {
         $this->code = $code;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getRevoked(): ?bool
+    {
+        return $this->revoked;
+    }
+
+    /**
+     * @param bool|null $revoked
+     */
+    public function setRevoked(?bool $revoked): void
+    {
+        $this->revoked = $revoked;
     }
 
     /**

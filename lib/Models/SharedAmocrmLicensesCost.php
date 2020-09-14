@@ -12,12 +12,17 @@ namespace Hedera\Models;
 use Doctrine\Common\Collections\Collection;
 use GraphAware\Neo4j\OGM\Annotations as OGM;
 use GraphAware\Neo4j\OGM\Common\Collection as HederaCollection;
+use Hedera\Helpers\EntityFactory;
+use Hedera\Helpers\SerializationHelper;
 
 /**
  * @OGM\Node(label="SharedAmocrmLicensesCost", repository="Hedera\Repositories\SharedAmocrmLicensesCostRepository")
  */
-class SharedAmocrmLicensesCost
+class SharedAmocrmLicensesCost implements \JsonSerializable
 {
+    use EntityFactory;
+    use SerializationHelper;
+
     /**
      * @var int
      *
@@ -130,5 +135,10 @@ class SharedAmocrmLicensesCost
     public function setSharedAmocrmLicenses(Collection $sharedAmocrmLicenses): void
     {
         $this->sharedAmocrmLicenses = $sharedAmocrmLicenses;
+    }
+
+    public function jsonSerialize()
+    {
+        return self::serializing();
     }
 }

@@ -96,7 +96,7 @@ class SharedCustomersServices implements \JsonSerializable
     /**
      * @var SharedIntegrations|null
      *
-     * @OGM\Relationship(type="CU_SERV_INTEGR_IN", direction="OUTGOING", collection=false, mappedBy="sharedCustomersServices", targetEntity="SharedIntegrations")
+     * @OGM\Relationship(type="CU_SERV_INTEGR_IN", direction="OUTGOING", collection=false, mappedBy="sharedCustomersServices", targetEntity="Hedera\Models\SharedIntegrations")
      */
     protected $sharedIntegrations;
 

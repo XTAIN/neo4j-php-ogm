@@ -91,6 +91,13 @@ class SharedWidgets
     protected $logoMain;
 
     /**
+     * @var bool|null
+     *
+     * @OGM\Property(type="boolean", key="is_private")
+     */
+    protected $isPrivate;
+
+    /**
      * @var Collection
      *
      * @OGM\Relationship(type="WIDGET_INTEGR_IN", direction="INCOMING", collection=true, mappedBy="sharedWidgets", targetEntity="SharedIntegrations")
@@ -268,6 +275,22 @@ class SharedWidgets
     public function setLogoMain(?string $logoMain): void
     {
         $this->logoMain = $logoMain;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getIsPrivate(): ?bool
+    {
+        return $this->isPrivate;
+    }
+
+    /**
+     * @param bool|null $isPrivate
+     */
+    public function setIsPrivate(?bool $isPrivate): void
+    {
+        $this->isPrivate = $isPrivate;
     }
 
     /**

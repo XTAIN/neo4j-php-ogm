@@ -39,4 +39,29 @@ class TomatoObserverConfigsRepository extends BaseRepository
 
         return new HederaCollection($query->getResult());
     }
+
+    /**
+     * @param SharedCustomersServices $sharedCustomersServices
+     * @param array $criteria
+     * @return HederaCollection
+     */
+    public function findByCriteriaForSCS(SharedCustomersServices $sharedCustomersServices, array $criteria)
+    {
+        $scsGraph = last(explode('\\', SharedCustomersServices::class));
+        $graph = last(explode('\\', $this->getClassName()));
+
+        $cql = 'MATCH (n:' . $scsGraph . ')<-[:TOMATO_SERVICE_IN]-(observer:' . $graph . ')';
+        $cql .= ' WHERE ID(n) = $id';
+        foreach ($criteria as $key => $value) {
+            $cql .= ' AND observer.' . $key . ' = ' . (is_int($value) ? $value : "'$value'");
+        }
+        $cql .= ' RETURN observer';
+
+        $query = $this->entityManager->createQuery($cql);
+        $query->setParameter('id', $sharedCustomersServices->getId());
+
+        $query->addEntityMapping('observer', $this->getClassName());
+
+        return new HederaCollection($query->getResult());
+    }
 }

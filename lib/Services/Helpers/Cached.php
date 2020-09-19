@@ -36,11 +36,7 @@ trait Cached
 
         $file = self::getFilename();
         file_put_contents(self::getDirectory($file), json_encode($data));
-        try {
-            chmod(self::getDirectory($file), 0664);
-        } catch (\Error $error) {
-            // not permitted
-        }
+        @chmod(self::getDirectory($file), 0664);
     }
 
     /**

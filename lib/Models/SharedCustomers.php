@@ -14,6 +14,8 @@ use GraphAware\Neo4j\OGM\Annotations as OGM;
 use GraphAware\Neo4j\OGM\Common\Collection as HederaCollection;
 use Hedera\Helpers\EntityFactory;
 use Hedera\Helpers\SerializationHelper;
+use Hedera\Relations\SharedUsersSharedCustomersPartnerRoles;
+use Hedera\Relations\SharedUsersSharedCustomersRoles;
 
 /**
  * @OGM\Node(label="SharedCustomers", repository="Hedera\Repositories\SharedCustomersRepository")
@@ -100,6 +102,20 @@ class SharedCustomers implements \JsonSerializable
      */
     protected $sharedIntermediaries;
 
+    /**
+     * @var Collection<\Hedera\Relations\SharedUsersSharedCustomersRoles>
+     *
+     * @OGM\Relationship(relationshipEntity="Hedera\Relations\SharedUsersSharedCustomersRoles", type="SHARED_USERS_TO_SHARED_CUSTOMERS_ROLES", direction="INCOMING", collection=true, mappedBy="sharedCustomers")
+     */
+    protected $sharedUsersRoles;
+
+    /**
+     * @var Collection<\Hedera\Relations\SharedUsersSharedCustomersPartnerRoles>
+     *
+     * @OGM\Relationship(relationshipEntity="Hedera\Relations\SharedUsersSharedCustomersPartnerRoles", type="SHARED_USERS_TO_SHARED_CUSTOMERS_PARTNER_ROLES", direction="INCOMING", collection=true, mappedBy="sharedCustomers")
+     */
+    protected $sharedUsersPartnerRoles;
+
     public function __construct()
     {
         $this->sharedCustomersServices = new HederaCollection();
@@ -109,6 +125,8 @@ class SharedCustomers implements \JsonSerializable
         $this->sharedModules = new HederaCollection();
         $this->sharedContacts = new HederaCollection();
         $this->sharedIntermediaries = new HederaCollection();
+        $this->sharedUsersRoles = new HederaCollection();
+        $this->sharedUsersPartnerRoles = new HederaCollection();
     }
 
     /**
@@ -144,7 +162,7 @@ class SharedCustomers implements \JsonSerializable
     }
 
     /**
-     * @param string $description
+     * @param string|null $description
      */
     public function setDescription(?string $description): void
     {
@@ -277,6 +295,62 @@ class SharedCustomers implements \JsonSerializable
     public function setSharedIntermediaries(Collection $sharedIntermediaries): void
     {
         $this->sharedIntermediaries = $sharedIntermediaries;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getSharedUsersRoles(): Collection
+    {
+        return $this->sharedUsersRoles;
+    }
+
+    /**
+     * @param Collection $sharedUsersRoles
+     */
+    public function setSharedUsersRoles(Collection $sharedUsersRoles): void
+    {
+        $this->sharedUsersRoles = $sharedUsersRoles;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getSharedUsersPartnerRoles(): Collection
+    {
+        return $this->sharedUsersPartnerRoles;
+    }
+
+    /**
+     * @param Collection $sharedUsersPartnerRoles
+     */
+    public function setSharedUsersPartnerRoles(Collection $sharedUsersPartnerRoles): void
+    {
+        $this->sharedUsersPartnerRoles = $sharedUsersPartnerRoles;
+    }
+
+    // custom
+
+    /**
+     * @param SharedUsers $sharedUsers
+     * @param array $roles
+     */
+    public function addSharedCustomersWithRoles(SharedUsers $sharedUsers, array $roles): void
+    {
+        $linked = new SharedUsersSharedCustomersRoles($sharedUsers, $this, $roles);
+        $this->getSharedUsersRoles()->add($linked);
+        $sharedUsers->getSharedCustomersRoles()->add($linked);
+    }
+
+    /**
+     * @param SharedUsers $sharedUsers
+     * @param array $roles
+     */
+    public function addSharedCustomersWithPartnerRoles(SharedUsers $sharedUsers, array $roles): void
+    {
+        $linked = new SharedUsersSharedCustomersPartnerRoles($sharedUsers, $this, $roles);
+        $this->getSharedUsersPartnerRoles()->add($linked);
+        $sharedUsers->getSharedCustomersPartnerRoles()->add($linked);
     }
 
     public function jsonSerialize()

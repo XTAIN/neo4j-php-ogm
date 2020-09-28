@@ -860,6 +860,12 @@ class UnitOfWork
                 if (!array_key_exists($oid, $this->reOriginalData)) {
                 }
                 $originalValues = $this->reOriginalData[$oid];
+                $newValues = array_map(function ($item) {
+                    return is_array($item) ? json_encode($item) : $item;
+                }, $newValues);
+                $originalValues = array_map(function ($item) {
+                    return is_array($item) ? json_encode($item) : $item;
+                }, $originalValues);
                 if (count(array_diff($originalValues, $newValues)) > 0) {
                     $this->relEntitesScheduledForUpdate[$oid] = $e;
                 }

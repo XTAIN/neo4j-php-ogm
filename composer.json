@@ -35,7 +35,7 @@
         "ext-simplexml": "*",
         "oosor/neo4j-php-client": "^10.0",
         "ext-json": "*",
-        "illuminate/support": "^5.0 | ^6.0 | ^7.0"
+        "illuminate/support": "^5.0 | ^6.0 | ^7.0 | ^8.0"
     },
     "autoload": {
         "psr-4": {

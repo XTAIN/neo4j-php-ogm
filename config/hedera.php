@@ -29,6 +29,6 @@ return [
 
     'keycloak' => [
         'oidc' => file_exists($OIDC_JSON) ? json_decode(file_get_contents($OIDC_JSON), true) : null,
-        'public_key' => null,
+        'public_key' => env('KEYCLOAK_PUBLIC_KEY', null),
     ],
 ];

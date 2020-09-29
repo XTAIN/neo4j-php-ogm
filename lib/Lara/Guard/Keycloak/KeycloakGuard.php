@@ -51,7 +51,11 @@ class KeycloakGuard implements Guard
             \Log::error('Before using hedera guard - you should setting hedera config in config');
         } else {
             $this->repository = new UserRepository($this->config);
-            $this->initUser();
+            try {
+                $this->initUser();
+            } catch (GuardingException $exception) {
+                \Log::error($exception->getMessage());
+            }
         }
     }
 

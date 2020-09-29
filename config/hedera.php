@@ -5,9 +5,11 @@
  * @package   Hedera
  * @author    Andrew <3oosor@gmail.com>
  * @copyright 2020 Fabrika-Klientov
- * @version   GIT: 20.07.07
+ * @version   GIT: 20.09.29
  * @link      https://fabrika-klientov.ua
  */
+
+$OIDC_JSON = base_path(env('KEYCLOAK_OIDC_JSON', 'keycloak.json'));
 
 return [
     'default' => env('HEDERA_CONNECTION', 'neo4j'),
@@ -23,5 +25,10 @@ return [
             'cache' => env('HEDERA_CACHE') ? storage_path(env('HEDERA_CACHE')) : null,
             'listeners' => env('HEDERA_LISTENERS', true),
         ],
+    ],
+
+    'keycloak' => [
+        'oidc' => file_exists($OIDC_JSON) ? json_decode(file_get_contents($OIDC_JSON), true) : null,
+        'public_key' => null,
     ],
 ];

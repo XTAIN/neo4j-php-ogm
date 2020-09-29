@@ -3,19 +3,17 @@
  * @package   Hedera
  * @author    Andrew <3oosor@gmail.com>
  * @copyright 2020 Fabrika-Klientov
- * @version   GIT: 20.07.15
+ * @version   GIT: 20.09.29
  * @link      https://fabrika-klientov.ua
  * */
 
 namespace Hedera\Services;
 
-use Hedera\Exceptions\GuardingException;
-
 /**
- * Service for guarding module apps.
- * Use SharedModules as identifier and load other entities as SharedCustomers, SharedModules
+ * Service for guarding oauth2 apps from keycloak server.
+ * Use Keycloak server as identifier oauth2 token and load other entities as SharedUsers, SharedRoles, SharedScopes
  * */
-class ModuleService implements UserService
+class KeycloakService implements UserService
 {
     /**
      * @var ConnectorService $connectorService
@@ -34,7 +32,7 @@ class ModuleService implements UserService
     public function __construct(string $identifier, ConnectorService $connector = null)
     {
         $this->connectorService = $connector ?? new ConnectorService();
-        $this->smartService = new ModuleSmartService($this->connectorService->getConnection());
+        $this->smartService = new KeycloakSmartService($this->connectorService->getConnection());
         $this->smartService->init($identifier);
     }
 
@@ -47,9 +45,9 @@ class ModuleService implements UserService
     }
 
     /**
-     * @return ModuleSmartService
-     * */
-    public function getSmartService(): ModuleSmartService
+     * @return KeycloakSmartService
+     */
+    public function getSmartService(): KeycloakSmartService
     {
         return $this->smartService;
     }
@@ -60,20 +58,5 @@ class ModuleService implements UserService
     public function isReady(): bool
     {
         return $this->smartService->isReady();
-    }
-
-    /**
-     * @return self
-     * @throws GuardingException
-     */
-    public function validateModule()
-    {
-        $model = $this->smartService->getSharedModules();
-
-        if (empty($model)) {
-            throw new GuardingException('Model SharedModules not found');
-        }
-
-        return $this;
     }
 }

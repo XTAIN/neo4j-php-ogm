@@ -13,6 +13,11 @@ use Anemone\Client as AnemoneClient;
 use Hedera\Exceptions\GuardingException;
 use Hedera\Models\SharedOauth;
 
+/**
+ * Service for guarding all apps.
+ * Use SharedApikey as identifier and load other entities as SharedCustomers, SharedCustomersServices, SharedPeriods,
+ * SharedAmocrm, SharedIntegration, SharedOauth, SharedApikey
+ * */
 class GuardService implements UserService
 {
     /**

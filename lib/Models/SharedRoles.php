@@ -45,6 +45,13 @@ class SharedRoles implements \JsonSerializable
     protected $priority;
 
     /**
+     * @var bool|null
+     *
+     * @OGM\Property(type="boolean")
+     */
+    protected $guest;
+
+    /**
      * @var string|null
      *
      * @OGM\Property(type="string")
@@ -109,6 +116,22 @@ class SharedRoles implements \JsonSerializable
     public function setPriority(int $priority): void
     {
         $this->priority = $priority;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function isGuest(): ?bool
+    {
+        return $this->guest;
+    }
+
+    /**
+     * @param bool|null $guest
+     */
+    public function setGuest(?bool $guest): void
+    {
+        $this->guest = $guest;
     }
 
     /**

@@ -11,57 +11,46 @@
 
 namespace Hedera\Lara\Guard\Keycloak;
 
-use Hedera\Services\KeycloakService;
+use Illuminate\Contracts\Auth\Authenticatable;
 
-class User extends SimpleUser
+class SimpleUser implements Authenticatable
 {
     /**
-     * @var KeycloakService $moduleService
+     * @var array $decodedToken
      */
-    private $userService;
+    protected $decodedToken = [];
 
     /**
-     * @param KeycloakService $userService
+     * @return void
      */
-    public function __construct(KeycloakService $userService)
+    public function __construct()
     {
-        parent::__construct();
-        $this->userService = $userService;
     }
 
     /**
-     * @return KeycloakService
+     * @param array $tokenData
      */
-    public function getUserService(): KeycloakService
+    public function setTokenData(array $tokenData)
     {
-        return $this->userService;
+        $this->decodedToken = $tokenData;
     }
 
     /**
-     * @param string|null $name
-     * @return \GraphAware\Neo4j\OGM\EntityManager|null
+     * @return array
      */
-    public function getEntityManager(string $name = null)
+    public function getTokenData()
     {
-        return $this->userService->getConnectorService()->getConnection($name);
-    }
-
-    /**
-     * @return \Hedera\Models\SharedUsers
-     * */
-    public function getSharedUsers()
-    {
-        return $this->userService->getSmartService()->getSharedUsers();
+        return $this->decodedToken;
     }
 
     public function getAuthIdentifierName()
     {
-        return 'id';
+        return 'sub';
     }
 
     public function getAuthIdentifier()
     {
-        return $this->getSharedUsers()->getId();
+        return $this->decodedToken['sub'] ?? null;
     }
 
     public function getAuthPassword()

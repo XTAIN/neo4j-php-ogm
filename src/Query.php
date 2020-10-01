@@ -142,7 +142,9 @@ class Query
                     if (count($keys) === 1) {
                         $row = $this->em->getEntityHydrator($this->mappings[$key][0])->hydrateNode($record->get($key));
                     } else {
-                        $row[$key] = $this->em->getEntityHydrator($this->mappings[$key][0])->hydrateNode($record->get($key));
+                        $row[$key] = $record->get($key)
+                            ? $this->em->getEntityHydrator($this->mappings[$key][0])->hydrateNode($record->get($key))
+                            : null;
                     }
                 } elseif ($mode === self::HYDRATE_COLLECTION) {
                     $coll = [];

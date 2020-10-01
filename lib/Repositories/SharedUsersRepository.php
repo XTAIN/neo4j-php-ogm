@@ -10,9 +10,12 @@
 namespace Hedera\Repositories;
 
 use GraphAware\Neo4j\OGM\Repository\BaseRepository;
+use Hedera\Helpers\WithBuilder;
 
 class SharedUsersRepository extends BaseRepository
 {
+    use WithBuilder;
+
     /**
      * @param string $uuid
      * @return \Hedera\Models\SharedUsersConfigs|null

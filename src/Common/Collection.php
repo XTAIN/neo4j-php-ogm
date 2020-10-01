@@ -13,6 +13,13 @@ namespace GraphAware\Neo4j\OGM\Common;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
-class Collection extends ArrayCollection
+class Collection extends ArrayCollection implements \JsonSerializable
 {
+    /**
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        return $this->toArray();
+    }
 }

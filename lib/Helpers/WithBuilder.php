@@ -63,6 +63,17 @@ trait WithBuilder
 
     /**
      * @param string|null $class
+     * @return int
+     */
+    public function count(string $class = null): int
+    {
+        $query = $this->entityManager->createQuery($this->builder->count($class));
+
+        return $query->getOneResult()[self::getGraphName($class)] ?? 0;
+    }
+
+    /**
+     * @param string|null $class
      * @return string
      */
     protected function getGraphName(string $class = null): string

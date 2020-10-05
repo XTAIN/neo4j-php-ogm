@@ -241,6 +241,18 @@ class Builder
     }
 
     /**
+     * @param string|null $class
+     * @return string
+     */
+    public function count(string $class = null)
+    {
+        $cql = preg_replace('/OPTIONAL MATCH .*/', '', $this->cql);
+        $graph = self::getGraphName($class);
+
+        return $cql . " RETURN COUNT($graph) as $graph";
+    }
+
+    /**
      * @return array
      */
     public function getGraph()

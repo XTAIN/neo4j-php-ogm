@@ -68,7 +68,7 @@ class Builder
         $this->entityManager = $entityManager;
         $this->repository = $repository;
 
-        $graph = last(explode('\\', $this->repository->getClassName()));
+        $graph = self::getGraphName();
         $this->graph[] = $this->repository->getClassName();
 
         $this->cql = 'MATCH (' . $graph . ':' . $graph . ')';
@@ -207,8 +207,6 @@ class Builder
      */
     public function result(...$classes)
     {
-        $cql = $this->cql;
-
         if (empty($classes)) {
             $classes = self::getGraph();
         }
@@ -227,14 +225,28 @@ class Builder
             )
         );
 
-        $cql .= ' RETURN ' . join(', ', $filteredReturn);
+        return self::_result($filteredReturn);
+    }
+
+    /**
+     * @param array $graphs
+     * @param bool $skipOffset
+     * @return string
+     */
+    private function _result(array $graphs, bool $skipOffset = false)
+    {
+        $cql = $this->cql;
+
+        $cql .= ' RETURN ' . join(', ', $graphs);
 
         if (!empty($this->orderBy)) {
             $cql .= " ORDER BY $this->orderBy" . (empty($this->orderDirection) ? '' : " $this->orderDirection");
         }
 
-        if (isset($this->offset) && $this->count > 0) {
-            $cql .= " SKIP $this->offset LIMIT $this->count";
+        if (isset($this->offset) && $this->count > 0 && !$skipOffset) {
+            self::skipLimited();
+
+            return self::_result($graphs, true);
         }
 
         return $cql;
@@ -250,6 +262,36 @@ class Builder
         $graph = self::getGraphName($class);
 
         return $cql . " RETURN COUNT($graph) as $graph";
+    }
+
+    /**
+     * @return void
+     */
+    protected function skipLimited()
+    {
+        $cql = preg_replace('/OPTIONAL MATCH .*/', '', $this->cql);
+        preg_match('/OPTIONAL MATCH .*/', $this->cql, $matches);
+
+        $graph = self::getGraphName();
+
+        $cql .= " RETURN ID($graph) as id";
+
+        if (!empty($this->orderBy)) {
+            $cql .= " ORDER BY $this->orderBy" . (empty($this->orderDirection) ? '' : " $this->orderDirection");
+        }
+
+        $cql .= " SKIP $this->offset LIMIT $this->count";
+
+        $query = $this->entityManager->createQuery($cql);
+        $result = $query->execute();
+
+        $ids = array_map(function ($item) {
+            return $item['id'];
+        }, $result);
+
+        // new CQL
+        $ids = json_encode($ids);
+        $this->cql = "MATCH ($graph:$graph) WHERE ID($graph) IN $ids " . ($matches[0] ?? '');
     }
 
     /**

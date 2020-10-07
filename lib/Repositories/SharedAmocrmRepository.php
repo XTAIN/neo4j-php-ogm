@@ -11,12 +11,15 @@ namespace Hedera\Repositories;
 
 use GraphAware\Neo4j\OGM\Common\Collection as HederaCollection;
 use GraphAware\Neo4j\OGM\Repository\BaseRepository;
+use Hedera\Helpers\WithBuilder;
 use Hedera\Models\SharedAmocrm;
 use Hedera\Models\SharedIntegrations;
 use Hedera\Models\SharedOauth;
 
 class SharedAmocrmRepository extends BaseRepository
 {
+    use WithBuilder;
+
     /**
      * @param SharedAmocrm $sharedAmocrm
      * @param array $where ex.: [['oauth.code', '!=', 'tomato', 'OR'], ['integration.name', 'Teal']]

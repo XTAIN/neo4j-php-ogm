@@ -10,8 +10,9 @@
 namespace Hedera\Repositories;
 
 use GraphAware\Neo4j\OGM\Repository\BaseRepository;
+use Hedera\Helpers\WithBuilder;
 
 class SharedCustomersRepository extends BaseRepository
 {
-
+    use WithBuilder;
 }

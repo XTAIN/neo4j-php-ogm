@@ -9,8 +9,10 @@
 
 namespace Hedera\Helpers;
 
+use GraphAware\Neo4j\Client\Formatter\Type\Relationship;
 use GraphAware\Neo4j\OGM\Common\Collection as HederaCollection;
 use Hedera\Exceptions\HederaException;
+use Hedera\Query\AbstractRelationMapper;
 use Hedera\Query\Builder;
 
 trait WithBuilder
@@ -56,11 +58,29 @@ trait WithBuilder
             $query->addEntityMapping(self::getGraphName($key), $item);
         }
 
-        echo $cql;
-
         $data = $query->execute();
 
-        return new HederaCollection($data);
+        $relations = $this->builder->getGraphRelations();
+
+        $collect = new HederaCollection($data);
+
+        if (empty($relations)) {
+            return $collect;
+        }
+
+        return $collect
+            ->map(
+                function ($item) use ($relations) {
+                    foreach ($item as $key => $value) {
+                        // optimize relationship
+                        if ($value instanceof Relationship && array_key_exists($key, $relations)) {
+                            $item[$key] = new AbstractRelationMapper($value);
+                        }
+                    }
+
+                    return $item;
+                }
+            );
     }
 
     /**

@@ -30,6 +30,11 @@ class Builder
     protected $graph = [];
 
     /**
+     * @var array $relations
+     * */
+    protected $relations = [];
+
+    /**
      * @var int $offset
      * */
     protected $offset = 0;
@@ -144,14 +149,22 @@ class Builder
      * @param string $class
      * @param string|null $relationType
      * @param string|null $alias
+     * @param string|null $aliasRelation
      * @return Builder
      */
-    public function with(string $class, string $relationType = null, string $alias = null)
+    public function with(string $class, string $relationType = null, string $alias = null, string $aliasRelation = null)
     {
         $this->graph[$alias ?? $class] = $class;
+        if (!empty($relationType) && !empty($aliasRelation)) {
+            $this->relations[$aliasRelation] = $relationType;
+        }
 
         $graph = self::getGraphName($class);
-        $this->cql .= '-[' . ($relationType ? ":{$relationType}" : '') . ']-(' . ($alias ?? $graph) . ':' . $graph . ')';
+
+        $this->cql .= '-[' .
+            ($aliasRelation && $relationType ? $aliasRelation : '') .
+            ($relationType ? ":{$relationType}" : '') .
+            ']-(' . ($alias ?? $graph) . ':' . $graph . ')';
 
         return $this;
     }
@@ -250,6 +263,8 @@ class Builder
         $cql = $this->cql;
 
         $cql .= ' RETURN ' . join(', ', $graphs);
+        $cql .= count($this->relations) > 0
+            ? ((count($graphs) > 0 ? ', ' : '') . join(', ', array_keys($this->relations))) : '';
 
         if (!empty($this->orderBy)) {
             $cql .= " ORDER BY $this->orderBy" . (empty($this->orderDirection) ? '' : " $this->orderDirection");
@@ -315,6 +330,14 @@ class Builder
     public function getGraph()
     {
         return array_unique($this->graph);
+    }
+
+    /**
+     * @return array
+     */
+    public function getGraphRelations()
+    {
+        return array_unique($this->relations);
     }
 
     /**

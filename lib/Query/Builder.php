@@ -138,7 +138,7 @@ class Builder
         $graph = self::getGraphName($class);
 
         if (mb_strtoupper($prop) == 'ID') {
-            $this->cql .= " ID($graph) $operator " . ((int)$value);
+            $this->cql .= " ID($graph) $operator " . (is_array($value) ? json_encode($value) : (int)$value);
         } else {
             $prop = preg_match('/^(\[).*/', $prop) ? $prop : ".$prop";
             $this->cql .= " $graph$prop $operator '$value'";

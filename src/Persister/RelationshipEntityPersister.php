@@ -123,7 +123,7 @@ class RelationshipEntityPersister
     public function getDeleteQuery($entity)
     {
         $id = $this->classMetadata->getIdValue($entity);
-        $query = 'MATCH rel=rel('.$id.') DELETE rel RETURN $oid AS oid';
+        $query = 'MATCH ()-[rel]-() WHERE ID(rel) = '.$id.' DELETE rel RETURN $oid AS oid';
         $params = ['oid' => spl_object_hash($entity)];
 
         return Statement::create($query, $params);

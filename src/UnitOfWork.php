@@ -293,8 +293,9 @@ class UnitOfWork
             foreach ($result->records() as $record) {
                 $oid = $record->get('oid');
                 $this->relationshipEntityStates[$record->get('oid')] = self::STATE_DELETED;
-                $id = $this->reEntityIds[$oid];
-                unset($this->reEntityIds[$oid], $this->reEntitiesById[$id]);
+                // TODO: optimize (07/10/2020)
+//                $id = $this->reEntityIds[$oid];
+//                unset($this->reEntityIds[$oid], $this->reEntitiesById[$id]);
             }
         }
 

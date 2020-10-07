@@ -233,8 +233,6 @@ class Builder
             $classes = self::getGraph();
         }
 
-        $classes = array_unique($classes);
-
         $filteredReturn = array_map(
             function ($item) {
                 return self::getGraphName($item);
@@ -329,7 +327,7 @@ class Builder
      */
     public function getGraph()
     {
-        return array_unique($this->graph);
+        return $this->graph;
     }
 
     /**
@@ -337,7 +335,7 @@ class Builder
      */
     public function getGraphRelations()
     {
-        return array_unique($this->relations);
+        return $this->relations;
     }
 
     /**

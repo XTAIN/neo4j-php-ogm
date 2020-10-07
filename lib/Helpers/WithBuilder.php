@@ -52,9 +52,11 @@ trait WithBuilder
 
         $query = $this->entityManager->createQuery($cql);
 
-        foreach ($classes as $item) {
-            $query->addEntityMapping(self::getGraphName($item), $item);
+        foreach ($classes as $key => $item) {
+            $query->addEntityMapping(self::getGraphName($key), $item);
         }
+
+        echo $cql;
 
         $data = $query->execute();
 

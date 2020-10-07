@@ -69,7 +69,7 @@ class Builder
         $this->repository = $repository;
 
         $graph = self::getGraphName();
-        $this->graph[] = $this->repository->getClassName();
+        $this->graph[$this->repository->getClassName()] = $this->repository->getClassName();
 
         $this->cql = 'MATCH (' . $graph . ':' . $graph . ')';
     }
@@ -143,14 +143,15 @@ class Builder
     /**
      * @param string $class
      * @param string|null $relationType
+     * @param string|null $alias
      * @return Builder
      */
-    public function with(string $class, string $relationType = null)
+    public function with(string $class, string $relationType = null, string $alias = null)
     {
-        $this->graph[] = $class;
+        $this->graph[$alias ?? $class] = $class;
 
         $graph = self::getGraphName($class);
-        $this->cql .= '-[' . ($relationType ? ":{$relationType}" : '') . ']-(' . $graph . ':' . $graph . ')';
+        $this->cql .= '-[' . ($relationType ? ":{$relationType}" : '') . ']-(' . ($alias ?? $graph) . ':' . $graph . ')';
 
         return $this;
     }
@@ -207,6 +208,14 @@ class Builder
      */
     public function result(...$classes)
     {
+        $classes = array_reduce(
+            $classes,
+            function ($result, $item) {
+                return $result[$item] = $item;
+            },
+            []
+        );
+
         if (empty($classes)) {
             $classes = self::getGraph();
         }
@@ -217,11 +226,14 @@ class Builder
             function ($item) {
                 return self::getGraphName($item);
             },
-            array_filter(
-                $classes,
-                function ($item) {
-                    return in_array($item, $this->graph);
-                }
+            array_keys(
+                array_filter(
+                    $classes,
+                    function ($item) {
+                        return array_key_exists($item, $this->graph);
+                    },
+                    ARRAY_FILTER_USE_KEY
+                )
             )
         );
 
@@ -285,9 +297,12 @@ class Builder
         $query = $this->entityManager->createQuery($cql);
         $result = $query->execute();
 
-        $ids = array_map(function ($item) {
-            return $item['id'];
-        }, $result);
+        $ids = array_map(
+            function ($item) {
+                return $item['id'];
+            },
+            $result
+        );
 
         // new CQL
         $ids = json_encode($ids);

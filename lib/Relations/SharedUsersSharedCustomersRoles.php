@@ -54,9 +54,9 @@ class SharedUsersSharedCustomersRoles implements \JsonSerializable
     /**
      * @param SharedUsers $sharedUsers
      * @param SharedCustomers $sharedCustomers
-     * @param array $roles
+     * @param array|null $roles
      */
-    public function __construct(SharedUsers $sharedUsers, SharedCustomers $sharedCustomers, array $roles)
+    public function __construct(SharedUsers $sharedUsers, SharedCustomers $sharedCustomers, ?array $roles)
     {
         $this->sharedUsers = $sharedUsers;
         $this->sharedCustomers = $sharedCustomers;

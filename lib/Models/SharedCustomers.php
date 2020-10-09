@@ -14,6 +14,7 @@ use GraphAware\Neo4j\OGM\Annotations as OGM;
 use GraphAware\Neo4j\OGM\Common\Collection as HederaCollection;
 use Hedera\Helpers\EntityFactory;
 use Hedera\Helpers\SerializationHelper;
+use Hedera\Helpers\SoftDeletes;
 use Hedera\Relations\SharedUsersSharedCustomersPartnerRoles;
 use Hedera\Relations\SharedUsersSharedCustomersRoles;
 
@@ -24,6 +25,7 @@ class SharedCustomers implements \JsonSerializable
 {
     use EntityFactory;
     use SerializationHelper;
+    use SoftDeletes;
 
     /**
      * @var int
@@ -52,6 +54,13 @@ class SharedCustomers implements \JsonSerializable
      * @OGM\Property(type="string")
      */
     protected $key;
+
+    /**
+     * @var bool|null
+     *
+     * @OGM\Property(type="string", nullable=true)
+     */
+    protected $disabled;
 
     /**
      * @var Collection
@@ -183,6 +192,22 @@ class SharedCustomers implements \JsonSerializable
     public function setKey(?string $key): void
     {
         $this->key = $key;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getDisabled(): ?bool
+    {
+        return $this->disabled;
+    }
+
+    /**
+     * @param bool|null $disabled
+     */
+    public function setDisabled(?bool $disabled): void
+    {
+        $this->disabled = $disabled;
     }
 
     /**

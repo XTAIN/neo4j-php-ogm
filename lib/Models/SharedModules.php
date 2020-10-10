@@ -14,6 +14,7 @@ use GraphAware\Neo4j\OGM\Annotations as OGM;
 use GraphAware\Neo4j\OGM\Common\Collection as HederaCollection;
 use Hedera\Helpers\EntityFactory;
 use Hedera\Helpers\SerializationHelper;
+use Hedera\Helpers\SoftDeletes;
 
 /**
  * @OGM\Node(label="SharedModules", repository="Hedera\Repositories\SharedModulesRepository")
@@ -22,6 +23,7 @@ class SharedModules implements \JsonSerializable
 {
     use EntityFactory;
     use SerializationHelper;
+    use SoftDeletes;
 
     /**
      * @var int

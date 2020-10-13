@@ -188,12 +188,33 @@ class Builder
      */
     public function nextMatch(string $fromClass = null)
     {
-        $graph = self::getGraphName($fromClass);
-        $this->cql .= ' OPTIONAL MATCH (' . $graph . ':' . $graph . ')';
-
-        $this->whereStart = true;
+        self::_match($fromClass, true);
 
         return $this;
+    }
+
+    /**
+     * @param string|null $fromClass
+     * @param bool $isOptional
+     * @return Builder
+     */
+    public function match(string $fromClass = null, bool $isOptional = false)
+    {
+        self::_match($fromClass, $isOptional);
+
+        return $this;
+    }
+
+    /**
+     * @param string|null $fromClass
+     * @param bool $isOptional
+     */
+    private function _match(?string $fromClass, bool $isOptional)
+    {
+        $graph = self::getGraphName($fromClass);
+        $this->cql .= ($isOptional ? ' OPTIONAL ' : ' ') . 'MATCH (' . $graph . ':' . $graph . ')';
+
+        $this->whereStart = true;
     }
 
     /**

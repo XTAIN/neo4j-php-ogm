@@ -12,12 +12,17 @@ namespace Hedera\Models;
 use Doctrine\Common\Collections\Collection;
 use GraphAware\Neo4j\OGM\Annotations as OGM;
 use GraphAware\Neo4j\OGM\Common\Collection as HederaCollection;
+use Hedera\Helpers\EntityFactory;
+use Hedera\Helpers\SerializationHelper;
 
 /**
  * @OGM\Node(label="SharedWidgets", repository="Hedera\Repositories\SharedWidgetsRepository")
  */
-class SharedWidgets
+class SharedWidgets implements \JsonSerializable
 {
+    use EntityFactory;
+    use SerializationHelper;
+
     /**
      * @var int
      *
@@ -339,5 +344,10 @@ class SharedWidgets
     public function setSharedCustomersWidgets(Collection $sharedCustomersWidgets): void
     {
         $this->sharedCustomersWidgets = $sharedCustomersWidgets;
+    }
+
+    public function jsonSerialize()
+    {
+        return self::serializing();
     }
 }

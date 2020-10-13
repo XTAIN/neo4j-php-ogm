@@ -65,6 +65,16 @@ class Builder
     protected $whereStart = true;
 
     /**
+     * @var string $LEFT_CQL_SPLITTER_PATTERN
+     * */
+    protected static $LEFT_CQL_SPLITTER_PATTERN = '/(OPTIONAL MATCH|WHERE|RETURN)/';
+
+    /**
+     * @var string $FIRST_MATCH_CQL_SPLITTER_PATTERN
+     * */
+    protected static $FIRST_MATCH_CQL_SPLITTER_PATTERN = '/(OPTIONAL MATCH|RETURN)/';
+
+    /**
      * @param EntityManager $entityManager
      * @param ObjectRepository $repository
      */
@@ -318,7 +328,7 @@ class Builder
      */
     public function count(string $class = null)
     {
-        $cql = preg_split('/(OPTIONAL MATCH|WHERE|RETURN)/', $this->cql, 2)[0];
+        $cql = preg_split(self::$FIRST_MATCH_CQL_SPLITTER_PATTERN, $this->cql, 2)[0];
         $graph = self::getGraphName($class);
 
         return $cql . " RETURN COUNT($graph) as $graph";
@@ -329,7 +339,7 @@ class Builder
      */
     protected function skipLimited()
     {
-        $cql = preg_split('/(OPTIONAL MATCH|WHERE|RETURN)/', $this->cql, 2)[0];
+        $cql = preg_split(self::$FIRST_MATCH_CQL_SPLITTER_PATTERN, $this->cql, 2)[0];
         preg_match('/OPTIONAL MATCH .*/', $this->cql, $matches);
 
         $graph = self::getGraphName();
@@ -353,7 +363,7 @@ class Builder
         );
 
         // new CQL
-        $leftCQL = preg_split('/(OPTIONAL MATCH|WHERE|RETURN)/', $cql, 2);
+        $leftCQL = preg_split(self::$LEFT_CQL_SPLITTER_PATTERN, $cql, 2);
         $ids = json_encode($ids);
         $this->cql = "{$leftCQL[0]} WHERE ID($graph) IN $ids " . ($matches[0] ?? '');
     }

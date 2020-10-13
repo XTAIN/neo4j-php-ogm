@@ -208,6 +208,7 @@ class Builder
     /**
      * @param string|null $fromClass
      * @param bool $isOptional
+     * @return void
      */
     private function _match(?string $fromClass, bool $isOptional)
     {
@@ -352,9 +353,9 @@ class Builder
         );
 
         // new CQL
-        preg_match('/^(MATCH \S*).*/', $cql, $matches2);
+        $leftCQL = preg_split('/(OPTIONAL MATCH|WHERE|RETURN)/', '', 2);
         $ids = json_encode($ids);
-        $this->cql = "{$matches2[1]} WHERE ID($graph) IN $ids " . ($matches[0] ?? '');
+        $this->cql = "$leftCQL WHERE ID($graph) IN $ids " . ($matches[0] ?? '');
     }
 
     /**

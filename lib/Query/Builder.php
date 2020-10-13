@@ -318,7 +318,7 @@ class Builder
      */
     public function count(string $class = null)
     {
-        $cql = preg_replace('/OPTIONAL MATCH .*/', '', $this->cql);
+        $cql = preg_split('/(OPTIONAL MATCH|WHERE|RETURN)/', $this->cql, 2)[0];
         $graph = self::getGraphName($class);
 
         return $cql . " RETURN COUNT($graph) as $graph";
@@ -329,7 +329,7 @@ class Builder
      */
     protected function skipLimited()
     {
-        $cql = preg_replace('/OPTIONAL MATCH .*/', '', $this->cql);
+        $cql = preg_split('/(OPTIONAL MATCH|WHERE|RETURN)/', $this->cql, 2)[0];
         preg_match('/OPTIONAL MATCH .*/', $this->cql, $matches);
 
         $graph = self::getGraphName();

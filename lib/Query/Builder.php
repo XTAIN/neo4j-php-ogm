@@ -320,7 +320,7 @@ class Builder
         // new CQL
         preg_match('/^(MATCH \S*).*/', $cql, $matches2);
         $ids = json_encode($ids);
-        $this->cql = "{{$matches2[1]}} WHERE ID($graph) IN $ids " . ($matches[0] ?? '');
+        $this->cql = "{$matches2[1]} WHERE ID($graph) IN $ids " . ($matches[0] ?? '');
     }
 
     /**

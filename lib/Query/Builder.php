@@ -353,7 +353,7 @@ class Builder
         );
 
         // new CQL
-        $leftCQL = preg_split('/(OPTIONAL MATCH|WHERE|RETURN)/', '', 2);
+        $leftCQL = preg_split('/(OPTIONAL MATCH|WHERE|RETURN)/', $cql, 2);
         $ids = json_encode($ids);
         $this->cql = "$leftCQL WHERE ID($graph) IN $ids " . ($matches[0] ?? '');
     }

@@ -318,8 +318,9 @@ class Builder
         );
 
         // new CQL
+        $cql = preg_replace('/WHERE .*/', '', $cql);
         $ids = json_encode($ids);
-        $this->cql = "MATCH ($graph:$graph) WHERE ID($graph) IN $ids " . ($matches[0] ?? '');
+        $this->cql = "$cql WHERE ID($graph) IN $ids " . ($matches[0] ?? '');
     }
 
     /**

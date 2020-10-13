@@ -140,8 +140,21 @@ class Builder
         if (mb_strtoupper($prop) == 'ID') {
             $this->cql .= " ID($graph) $operator " . (is_array($value) ? json_encode($value) : (int)$value);
         } else {
+            switch (true) {
+                case is_int($value):
+                    break;
+                case is_bool($value):
+                    $value = $value ? 'true' : 'false';
+                    break;
+                case is_null($value):
+                    $value = 'null';
+                    break;
+                default:
+                    $value = "'$value'";
+            }
+
             $prop = preg_match('/^(\[).*/', $prop) ? $prop : ".$prop";
-            $this->cql .= " $graph$prop $operator '$value'";
+            $this->cql .= " $graph$prop $operator $value";
         }
     }
 

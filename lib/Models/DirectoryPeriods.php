@@ -52,6 +52,13 @@ class DirectoryPeriods implements \JsonSerializable
     protected $trial;
 
     /**
+     * @var int
+     *
+     * @OGM\Property(type="int")
+     */
+    protected $interval;
+
+    /**
      * @var Collection
      *
      * @OGM\Relationship(type="PERIOD_DIR_IN", direction="INCOMING", collection=true, mappedBy="directoryPeriods", targetEntity="SharedPeriods")
@@ -117,6 +124,22 @@ class DirectoryPeriods implements \JsonSerializable
     public function setTrial(bool $trial): void
     {
         $this->trial = $trial;
+    }
+
+    /**
+     * @return int
+     */
+    public function getInterval(): int
+    {
+        return $this->interval;
+    }
+
+    /**
+     * @param int $interval
+     */
+    public function setInterval(int $interval): void
+    {
+        $this->interval = $interval;
     }
 
     /**

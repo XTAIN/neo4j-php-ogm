@@ -35,6 +35,13 @@ class SharedWidgets implements \JsonSerializable
      *
      * @OGM\Property(type="string")
      */
+    protected $name;
+
+    /**
+     * @var string
+     *
+     * @OGM\Property(type="string")
+     */
     protected $code;
 
     /**
@@ -54,6 +61,7 @@ class SharedWidgets implements \JsonSerializable
     /**
      * @var string
      *
+     * @deprecated
      * @OGM\Property(type="string")
      */
     protected $uri;
@@ -61,6 +69,7 @@ class SharedWidgets implements \JsonSerializable
     /**
      * @var string
      *
+     * @deprecated
      * @OGM\Property(type="string")
      */
     protected $path;
@@ -75,6 +84,7 @@ class SharedWidgets implements \JsonSerializable
     /**
      * @var mixed
      *
+     * @deprecated
      * @OGM\Property(type="array")
      * @OGM\Convert(type="nested")
      */
@@ -91,6 +101,7 @@ class SharedWidgets implements \JsonSerializable
     /**
      * @var string|null
      *
+     * @deprecated
      * @OGM\Property(type="string", key="logo_main")
      */
     protected $logoMain;
@@ -136,6 +147,22 @@ class SharedWidgets implements \JsonSerializable
     public function getId(): int
     {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName(string $name): void
+    {
+        $this->name = $name;
     }
 
     /**
@@ -187,6 +214,7 @@ class SharedWidgets implements \JsonSerializable
     }
 
     /**
+     * @deprecated
      * @return string
      */
     public function getUri(): string
@@ -195,6 +223,7 @@ class SharedWidgets implements \JsonSerializable
     }
 
     /**
+     * @deprecated
      * @param string $uri
      */
     public function setUri(string $uri): void
@@ -203,6 +232,7 @@ class SharedWidgets implements \JsonSerializable
     }
 
     /**
+     * @deprecated
      * @return string
      */
     public function getPath(): string
@@ -211,6 +241,7 @@ class SharedWidgets implements \JsonSerializable
     }
 
     /**
+     * @deprecated
      * @param string $path
      */
     public function setPath(string $path): void
@@ -235,6 +266,7 @@ class SharedWidgets implements \JsonSerializable
     }
 
     /**
+     * @deprecated
      * @return mixed
      */
     public function getWidgetsJSON()
@@ -243,6 +275,7 @@ class SharedWidgets implements \JsonSerializable
     }
 
     /**
+     * @deprecated
      * @param mixed $widgetsJSON
      */
     public function setWidgetsJSON($widgetsJSON): void
@@ -267,6 +300,7 @@ class SharedWidgets implements \JsonSerializable
     }
 
     /**
+     * @deprecated
      * @return string|null
      */
     public function getLogoMain(): ?string
@@ -275,6 +309,7 @@ class SharedWidgets implements \JsonSerializable
     }
 
     /**
+     * @deprecated
      * @param string|null $logoMain
      */
     public function setLogoMain(?string $logoMain): void

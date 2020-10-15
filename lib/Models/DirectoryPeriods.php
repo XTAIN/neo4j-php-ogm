@@ -12,12 +12,17 @@ namespace Hedera\Models;
 use Doctrine\Common\Collections\Collection;
 use GraphAware\Neo4j\OGM\Annotations as OGM;
 use GraphAware\Neo4j\OGM\Common\Collection as HederaCollection;
+use Hedera\Helpers\EntityFactory;
+use Hedera\Helpers\SerializationHelper;
 
 /**
  * @OGM\Node(label="DirectoryPeriods", repository="Hedera\Repositories\DirectoryPeriodsRepository")
  */
-class DirectoryPeriods
+class DirectoryPeriods implements \JsonSerializable
 {
+    use EntityFactory;
+    use SerializationHelper;
+
     /**
      * @var int
      *
@@ -128,5 +133,10 @@ class DirectoryPeriods
     public function setSharedPeriods(Collection $sharedPeriods): void
     {
         $this->sharedPeriods = $sharedPeriods;
+    }
+
+    public function jsonSerialize()
+    {
+        return self::serializing();
     }
 }

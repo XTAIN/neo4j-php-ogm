@@ -10,12 +10,17 @@
 namespace Hedera\Models;
 
 use GraphAware\Neo4j\OGM\Annotations as OGM;
+use Hedera\Helpers\EntityFactory;
+use Hedera\Helpers\SerializationHelper;
 
 /**
  * @OGM\Node(label="DirectoryTexts", repository="Hedera\Repositories\DirectoryTextsRepository")
  */
-class DirectoryTexts
+class DirectoryTexts implements \JsonSerializable
 {
+    use EntityFactory;
+    use SerializationHelper;
+
     /**
      * @var int
      *
@@ -103,5 +108,10 @@ class DirectoryTexts
     public function setData($data): void
     {
         $this->data = $data;
+    }
+
+    public function jsonSerialize()
+    {
+        return self::serializing();
     }
 }

@@ -167,6 +167,38 @@ class Builder
 
     /**
      * @param string $class
+     * @param string|null $forClass
+     * @param string|null $relationType
+     * @return Builder
+     */
+    public function whereWithNot(
+        string $class,
+        string $forClass = null,
+        string $relationType = null
+    ) {
+        self::_whereWithNot($class, $forClass, $relationType);
+
+        return $this;
+    }
+
+    /**
+     * @param string $class
+     * @param string|null $forClass
+     * @param string|null $relationType
+     * @return Builder
+     */
+    public function orWhereWithNot(
+        string $class,
+        string $forClass = null,
+        string $relationType = null
+    ) {
+        self::_whereWithNot($class, $forClass, $relationType, 'OR');
+
+        return $this;
+    }
+
+    /**
+     * @param string $class
      * @param string $prop
      * @param string $operator
      * @param null $value
@@ -234,6 +266,32 @@ class Builder
 
         $prop = preg_match('/^(\[).*/', $prop) ? $prop : ".$prop";
         $this->cql .= " datetime(reduce(accumulator = '', item in split($graph$prop, ' ') | accumulator + CASE WHEN accumulator = '' THEN '' ELSE 'T' END + item)) $operator datetime($value)";
+    }
+
+    /**
+     * @param string $class
+     * @param string|null $forClass
+     * @param string|null $relationType
+     * @param string $type
+     */
+    private function _whereWithNot(
+        string $class,
+        ?string $forClass,
+        ?string $relationType,
+        string $type = 'AND'
+    ) {
+        if ($this->whereStart) {
+            $this->cql .= ' WHERE NOT';
+        } else {
+            $this->cql .= " $type NOT";
+        }
+
+        $this->whereStart = false;
+
+        $graphNot = self::getGraphName($class);
+        $graph = self::getGraphName($forClass);
+
+        $this->cql .= " ($graph)-[" . ($relationType ? ":$relationType" : '') . "]-(:$graphNot)";
     }
 
     /**

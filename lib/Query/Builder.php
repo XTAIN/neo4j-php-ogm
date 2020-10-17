@@ -130,7 +130,45 @@ class Builder
     /**
      * @param string $class
      * @param string $prop
-     * @param $operator
+     * @param string $operator
+     * @param string|null $value
+     * @return Builder
+     */
+    public function whereDatetime(string $class, string $prop, $operator, $value = null)
+    {
+        if (func_num_args() == 3) {
+            $value = $operator;
+            $operator = '=';
+        }
+
+        self::_whereDatetime($class, $prop, $operator, $value);
+
+        return $this;
+    }
+
+    /**
+     * @param string $class
+     * @param string $prop
+     * @param string $operator
+     * @param string|null $value
+     * @return Builder
+     */
+    public function orWhereDatetime(string $class, string $prop, $operator, $value = null)
+    {
+        if (func_num_args() == 3) {
+            $value = $operator;
+            $operator = '=';
+        }
+
+        self::_whereDatetime($class, $prop, $operator, $value, 'OR');
+
+        return $this;
+    }
+
+    /**
+     * @param string $class
+     * @param string $prop
+     * @param string $operator
      * @param null $value
      * @param string $type
      * @return void
@@ -166,6 +204,36 @@ class Builder
             $prop = preg_match('/^(\[).*/', $prop) ? $prop : ".$prop";
             $this->cql .= " $graph$prop $operator $value";
         }
+    }
+
+    /**
+     * @param string $class
+     * @param string $prop
+     * @param string $operator
+     * @param null $value
+     * @param string $type
+     */
+    private function _whereDatetime(
+        string $class,
+        string $prop,
+        $operator,
+        $value = null,
+        string $type = 'AND'
+    ) {
+        if ($this->whereStart) {
+            $this->cql .= ' WHERE';
+        } else {
+            $this->cql .= " $type";
+        }
+
+        $this->whereStart = false;
+
+        $graph = self::getGraphName($class);
+
+        $value = "'$value'";
+
+        $prop = preg_match('/^(\[).*/', $prop) ? $prop : ".$prop";
+        $this->cql .= " datetime(reduce(accumulator = '', item in split($graph$prop, ' ') | accumulator + CASE WHEN accumulator = '' THEN '' ELSE 'T' END + item)) $operator datetime($value)";
     }
 
     /**

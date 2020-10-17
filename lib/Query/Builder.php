@@ -198,6 +198,28 @@ class Builder
     }
 
     /**
+     * @param string $data
+     * @return Builder
+     */
+    public function whereMixed(string $data)
+    {
+        self::_whereMixed($data);
+
+        return $this;
+    }
+
+    /**
+     * @param string $data
+     * @return Builder
+     */
+    public function orWhereMixed(string $data)
+    {
+        self::_whereMixed($data, 'OR');
+
+        return $this;
+    }
+
+    /**
      * @param string $class
      * @param string $prop
      * @param string $operator
@@ -292,6 +314,23 @@ class Builder
         $graph = self::getGraphName($forClass);
 
         $this->cql .= " ($graph)-[" . ($relationType ? ":$relationType" : '') . "]-(:$graphNot)";
+    }
+
+    /**
+     * @param string $data
+     * @param string $type
+     */
+    private function _whereMixed(string $data, string $type = 'AND')
+    {
+        if ($this->whereStart) {
+            $this->cql .= ' WHERE';
+        } else {
+            $this->cql .= " $type";
+        }
+
+        $this->whereStart = false;
+
+        $this->cql .= $data;
     }
 
     /**

@@ -61,7 +61,6 @@ class SharedWidgets implements \JsonSerializable
     /**
      * @var string
      *
-     * @deprecated
      * @OGM\Property(type="string")
      */
     protected $uri;
@@ -214,7 +213,6 @@ class SharedWidgets implements \JsonSerializable
     }
 
     /**
-     * @deprecated
      * @return string
      */
     public function getUri(): string
@@ -223,7 +221,6 @@ class SharedWidgets implements \JsonSerializable
     }
 
     /**
-     * @deprecated
      * @param string $uri
      */
     public function setUri(string $uri): void

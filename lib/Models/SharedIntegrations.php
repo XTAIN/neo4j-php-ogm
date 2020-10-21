@@ -147,14 +147,14 @@ class SharedIntegrations implements \JsonSerializable
     protected $scopes;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @OGM\Property(type="string")
      */
     protected $code;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @OGM\Property(type="string", key="secret_key")
      */
@@ -466,33 +466,33 @@ class SharedIntegrations implements \JsonSerializable
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCode(): string
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
     /**
-     * @param string $code
+     * @param string|null $code
      */
-    public function setCode(string $code): void
+    public function setCode(?string $code): void
     {
         $this->code = $code;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSecretKey(): string
+    public function getSecretKey(): ?string
     {
         return $this->secretKey;
     }
 
     /**
-     * @param string $secretKey
+     * @param string|null $secretKey
      */
-    public function setSecretKey(string $secretKey): void
+    public function setSecretKey(?string $secretKey): void
     {
         $this->secretKey = $secretKey;
     }

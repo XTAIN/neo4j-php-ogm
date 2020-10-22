@@ -98,6 +98,14 @@ class SharedWidgets implements \JsonSerializable
     protected $manifestJSON;
 
     /**
+     * @var mixed
+     *
+     * @OGM\Property(type="array")
+     * @OGM\Convert(type="nested")
+     */
+    protected $settingsManifest;
+
+    /**
      * @var string|null
      *
      * @deprecated
@@ -294,6 +302,22 @@ class SharedWidgets implements \JsonSerializable
     public function setManifestJSON($manifestJSON): void
     {
         $this->manifestJSON = $manifestJSON;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSettingsManifest()
+    {
+        return $this->settingsManifest;
+    }
+
+    /**
+     * @param mixed $settingsManifest
+     */
+    public function setSettingsManifest($settingsManifest): void
+    {
+        $this->settingsManifest = $settingsManifest;
     }
 
     /**

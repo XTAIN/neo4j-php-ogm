@@ -58,7 +58,7 @@ class SharedCustomers implements \JsonSerializable
     /**
      * @var bool|null
      *
-     * @OGM\Property(type="string", nullable=true)
+     * @OGM\Property(type="boolean", nullable=true)
      */
     protected $disabled;
 

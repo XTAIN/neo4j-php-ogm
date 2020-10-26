@@ -190,6 +190,14 @@ class UnitOfWork
 
             return;
         }
+
+        // PATCH oosor
+        $state = $this->getEntityState($entityB);
+        if ($state === self::STATE_DELETED) {
+            return;
+        }
+        // END oosor
+
         $this->doPersist($entityB, $visited);
         $this->relationshipsScheduledForCreated[] = [$entityA, $relationship, $entityB, $relationship->getPropertyName()];
     }

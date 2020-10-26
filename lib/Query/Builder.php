@@ -434,7 +434,8 @@ class Builder
         $classes = array_reduce(
             $classes,
             function ($result, $item) {
-                return $result[$item] = $item;
+                $result[$item] = $item;
+                return $result;
             },
             []
         );

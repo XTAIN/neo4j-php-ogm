@@ -52,6 +52,13 @@ class SharedUsersSharedCustomersPartnerRoles implements \JsonSerializable
     protected $roles;
 
     /**
+     * @var bool|null
+     *
+     * @OGM\Property(type="boolean", nullable=true)
+     */
+    protected $temporary;
+
+    /**
      * @param SharedUsers $sharedUsers
      * @param SharedCustomers $sharedCustomers
      * @param array|null $roles
@@ -117,6 +124,22 @@ class SharedUsersSharedCustomersPartnerRoles implements \JsonSerializable
     public function setRoles(?array $roles): void
     {
         $this->roles = $roles;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getTemporary(): ?bool
+    {
+        return $this->temporary;
+    }
+
+    /**
+     * @param bool|null $temporary
+     */
+    public function setTemporary(?bool $temporary): void
+    {
+        $this->temporary = $temporary;
     }
 
     public function jsonSerialize()

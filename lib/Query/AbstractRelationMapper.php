@@ -32,7 +32,7 @@ class AbstractRelationMapper implements \JsonSerializable
      */
     public function __get($name)
     {
-        return $this->relationship->get($name);
+        return $this->relationship->value($name, null);
     }
 
     /**

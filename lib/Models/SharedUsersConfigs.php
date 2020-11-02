@@ -10,12 +10,17 @@
 namespace Hedera\Models;
 
 use GraphAware\Neo4j\OGM\Annotations as OGM;
+use Hedera\Helpers\EntityFactory;
+use Hedera\Helpers\SerializationHelper;
 
 /**
  * @OGM\Node(label="SharedUsersConfigs", repository="Hedera\Repositories\SharedUsersConfigsRepository")
  */
-class SharedUsersConfigs
+class SharedUsersConfigs implements \JsonSerializable
 {
+    use EntityFactory;
+    use SerializationHelper;
+
     /**
      * @var int
      *
@@ -126,5 +131,10 @@ class SharedUsersConfigs
     public function setSharedUsers(?SharedUsers $sharedUsers): void
     {
         $this->sharedUsers = $sharedUsers;
+    }
+
+    public function jsonSerialize()
+    {
+        return self::serializing();
     }
 }

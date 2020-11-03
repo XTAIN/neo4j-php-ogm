@@ -78,6 +78,13 @@ class SharedUsers implements \JsonSerializable
     protected $additionalInfo;
 
     /**
+     * @var string|null
+     *
+     * @OGM\Property(type="string", nullable=true)
+     */
+    protected $lang;
+
+    /**
      * @var Collection
      *
      * @OGM\Relationship(type="SHARED_CONTACTS_TO_SHARED_USERS", direction="INCOMING", collection=true, mappedBy="sharedUsers", targetEntity="Hedera\Models\SharedContacts")
@@ -231,6 +238,22 @@ class SharedUsers implements \JsonSerializable
     public function setAdditionalInfo($additionalInfo): void
     {
         $this->additionalInfo = $additionalInfo;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getLang(): ?string
+    {
+        return $this->lang;
+    }
+
+    /**
+     * @param string|null $lang
+     */
+    public function setLang(?string $lang): void
+    {
+        $this->lang = $lang;
     }
 
     /**

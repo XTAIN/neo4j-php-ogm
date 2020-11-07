@@ -35,21 +35,21 @@ class SharedUsers implements \JsonSerializable
     protected $id;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @OGM\Property(type="string")
      */
     protected $name;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @OGM\Property(type="string")
      */
     protected $username;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @OGM\Property(type="string")
      */
@@ -145,49 +145,49 @@ class SharedUsers implements \JsonSerializable
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
+     * @param string|null $name
      */
-    public function setName(string $name): void
+    public function setName(?string $name): void
     {
         $this->name = $name;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getUsername(): string
+    public function getUsername(): ?string
     {
         return $this->username;
     }
 
     /**
-     * @param string $username
+     * @param string|null $username
      */
-    public function setUsername(string $username): void
+    public function setUsername(?string $username): void
     {
         $this->username = $username;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
     /**
-     * @param string $email
+     * @param string|null $email
      */
-    public function setEmail(string $email): void
+    public function setEmail(?string $email): void
     {
         $this->email = $email;
     }

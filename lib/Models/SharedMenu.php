@@ -16,6 +16,7 @@ use Hedera\Helpers\EntityFactory;
 use Hedera\Helpers\SerializationHelper;
 
 /**
+ * @deprecated
  * @OGM\Node(label="SharedMenu", repository="Hedera\Repositories\SharedMenuRepository")
  */
 class SharedMenu implements \JsonSerializable

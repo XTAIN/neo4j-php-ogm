@@ -54,6 +54,14 @@ class SharedModules implements \JsonSerializable
     protected $key;
 
     /**
+     * @var array|null
+     *
+     * @OGM\Property(type="array")
+     * @OGM\Convert(type="array")
+     */
+    protected $availableCondact;
+
+    /**
      * @var SharedCustomers|null
      *
      * @OGM\Relationship(type="MODULE_CU_IN", direction="OUTGOING", collection=false, mappedBy="sharedModules", targetEntity="SharedCustomers")
@@ -140,6 +148,22 @@ class SharedModules implements \JsonSerializable
     public function setKey(string $key): void
     {
         $this->key = $key;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getAvailableCondact(): ?array
+    {
+        return $this->availableCondact;
+    }
+
+    /**
+     * @param array|null $availableCondact
+     */
+    public function setAvailableCondact(?array $availableCondact): void
+    {
+        $this->availableCondact = $availableCondact;
     }
 
     /**

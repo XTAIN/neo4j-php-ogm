@@ -146,6 +146,15 @@ class SmartService implements BeSmartService
     }
 
     /**
+     * @param string $identifier
+     * @return void
+     */
+    public function setIdentifier(string $identifier)
+    {
+        $this->identifier = $identifier;
+    }
+
+    /**
      * @return SharedApikeys|null
      */
     public function getSharedApiKey(): ?SharedApikeys

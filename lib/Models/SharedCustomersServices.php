@@ -102,6 +102,13 @@ class SharedCustomersServices implements \JsonSerializable
      */
     protected $sharedIntegrations;
 
+    /**
+     * @var StateCustomersServices|null
+     *
+     * @OGM\Relationship(type="STATE_CUSTOMERS_SERVICES_TO_SHARED_CUSTOMERS_SERVICES", direction="INCOMING", collection=false, mappedBy="sharedCustomersServices", targetEntity="Hedera\Models\StateCustomersServices")
+     */
+    protected $stateCustomersServices;
+
     public function __construct()
     {
         $this->sharedConfigs = new HederaCollection();

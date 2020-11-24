@@ -431,17 +431,22 @@ class Builder
      */
     public function result(...$classes)
     {
-        $classes = array_reduce(
-            $classes,
-            function ($result, $item) {
-                $result[$item] = $item;
-                return $result;
-            },
-            []
-        );
+        $existGraph = self::getGraph();
 
         if (empty($classes)) {
-            $classes = self::getGraph();
+            $classes = $existGraph;
+        } else {
+            $classes = array_reduce(
+                $classes,
+                function ($result, $item) use ($existGraph) {
+                    if (array_key_exists($item, $existGraph)) {
+                        $result[$item] = $existGraph[$item];
+                    }
+
+                    return $result;
+                },
+                []
+            );
         }
 
         $filteredReturn = array_map(

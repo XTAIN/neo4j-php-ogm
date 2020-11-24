@@ -48,13 +48,9 @@ trait WithBuilder
 
         $cql = $this->builder->result(...$classes);
 
-        if (empty($classes)) {
-            $classes = $this->builder->getGraph();
-        }
-
         $query = $this->entityManager->createQuery($cql);
 
-        foreach ($classes as $key => $item) {
+        foreach ($this->builder->getGraph() as $key => $item) {
             $query->addEntityMapping(self::getGraphName($key), $item);
         }
 

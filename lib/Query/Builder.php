@@ -9,6 +9,7 @@
 
 namespace Hedera\Query;
 
+use Closure;
 use Doctrine\Persistence\ObjectRepository;
 use GraphAware\Neo4j\OGM\EntityManager;
 
@@ -90,32 +91,23 @@ class Builder
     }
 
     /**
+     * @param Closure $closure
      * @return Builder
      */
-    public function whereGroupBracketsStart()
+    public function whereGroup(Closure $closure)
     {
-        self::_addSymbol('(');
+        self::_whereGroup($closure);
 
         return $this;
     }
 
     /**
+     * @param Closure $closure
      * @return Builder
      */
-    public function whereGroupBracketsEnd()
+    public function orWhereGroup(Closure $closure)
     {
-        self::_addSymbol(')');
-
-        return $this;
-    }
-
-    /**
-     * @param string $str
-     * @return Builder
-     */
-    public function addCustomBuilderStr(string $str)
-    {
-        self::_addSymbol($str);
+        self::_whereGroup($closure, 'OR');
 
         return $this;
     }
@@ -262,7 +254,7 @@ class Builder
     {
         if ($this->whereStart) {
             $this->cql .= ' WHERE';
-        } else {
+        } elseif (mb_substr($this->cql, mb_strlen($this->cql) - mb_strlen('(')) != '(') {
             $this->cql .= " $type";
         }
 
@@ -295,11 +287,24 @@ class Builder
     }
 
     /**
-     * @param string $symbol
+     * @param Closure $closure
+     * @param string $type
      */
-    private function _addSymbol(string $symbol)
+    private function _whereGroup(Closure $closure, string $type = 'AND')
     {
-        $this->cql .= $symbol;
+        if ($this->whereStart) {
+            $this->cql .= ' WHERE';
+        } else {
+            $this->cql .= " $type";
+        }
+
+        $this->whereStart = false;
+
+        $this->cql .= ' (';
+
+        $closure($this);
+
+        $this->cql .= ')';
     }
 
     /**

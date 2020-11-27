@@ -90,6 +90,37 @@ class Builder
     }
 
     /**
+     * @return Builder
+     */
+    public function whereGroupBracketsStart()
+    {
+        self::_addSymbol('(');
+
+        return $this;
+    }
+
+    /**
+     * @return Builder
+     */
+    public function whereGroupBracketsEnd()
+    {
+        self::_addSymbol(')');
+
+        return $this;
+    }
+
+    /**
+     * @param string $str
+     * @return Builder
+     */
+    public function addCustomBuilderStr(string $str)
+    {
+        self::_addSymbol($str);
+
+        return $this;
+    }
+
+    /**
      * @param string $class
      * @param string $prop
      * @param string $operator
@@ -261,6 +292,14 @@ class Builder
             $prop = preg_match('/^(\[).*/', $prop) ? $prop : ".$prop";
             $this->cql .= " $graph$prop $operator $value";
         }
+    }
+
+    /**
+     * @param string $symbol
+     */
+    private function _addSymbol(string $symbol)
+    {
+        $this->cql .= $symbol;
     }
 
     /**

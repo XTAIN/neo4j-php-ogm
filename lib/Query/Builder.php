@@ -251,6 +251,9 @@ class Builder
                 case is_null($value):
                     $value = 'null';
                     break;
+                case is_array($value):
+                    $value = json_encode($value);
+                    break;
                 default:
                     $value = "'$value'";
             }

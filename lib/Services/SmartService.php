@@ -87,7 +87,7 @@ class SmartService implements BeSmartService
     {
         static::$directory = function_exists('storage_path') ? storage_path('hedera') : static::DIRECTORY;
         $this->entityManager = $connection;
-        $tmp = getenv('SHARED_CUSTOMERS_SERVICE');
+        $tmp = function_exists('env') ? env('SHARED_CUSTOMERS_SERVICE') : getenv('SHARED_CUSTOMERS_SERVICE');
         if (!empty($tmp)) {
             static::$classOfCustomersService = $tmp;
         }

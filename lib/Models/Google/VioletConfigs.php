@@ -24,13 +24,6 @@ class VioletConfigs extends GoogleConfigs
      */
     protected $storageQuota;
 
-    /**
-     * @var bool
-     *
-     * @OGM\Property(type="boolean")
-     */
-    protected $isDefault;
-
     // getters setters
 
     /**
@@ -47,21 +40,5 @@ class VioletConfigs extends GoogleConfigs
     public function setStorageQuota($storageQuota): void
     {
         $this->storageQuota = $storageQuota;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isDefault(): bool
-    {
-        return $this->isDefault;
-    }
-
-    /**
-     * @param bool $isDefault
-     */
-    public function setIsDefault(bool $isDefault): void
-    {
-        $this->isDefault = $isDefault;
     }
 }

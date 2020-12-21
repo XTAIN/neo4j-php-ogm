@@ -46,6 +46,13 @@ class GoogleConfigs extends SharedConfigs
     protected $picture;
 
     /**
+     * @var bool
+     *
+     * @OGM\Property(type="boolean")
+     */
+    protected $isDefault;
+
+    /**
      * @var GoogleAuth|null
      *
      * @OGM\Relationship(type="GOOGLE_CONFIGS_TO_GOOGLE_AUTH", direction="OUTGOING", collection=false, mappedBy="googleConfigs", targetEntity="Hedera\Models\Google\GoogleAuth")
@@ -116,6 +123,22 @@ class GoogleConfigs extends SharedConfigs
     public function setPicture(string $picture): void
     {
         $this->picture = $picture;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDefault(): bool
+    {
+        return $this->isDefault;
+    }
+
+    /**
+     * @param bool $isDefault
+     */
+    public function setIsDefault(bool $isDefault): void
+    {
+        $this->isDefault = $isDefault;
     }
 
     /**

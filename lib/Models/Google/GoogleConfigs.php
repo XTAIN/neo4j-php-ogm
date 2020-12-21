@@ -18,9 +18,9 @@ use Hedera\Models\SharedConfigs;
 class GoogleConfigs extends SharedConfigs
 {
     /**
-     * @var int
+     * @var string
      *
-     * @OGM\Property(type="int")
+     * @OGM\Property(type="string")
      */
     protected $googleId;
 
@@ -55,17 +55,17 @@ class GoogleConfigs extends SharedConfigs
     // getters setters
 
     /**
-     * @return int
+     * @return string
      */
-    public function getGoogleId(): int
+    public function getGoogleId(): string
     {
         return $this->googleId;
     }
 
     /**
-     * @param int $googleId
+     * @param string $googleId
      */
-    public function setGoogleId(int $googleId): void
+    public function setGoogleId(string $googleId): void
     {
         $this->googleId = $googleId;
     }

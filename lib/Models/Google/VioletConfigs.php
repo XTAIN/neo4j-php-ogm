@@ -3,7 +3,7 @@
  * @package   Hedera
  * @author    Andrew <3oosor@gmail.com>
  * @copyright 2020 Fabrika-Klientov
- * @version   GIT: 20.12.14
+ * @version   GIT: 20.12.21
  * @link      https://fabrika-klientov.ua
  * */
 
@@ -17,25 +17,26 @@ use GraphAware\Neo4j\OGM\Annotations as OGM;
 class VioletConfigs extends GoogleConfigs
 {
     /**
-     * @var int
+     * @var mixed
      *
-     * @OGM\Property(type="int")
+     * @OGM\Property(type="array")
+     * @OGM\Convert(type="nested")
      */
-    protected $uid;
+    protected $storageQuota;
 
     /**
-     * @return int
+     * @return mixed
      */
-    public function getUid(): int
+    public function getStorageQuota()
     {
-        return $this->uid;
+        return $this->storageQuota;
     }
 
     /**
-     * @param int $uid
+     * @param mixed $storageQuota
      */
-    public function setUid(int $uid): void
+    public function setStorageQuota($storageQuota): void
     {
-        $this->uid = $uid;
+        $this->storageQuota = $storageQuota;
     }
 }

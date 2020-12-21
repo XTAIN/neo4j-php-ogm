@@ -68,6 +68,13 @@ class GoogleAuth implements \JsonSerializable
     protected $tokenType;
 
     /**
+     * @var string|null
+     *
+     * @OGM\Property(type="string", key="id_token", nullable=true)
+     */
+    protected $idToken;
+
+    /**
      * @var int|null
      *
      * @OGM\Property(type="int")
@@ -172,6 +179,22 @@ class GoogleAuth implements \JsonSerializable
     public function setTokenType(string $tokenType): void
     {
         $this->tokenType = $tokenType;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getIdToken(): ?string
+    {
+        return $this->idToken;
+    }
+
+    /**
+     * @param string|null $idToken
+     */
+    public function setIdToken(?string $idToken): void
+    {
+        $this->idToken = $idToken;
     }
 
     /**

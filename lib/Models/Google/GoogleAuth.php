@@ -15,6 +15,7 @@ use GraphAware\Neo4j\OGM\Common\Collection as HederaCollection;
 use Hedera\Helpers\EntityFactory;
 use Hedera\Helpers\SerializationHelper;
 use Hedera\Helpers\WithTimestamps;
+use Hedera\Models\SharedAmocrm;
 
 /**
  * @OGM\Node(label="GoogleAuth", repository="Hedera\Repositories\Google\GoogleAuthRepository")
@@ -87,6 +88,13 @@ class GoogleAuth implements \JsonSerializable
      * @OGM\Relationship(type="GOOGLE_CONFIGS_TO_GOOGLE_AUTH", direction="INCOMING", collection=true, mappedBy="googleAuth", targetEntity="Hedera\Models\Google\GoogleConfigs")
      */
     protected $googleConfigs;
+
+    /**
+     * @var SharedAmocrm|null
+     *
+     * @OGM\Relationship(type="GOOGLE_AUTH_TO_SHARED_AMOCRM", direction="OUTGOING", collection=false, mappedBy="googleAuth", targetEntity="Hedera\Models\SharedAmocrm")
+     */
+    protected $sharedAmocrm;
 
     public function __construct()
     {
@@ -227,6 +235,22 @@ class GoogleAuth implements \JsonSerializable
     public function setGoogleConfigs(Collection $googleConfigs): void
     {
         $this->googleConfigs = $googleConfigs;
+    }
+
+    /**
+     * @return SharedAmocrm|null
+     */
+    public function getSharedAmocrm(): ?SharedAmocrm
+    {
+        return $this->sharedAmocrm;
+    }
+
+    /**
+     * @param SharedAmocrm|null $sharedAmocrm
+     */
+    public function setSharedAmocrm(?SharedAmocrm $sharedAmocrm): void
+    {
+        $this->sharedAmocrm = $sharedAmocrm;
     }
 
     public function jsonSerialize()

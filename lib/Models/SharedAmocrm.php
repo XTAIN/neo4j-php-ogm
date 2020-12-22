@@ -123,6 +123,13 @@ class SharedAmocrm implements \JsonSerializable
      */
     protected $sharedModules;
 
+    /**
+     * @var Collection
+     *
+     * @OGM\Relationship(type="GOOGLE_AUTH_TO_SHARED_AMOCRM", direction="INCOMING", collection=true, mappedBy="sharedAmocrm", targetEntity="Hedera\Models\Google\GoogleAuth")
+     */
+    protected $googleAuth;
+
     public function __construct()
     {
         $this->sharedCustomersServices = new HederaCollection();
@@ -130,6 +137,7 @@ class SharedAmocrm implements \JsonSerializable
         $this->sharedCustomersWidgets = new HederaCollection();
         $this->sharedIntegrations = new HederaCollection();
         $this->sharedOauth = new HederaCollection();
+        $this->googleAuth = new HederaCollection();
     }
 
     /**
@@ -346,6 +354,22 @@ class SharedAmocrm implements \JsonSerializable
     public function setSharedModules(?SharedModules $sharedModules): void
     {
         $this->sharedModules = $sharedModules;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getGoogleAuth()
+    {
+        return $this->googleAuth;
+    }
+
+    /**
+     * @param Collection $googleAuth
+     */
+    public function setGoogleAuth(Collection $googleAuth): void
+    {
+        $this->googleAuth = $googleAuth;
     }
 
     public function jsonSerialize()

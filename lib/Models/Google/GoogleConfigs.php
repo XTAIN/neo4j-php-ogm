@@ -53,6 +53,13 @@ class GoogleConfigs extends SharedConfigs
     protected $isDefault;
 
     /**
+     * @var bool
+     *
+     * @OGM\Property(type="boolean")
+     */
+    protected $revoked;
+
+    /**
      * @var GoogleAuth|null
      *
      * @OGM\Relationship(type="GOOGLE_CONFIGS_TO_GOOGLE_AUTH", direction="OUTGOING", collection=false, mappedBy="googleConfigs", targetEntity="Hedera\Models\Google\GoogleAuth")
@@ -139,6 +146,22 @@ class GoogleConfigs extends SharedConfigs
     public function setIsDefault(bool $isDefault): void
     {
         $this->isDefault = $isDefault;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isRevoked(): bool
+    {
+        return $this->revoked;
+    }
+
+    /**
+     * @param bool $revoked
+     */
+    public function setRevoked(bool $revoked): void
+    {
+        $this->revoked = $revoked;
     }
 
     /**

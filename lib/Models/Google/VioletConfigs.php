@@ -24,6 +24,14 @@ class VioletConfigs extends GoogleConfigs
      */
     protected $storageQuota;
 
+    /**
+     * @var mixed
+     *
+     * @OGM\Property(type="array")
+     * @OGM\Convert(type="nested")
+     */
+    protected $folders;
+
     // getters setters
 
     /**
@@ -40,5 +48,21 @@ class VioletConfigs extends GoogleConfigs
     public function setStorageQuota($storageQuota): void
     {
         $this->storageQuota = $storageQuota;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFolders()
+    {
+        return $this->folders;
+    }
+
+    /**
+     * @param mixed $folders
+     */
+    public function setFolders($folders): void
+    {
+        $this->folders = $folders;
     }
 }

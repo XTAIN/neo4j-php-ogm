@@ -9,7 +9,9 @@
 
 namespace Hedera\Models\Google;
 
+use Doctrine\Common\Collections\Collection;
 use GraphAware\Neo4j\OGM\Annotations as OGM;
+use GraphAware\Neo4j\OGM\Common\Collection as HederaCollection;
 
 /**
  * @OGM\Node(label="SharedConfigs", repository="Hedera\Repositories\SharedConfigsRepository")
@@ -31,6 +33,20 @@ class VioletConfigs extends GoogleConfigs
      * @OGM\Convert(type="nested")
      */
     protected $folders;
+
+    /**
+     * @var Collection
+     *
+     * @OGM\Relationship(type="VIOLET_FILES_TO_VIOLET_CONFIGS", direction="INCOMING", collection=true, mappedBy="violetConfigs", targetEntity="Hedera\Models\Google\VioletFiles")
+     */
+    protected $violetFiles;
+
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->violetFiles = new HederaCollection();
+    }
 
     // getters setters
 
@@ -64,5 +80,21 @@ class VioletConfigs extends GoogleConfigs
     public function setFolders($folders): void
     {
         $this->folders = $folders;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getVioletFiles(): Collection
+    {
+        return $this->violetFiles;
+    }
+
+    /**
+     * @param Collection $violetFiles
+     */
+    public function setVioletFiles(Collection $violetFiles): void
+    {
+        $this->violetFiles = $violetFiles;
     }
 }

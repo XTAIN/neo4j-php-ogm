@@ -35,6 +35,14 @@ class VioletConfigs extends GoogleConfigs
     protected $folders;
 
     /**
+     * @var mixed
+     *
+     * @OGM\Property(type="array")
+     * @OGM\Convert(type="nested")
+     */
+    protected $categories;
+
+    /**
      * @var Collection
      *
      * @OGM\Relationship(type="VIOLET_FILES_TO_VIOLET_CONFIGS", direction="INCOMING", collection=true, mappedBy="violetConfigs", targetEntity="Hedera\Models\Google\VioletFiles")
@@ -80,6 +88,22 @@ class VioletConfigs extends GoogleConfigs
     public function setFolders($folders): void
     {
         $this->folders = $folders;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    /**
+     * @param mixed $categories
+     */
+    public function setCategories($categories): void
+    {
+        $this->categories = $categories;
     }
 
     /**

@@ -57,11 +57,19 @@ class VioletConfigs extends GoogleConfigs
      */
     protected $violetFiles;
 
+    /**
+     * @var Collection
+     *
+     * @OGM\Relationship(type="VIOLET_TEMPLATES_TO_VIOLET_CONFIGS", direction="INCOMING", collection=true, mappedBy="violetConfigs", targetEntity="Hedera\Models\Google\VioletTemplates")
+     */
+    protected $violetTemplates;
+
 
     public function __construct()
     {
         parent::__construct();
         $this->violetFiles = new HederaCollection();
+        $this->violetTemplates = new HederaCollection();
     }
 
     // getters setters
@@ -144,5 +152,21 @@ class VioletConfigs extends GoogleConfigs
     public function setVioletFiles(Collection $violetFiles): void
     {
         $this->violetFiles = $violetFiles;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getVioletTemplates(): Collection
+    {
+        return $this->violetTemplates;
+    }
+
+    /**
+     * @param Collection $violetTemplates
+     */
+    public function setVioletTemplates(Collection $violetTemplates): void
+    {
+        $this->violetTemplates = $violetTemplates;
     }
 }

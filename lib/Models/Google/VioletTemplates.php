@@ -71,6 +71,13 @@ class VioletTemplates implements \JsonSerializable
     protected $priceResult;
 
     /**
+     * @var string|null
+     *
+     * @OGM\Property(type="string", nullable=true)
+     */
+    protected $driveMime;
+
+    /**
      * @var mixed
      *
      * @OGM\Property(type="array", nullable=true)
@@ -204,6 +211,22 @@ class VioletTemplates implements \JsonSerializable
     public function setPriceResult(bool $priceResult): void
     {
         $this->priceResult = $priceResult;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDriveMime(): ?string
+    {
+        return $this->driveMime;
+    }
+
+    /**
+     * @param string|null $driveMime
+     */
+    public function setDriveMime(?string $driveMime): void
+    {
+        $this->driveMime = $driveMime;
     }
 
     /**

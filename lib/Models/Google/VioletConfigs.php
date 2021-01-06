@@ -51,6 +51,14 @@ class VioletConfigs extends GoogleConfigs
     protected $users;
 
     /**
+     * @var mixed
+     *
+     * @OGM\Property(type="array")
+     * @OGM\Convert(type="nested")
+     */
+    protected $settings;
+
+    /**
      * @var Collection
      *
      * @OGM\Relationship(type="VIOLET_FILES_TO_VIOLET_CONFIGS", direction="INCOMING", collection=true, mappedBy="violetConfigs", targetEntity="Hedera\Models\Google\VioletFiles")
@@ -136,6 +144,22 @@ class VioletConfigs extends GoogleConfigs
     public function setUsers($users): void
     {
         $this->users = $users;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSettings()
+    {
+        return $this->settings;
+    }
+
+    /**
+     * @param mixed $settings
+     */
+    public function setSettings($settings): void
+    {
+        $this->settings = $settings;
     }
 
     /**

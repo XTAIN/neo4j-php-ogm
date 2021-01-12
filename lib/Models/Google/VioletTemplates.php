@@ -102,6 +102,21 @@ class VioletTemplates implements \JsonSerializable
     protected $driveFile;
 
     /**
+     * @var string|null
+     *
+     * @OGM\Property(type="string", nullable=true)
+     */
+    protected $taskType;
+
+    /**
+     * @var mixed
+     *
+     * @OGM\Property(type="array", nullable=true)
+     * @OGM\Convert(type="nested")
+     */
+    protected $taskConfig;
+
+    /**
      * @var VioletConfigs|null
      *
      * @OGM\Relationship(type="VIOLET_TEMPLATES_TO_VIOLET_CONFIGS", direction="OUTGOING", collection=false, mappedBy="violetTemplates", targetEntity="Hedera\Models\Google\VioletConfigs")
@@ -275,6 +290,38 @@ class VioletTemplates implements \JsonSerializable
     public function setDriveFile($driveFile): void
     {
         $this->driveFile = $driveFile;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTaskType(): ?string
+    {
+        return $this->taskType;
+    }
+
+    /**
+     * @param string|null $taskType
+     */
+    public function setTaskType(?string $taskType): void
+    {
+        $this->taskType = $taskType;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTaskConfig()
+    {
+        return $this->taskConfig;
+    }
+
+    /**
+     * @param mixed $taskConfig
+     */
+    public function setTaskConfig($taskConfig): void
+    {
+        $this->taskConfig = $taskConfig;
     }
 
     /**

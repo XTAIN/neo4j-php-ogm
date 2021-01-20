@@ -10,8 +10,34 @@
 namespace Hedera\Repositories;
 
 use GraphAware\Neo4j\OGM\Repository\BaseRepository;
+use Hedera\Models\SharedConfigs;
 
 class SharedConfigsRepository extends BaseRepository
 {
+    /**
+     * @deprecated DONT WORK (RETURNED PARENT ENTITY if parent loaded before)
+     * @param SharedConfigs|int $configs
+     * @param string $classDeep (extends of SharedConfigs)
+     * @return mixed
+     */
+    public function loadDeepConfigs($configs, string $classDeep)
+    {
+        if (is_object($configs) && $configs instanceof SharedConfigs) {
+            $configs = $configs->getId();
+        }
 
+        if (empty($configs)) {
+            return null;
+        }
+
+        $graph = last(explode('\\', SharedConfigs::class));
+
+        $cql = 'MATCH (n:' . $graph . ') WHERE ID(n) = $id RETURN n';
+
+        $query = $this->entityManager->createQuery($cql);
+        $query->setParameter('id', (int)$configs);
+        $query->addEntityMapping('n', $classDeep);
+
+        return $query->getOneResult();
+    }
 }

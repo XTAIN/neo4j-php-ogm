@@ -59,6 +59,13 @@ class VioletConfigs extends GoogleConfigs
     protected $settings;
 
     /**
+     * @var int|null
+     *
+     * @OGM\Property(type="int")
+     */
+    protected $counter;
+
+    /**
      * @var Collection
      *
      * @OGM\Relationship(type="VIOLET_FILES_TO_VIOLET_CONFIGS", direction="INCOMING", collection=true, mappedBy="violetConfigs", targetEntity="Hedera\Models\Google\VioletFiles")
@@ -160,6 +167,22 @@ class VioletConfigs extends GoogleConfigs
     public function setSettings($settings): void
     {
         $this->settings = $settings;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getCounter(): ?int
+    {
+        return $this->counter;
+    }
+
+    /**
+     * @param int|null $counter
+     */
+    public function setCounter(?int $counter): void
+    {
+        $this->counter = $counter;
     }
 
     /**

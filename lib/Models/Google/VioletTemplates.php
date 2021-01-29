@@ -86,10 +86,10 @@ class VioletTemplates implements \JsonSerializable
     protected $cfLink;
 
     /**
-     * @var array|null
+     * @var mixed
      *
      * @OGM\Property(type="array", nullable=true)
-     * @OGM\Convert(type="array")
+     * @OGM\Convert(type="nested")
      */
     protected $users;
 
@@ -261,17 +261,17 @@ class VioletTemplates implements \JsonSerializable
     }
 
     /**
-     * @return array|null
+     * @return mixed
      */
-    public function getUsers(): ?array
+    public function getUsers()
     {
         return $this->users;
     }
 
     /**
-     * @param array|null $users
+     * @param mixed $users
      */
-    public function setUsers(?array $users): void
+    public function setUsers($users): void
     {
         $this->users = $users;
     }

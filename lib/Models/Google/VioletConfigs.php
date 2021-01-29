@@ -56,6 +56,14 @@ class VioletConfigs extends GoogleConfigs
      * @OGM\Property(type="array")
      * @OGM\Convert(type="nested")
      */
+    protected $variables;
+
+    /**
+     * @var mixed
+     *
+     * @OGM\Property(type="array")
+     * @OGM\Convert(type="nested")
+     */
     protected $settings;
 
     /**
@@ -151,6 +159,22 @@ class VioletConfigs extends GoogleConfigs
     public function setUsers($users): void
     {
         $this->users = $users;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVariables()
+    {
+        return $this->variables;
+    }
+
+    /**
+     * @param mixed $variables
+     */
+    public function setVariables($variables): void
+    {
+        $this->variables = $variables;
     }
 
     /**

@@ -63,6 +63,13 @@ class SharedUsers implements \JsonSerializable
     protected $keycloakId;
 
     /**
+     * @var string|null
+     *
+     * @OGM\Property(type="string")
+     */
+    protected $providerId;
+
+    /**
      * @var bool|null
      *
      * @OGM\Property(type="string", key="is_partner")
@@ -213,6 +220,22 @@ class SharedUsers implements \JsonSerializable
     public function setKeycloakId(?string $keycloakId): void
     {
         $this->keycloakId = $keycloakId;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getProviderId(): ?string
+    {
+        return $this->providerId;
+    }
+
+    /**
+     * @param string|null $providerId
+     */
+    public function setProviderId(?string $providerId): void
+    {
+        $this->providerId = $providerId;
     }
 
     /**

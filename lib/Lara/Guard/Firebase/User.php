@@ -11,30 +11,30 @@
 
 namespace Hedera\Lara\Guard\Firebase;
 
-use Hedera\Services\FirestoreService;
+use Hedera\Services\FirebaseService;
 use Kreait\Firebase\Factory;
 
 class User extends SimpleUser
 {
     /**
-     * @var FirestoreService $moduleService
+     * @var FirebaseService $moduleService
      */
     private $userService;
 
     /**
-     * @param FirestoreService $userService
+     * @param FirebaseService $userService
      * @param Factory $factory
      */
-    public function __construct(FirestoreService $userService, Factory $factory)
+    public function __construct(FirebaseService $userService, Factory $factory)
     {
         parent::__construct($factory);
         $this->userService = $userService;
     }
 
     /**
-     * @return FirestoreService
+     * @return FirebaseService
      */
-    public function getUserService(): FirestoreService
+    public function getUserService(): FirebaseService
     {
         return $this->userService;
     }

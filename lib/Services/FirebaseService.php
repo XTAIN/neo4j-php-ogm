@@ -13,7 +13,7 @@ namespace Hedera\Services;
  * Service for guarding oauth2 apps from Google firestore server.
  * Use Firestore uid as identifier oauth2 token and load other entities as SharedUsers, SharedRoles, SharedScopes
  * */
-class FirestoreService implements UserService
+class FirebaseService implements UserService
 {
     /**
      * @var ConnectorService $connectorService
@@ -32,7 +32,7 @@ class FirestoreService implements UserService
     public function __construct(string $identifier, ConnectorService $connector = null)
     {
         $this->connectorService = $connector ?? new ConnectorService();
-        $this->smartService = new FirestoreSmartService($this->connectorService->getConnection());
+        $this->smartService = new FirebaseSmartService($this->connectorService->getConnection());
         $this->smartService->init($identifier);
     }
 
@@ -45,9 +45,9 @@ class FirestoreService implements UserService
     }
 
     /**
-     * @return FirestoreSmartService
+     * @return FirebaseSmartService
      */
-    public function getSmartService(): FirestoreSmartService
+    public function getSmartService(): FirebaseSmartService
     {
         return $this->smartService;
     }

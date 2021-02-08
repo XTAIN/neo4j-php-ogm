@@ -12,7 +12,7 @@
 namespace Hedera\Lara\Guard\Firebase;
 
 use Hedera\Lara\Guard\URepository;
-use Hedera\Services\FirestoreService;
+use Hedera\Services\FirebaseService;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Kreait\Firebase\Factory;
 
@@ -33,7 +33,7 @@ class UserRepository implements URepository
      */
     public function getUser(string $identifier): ?Authenticatable
     {
-        $userService = new FirestoreService($identifier);
+        $userService = new FirebaseService($identifier);
         if ($userService->isReady()) {
             return new User($userService, $this->factory);
         }

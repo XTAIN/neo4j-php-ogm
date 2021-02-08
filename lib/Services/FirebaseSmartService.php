@@ -9,6 +9,6 @@
 
 namespace Hedera\Services;
 
-class FirestoreSmartService extends KeycloakSmartService implements BeSmartService
+class FirebaseSmartService extends KeycloakSmartService implements BeSmartService
 {
 }

@@ -12,6 +12,9 @@
 namespace Hedera\Lara\Providers;
 
 use Hedera\Lara\Guard\AccessTokenGuard;
+use Hedera\Lara\Guard\Firebase\FirebaseGuard;
+use Hedera\Lara\Guard\Firebase\FirebaseGuardSimple;
+use Hedera\Lara\Guard\Firebase\FirebaseProvider;
 use Hedera\Lara\Guard\Keycloak\KeycloakGuard;
 use Hedera\Lara\Guard\Keycloak\KeycloakGuardSimple;
 use Hedera\Lara\Guard\Keycloak\KeycloakProvider;
@@ -80,6 +83,30 @@ class AuthServiceProvider extends ServiceProvider
                 $config['hedera'] = config('hedera', null);
 
                 return new KeycloakGuardSimple($userProvider, $request, $config);
+            }
+        );
+
+        Auth::extend(
+            'hedera_firebase',
+            function ($app, $name, array $config) {
+                // automatically build the DI, put it as reference
+                $userProvider = app(FirebaseProvider::class);
+                $request = app('request');
+                $config['hedera'] = config('hedera', null);
+
+                return new FirebaseGuard($userProvider, $request, $config);
+            }
+        );
+
+        Auth::extend(
+            'hedera_firebase_simple',
+            function ($app, $name, array $config) {
+                // automatically build the DI, put it as reference
+                $userProvider = app(FirebaseProvider::class);
+                $request = app('request');
+                $config['hedera'] = config('hedera', null);
+
+                return new FirebaseGuardSimple($userProvider, $request, $config);
             }
         );
     }

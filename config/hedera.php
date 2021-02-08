@@ -10,6 +10,7 @@
  */
 
 $OIDC_JSON = base_path(env('KEYCLOAK_OIDC_JSON', 'keycloak.json'));
+$FIREBASE_JSON = base_path(env('FIREBASE_JSON', 'firebase_credentials.json'));
 
 return [
     'default' => env('HEDERA_CONNECTION', 'neo4j'),
@@ -30,5 +31,9 @@ return [
     'keycloak' => [
         'oidc' => file_exists($OIDC_JSON) ? json_decode(file_get_contents($OIDC_JSON), true) : null,
         'public_key' => env('KEYCLOAK_PUBLIC_KEY', null),
+    ],
+
+    'firebase' => [
+        'credentials' => file_exists($FIREBASE_JSON) ? json_decode(file_get_contents($FIREBASE_JSON), true) : null,
     ],
 ];

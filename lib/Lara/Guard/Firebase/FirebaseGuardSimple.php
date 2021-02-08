@@ -51,7 +51,7 @@ class FirebaseGuardSimple implements Guard
             \Log::error('Before using hedera guard - you should setting hedera config in config');
         } else {
             $this->factory = (new Factory())
-                ->withServiceAccount($this->config['keycloak']['firebase']['credentials'] ?? []);
+                ->withServiceAccount($this->config['firebase']['credentials'] ?? []);
             $this->initUser();
         }
     }

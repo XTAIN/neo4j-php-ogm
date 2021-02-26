@@ -12,6 +12,7 @@ namespace Hedera\Models;
 use GraphAware\Neo4j\OGM\Annotations as OGM;
 use Hedera\Helpers\EntityFactory;
 use Hedera\Helpers\SerializationHelper;
+use Hedera\Helpers\WithTimestamps;
 
 /**
  * @OGM\Node(label="SharedCustomersUsers", repository="Hedera\Repositories\SharedCustomersUsersRepository")
@@ -20,6 +21,7 @@ class SharedCustomersUsers implements \JsonSerializable
 {
     use EntityFactory;
     use SerializationHelper;
+    use WithTimestamps;
 
     /**
      * @var int

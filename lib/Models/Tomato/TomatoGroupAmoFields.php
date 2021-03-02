@@ -15,6 +15,7 @@ use Hedera\Helpers\SerializationHelper;
 use Hedera\Models\SharedCustomersServices;
 
 /**
+ * @deprecated (not grouped fields after some updates)
  * @OGM\Node(label="TomatoGroupAmoFields", repository="Hedera\Repositories\Tomato\TomatoGroupAmoFieldsRepository")
  */
 class TomatoGroupAmoFields implements \JsonSerializable

@@ -135,4 +135,12 @@ class BaseRepository implements ObjectRepository, Selectable
     {
         return $this->className;
     }
+
+    /**
+     * @return \GraphAware\Neo4j\OGM\Metadata\ClassMetadata
+     */
+    public function getClassMetadata()
+    {
+        return $this->classMetadata;
+    }
 }

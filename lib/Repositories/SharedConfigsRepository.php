@@ -10,10 +10,13 @@
 namespace Hedera\Repositories;
 
 use GraphAware\Neo4j\OGM\Repository\BaseRepository;
+use Hedera\Helpers\LoadLinked;
 use Hedera\Models\SharedConfigs;
 
 class SharedConfigsRepository extends BaseRepository
 {
+    use LoadLinked;
+
     /**
      * @deprecated DONT WORK (RETURNED PARENT ENTITY if parent loaded before)
      * @param SharedConfigs|int $configs

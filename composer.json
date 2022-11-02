@@ -1,5 +1,5 @@
 {
-    "name": "fbkl/hedera",
+    "name": "xtain/neo4j-php-ogm",
     "description": "PHP Object Graph Mapper for Neo4j (forked)",
     "license": "Apache-2.0",
     "keywords": [
@@ -28,10 +28,11 @@
         }
     ],
     "require": {
-        "php": "^7.1|^8.0",
+        "php": "^8.0",
         "doctrine/annotations": "^1.10",
         "doctrine/collections": "^1.6",
         "doctrine/common": "^3.0",
+
         "ext-simplexml": "*",
         "kreait/firebase-php": "^5.14",
         "oosor/neo4j-php-client": "^10.0",
@@ -41,8 +42,7 @@
     },
     "autoload": {
         "psr-4": {
-            "GraphAware\\Neo4j\\OGM\\": "src/",
-            "Hedera\\": "lib/"
+            "GraphAware\\Neo4j\\OGM\\": "src/"
         },
         "files": [
             "src/Mapping/Neo4jOGMAnnotations.php"
@@ -58,6 +58,7 @@
         "phpunit/phpunit": "^5.2",
         "symfony/finder": "^3.0",
         "symfony/stopwatch": "^3.0",
+
         "phpstan/phpstan": "^0.12.32",
         "shadoll/anemone": "^4.2"
     },

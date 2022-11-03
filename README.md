@@ -1,4 +1,6 @@
-# Oosor Neo4j PHP OGM
+Please head to http://github.com/neo4j-php or http://neo4j.com/developer/php for up-to-date PHP support for Neo4j.
+
+# GraphAware Neo4j PHP OGM
 
 ## Object Graph Mapper for Neo4j in PHP
 

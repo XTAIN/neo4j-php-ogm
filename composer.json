@@ -28,6 +28,7 @@
         }
     ],
     "require": {
+
         "php": "^8.0",
         "doctrine/annotations": "^1.10",
         "doctrine/collections": "^1.6",
@@ -39,6 +40,7 @@
         "ext-json": "*",
         "illuminate/support": "^5.0 | ^6.0 | ^7.0 | ^8.0",
         "firebase/php-jwt": "^5.2"
+      
     },
     "autoload": {
         "psr-4": {
